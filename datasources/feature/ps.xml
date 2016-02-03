@@ -1,0 +1,148 @@
+<SQLFeatureStore configVersion="3.1.0" 
+                 xmlns="http://www.deegree.org/datasource/feature/sql" 
+                 xmlns:elf-ps="http://www.locationframework.eu/schemas/ProtectedSites/1.0" 
+                 xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0"                 
+                 xmlns:gn="http://inspire.ec.europa.eu/schemas/gn/4.0" 
+                 xmlns:base="http://inspire.ec.europa.eu/schemas/base/3.3" 
+                 xmlns:gml="http://www.opengis.net/gml/3.2" 
+                 xmlns:xlink="http://www.w3.org/1999/xlink" 
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                 xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.1.0/sql.xsd">
+  
+  <JDBCConnId>DB_CONNECTION</JDBCConnId>
+  <StorageCRS srid="4258" dim="2D">EPSG:4258</StorageCRS>
+  <GMLSchema>../../appschemas/elf/ProtectedSites.xsd</GMLSchema>
+  
+  <FeatureTypeMapping name="ps:ProtectedSite" table="ps.protectedsite">
+    <FIDMapping prefix="PROTECTEDSITE_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="ps:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Complex path="ps:inspireID">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'EG.ERM.PS'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text()" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="ps:legalFoundationDate">
+      <Primitive path="text()" mapping="legalfoundationdate"/>
+      <Primitive path="@nilReason" mapping="legalfoundationdate_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="legalfoundationdate_nil"/>
+    </Complex>
+    <Complex path="ps:siteDesignation">
+      <Join table="ps.protectedsite_sitedesignation" fromColumns="id" toColumns="ps_fk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="ps:DesignationType">
+        <Complex path="ps:designationScheme">
+          <Primitive path="@nilReason" mapping="designationschema_nilreason"/>
+          <Primitive path="@xlink:href" mapping="designationschema_href"/>
+        </Complex>
+        <Complex path="ps:designation">
+          <Primitive path="@nilReason" mapping="designation_nilreason"/>
+          <Primitive path="@xlink:href" mapping="designation_href"/>
+        </Complex>
+        <Primitive path="ps:percentageUnderDesignation" mapping="percentageunderdesignation"/>
+      </Complex>
+    </Complex>
+    <Complex path="ps:siteName">
+      <Join table="ps.sitename" fromColumns="id" toColumns="ps_fk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="language"/>
+          <Primitive path="@nilReason" mapping="language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@nilReason" mapping="nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="nativeness_href"/>
+          <!-- TODO: ReferencedType? <Feature>...</Feature> -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@nilReason" mapping="namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="namestatus_href"/>
+          <!-- TODO: ReferencedType? <Feature>...</Feature> -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="sourceofname"/>
+          <Primitive path="@nilReason" mapping="sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="sourceofname_nil"/>
+        </Complex>
+        <!-- Complex path="gn:pronunciation">
+          <Primitive path="@nilReason" mapping="pronunciation_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="pronunciation_nil"/>
+          <Complex path="gn:PronunciationOfName">
+            <Complex path="gn:pronunciationSoundLink">
+              <Primitive path="text()" mapping="pronunciationsoundlink"/>
+              <Primitive path="@nilReason" mapping="pronunciationsoundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciationsoundlink_nil"/>
+            </Complex>
+            <Complex path="gn:pronunciationIPA">
+              <Primitive path="text()" mapping="pronunciationipa"/>
+              <Primitive path="@nilReason" mapping="pronunciationipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciationipa_nil"/>
+            </Complex>
+          </Complex>
+        </Complex -->
+        <Complex path="gn:spelling">
+          <Join table="ps.sitename_spelling" fromColumns="id" toColumns="sitename_fk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <!-- Complex path="gn:grammaticalGender">
+          <Primitive path="@owns" mapping="grammaticalgender_owns"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalgender_remoteschema"/>
+          <Primitive path="@nilReason" mapping="grammaticalgender_nilreason"/>
+          <Primitive path="@xlink:type" mapping="grammaticalgender_xlink_type"/>
+          <Primitive path="@xlink:href" mapping="grammaticalgender_xlink_href"/>
+          <Primitive path="@xlink:role" mapping="grammaticalgender_xlink_role"/>
+          <Primitive path="@xlink:arcrole" mapping="grammaticalgender_xlink_arcrole"/>
+          <Primitive path="@xlink:title" mapping="grammaticalgender_xlink_title"/>
+          <Primitive path="@xlink:show" mapping="grammaticalgender_xlink_show"/>
+          <Primitive path="@xlink:actuate" mapping="grammaticalgender_xlink_actuate"/>
+        </Complex>
+        <Complex path="gn:grammaticalNumber">
+          <Primitive path="@owns" mapping="grammaticalnumber_owns"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalnumber_remoteschema"/>
+          <Primitive path="@nilReason" mapping="grammaticalnumber_nilreason"/>
+          <Primitive path="@xlink:type" mapping="grammaticalnumber_xlink_type"/>
+          <Primitive path="@xlink:href" mapping="grammaticalnumber_xlink_href"/>
+          <Primitive path="@xlink:role" mapping="grammaticalnumber_xlink_role"/>
+          <Primitive path="@xlink:arcrole" mapping="grammaticalnumber_xlink_arcrole"/>
+          <Primitive path="@xlink:title" mapping="grammaticalnumberxlink_title"/>
+          <Primitive path="@xlink:show" mapping="grammaticalnumber_xlink_show"/>
+          <Primitive path="@xlink:actuate" mapping="grammaticalnumber_xlink_actuate"/>
+       </Complex-->
+      </Complex>
+    </Complex>    
+    <Complex path="ps:siteProtectionClassification">
+      <Join table="ps.siteprotectionclassification" fromColumns="id" toColumns="ps_fk"/>
+      <Primitive path="text()" mapping="classification"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+    </Complex>
+  </FeatureTypeMapping>
+</SQLFeatureStore>

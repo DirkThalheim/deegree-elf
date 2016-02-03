@@ -1,0 +1,2441 @@
+<SQLFeatureStore configVersion="3.1.0" 
+                 xmlns="http://www.deegree.org/datasource/feature/sql" 
+                 xmlns:tn="http://inspire.ec.europa.eu/schemas/tn/4.0" 
+                 xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" 
+                 xmlns:elf-tn-a="http://www.locationframework.eu/schemas/AirTransportNetwork/1.0" 
+                 xmlns:tn-a="http://inspire.ec.europa.eu/schemas/tn-a/4.0" 
+                 xmlns:net="http://inspire.ec.europa.eu/schemas/net/4.0" 
+                 xmlns:gmlexr="http://www.opengis.net/gml/3.3/exr" 
+                 xmlns:gn="http://inspire.ec.europa.eu/schemas/gn/4.0" 
+                 xmlns:bu-base="http://inspire.ec.europa.eu/schemas/bu-base/4.0" 
+                 xmlns:base="http://inspire.ec.europa.eu/schemas/base/3.3" 
+                 xmlns:xlink="http://www.w3.org/1999/xlink" 
+                 xmlns:gml="http://www.opengis.net/gml/3.2" 
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                 xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.1.0/sql.xsd">
+                 
+  <JDBCConnId>elf_regional</JDBCConnId>
+  <StorageCRS srid="4258" dim="2D">EPSG:4258</StorageCRS>
+  <GMLSchema>../../appschemas/elf/AirTransportNetwork.xsd</GMLSchema>
+  
+  <!-- 
+    Only FeatureTypes from namespaces tn-a and elf-tn-a are implemented.
+    FeatureTypes that are both available in tn-a and elf-tn-a, only that from elf-tn-a is implemented
+
+    No mappings for:
+    * */gml:identifier
+    * */geographicalName/pronunciation
+    * */geographicalName/grammaticalGender
+    * */geographicalName/grammaticalNumber
+    * */endLifespanVersion
+    * */localType[@xlink:type]
+    * */localType[@xlink:role]
+    * */localType[@xlink:arcrole]
+    * */localType[@xlink:show]
+    * */localType[@xlink:actuate]
+    * */localType[@uuidref]
+          
+    
+    All atributes with a type ReferencedType have only following attributes:
+    * xlink:href, nil and nil_reason
+  -->
+  <!-- == INSPIRE Transport Network Air ======================================== -->
+
+  <!-- == TransportPropertyTypes == -->
+  <FeatureTypeMapping name="tn-a:AerodromeCategory" table="tna.aerodromecategory">
+    <FIDMapping prefix="TN-A_AERODROMECATEGORY_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:networkRef">
+      <Join table="tna.aerodromecategory_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Complex path="net:NetworkReference">
+        <Complex path="net:element">
+          <Primitive path="@nilReason" mapping="networkreference_nilreason"/>
+          <Primitive path="@xlink:href" mapping="networkreference_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn-a:aerodromeCategory">
+      <Primitive path="@nilReason" mapping="aerodromecategory_nilreason"/>
+      <Primitive path="@xlink:href" mapping="aerodromecategory_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:AerodromeType" table="tna.aerodrometype">
+    <FIDMapping prefix="TN-A_AERODROMETYPE_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:networkRef">
+      <Join table="tna.aerodrometype_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Complex path="net:NetworkReference">
+        <Complex path="net:element">
+          <Primitive path="@nilReason" mapping="networkreference_nilreason"/>
+          <Primitive path="@xlink:href" mapping="networkreference_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn-a:aerodromeType">
+      <Primitive path="@nilReason" mapping="aerodrometype_nilreason"/>
+      <Primitive path="@xlink:href" mapping="aerodrometype_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:ConditionOfAirFacility" table="tna.conditionofairfacility">
+    <FIDMapping prefix="TN-A_CONDITIONOFAIRFACILITY_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:networkRef">
+      <Join table="tna.conditionofairfacility_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Complex path="net:NetworkReference">
+        <Complex path="net:element">
+          <Primitive path="@nilReason" mapping="networkreference_nilreason"/>
+          <Primitive path="@xlink:href" mapping="networkreference_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn:currentStatus">
+      <Primitive path="@nilReason" mapping="currentstatus_nilreason"/>
+      <Primitive path="@xlink:href" mapping="currentstatus_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:ElementLength" table="tna.elementlength">
+    <FIDMapping prefix="TN-A_ELEMENTLENGTH_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:networkRef">
+      <Join table="tna.elementlength_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Complex path="net:NetworkReference">
+        <Complex path="net:element">
+          <Primitive path="@nilReason" mapping="networkreference_nilreason"/>
+          <Primitive path="@xlink:href" mapping="networkreference_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn-a:length">
+      <Primitive path="text()" mapping="length"/>
+      <Primitive path="@uom" mapping="length_uom"/>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:ElementWidth" table="tna.elementwidth">
+    <FIDMapping prefix="TN-A_ELEMENTWIDTH_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:networkRef">
+      <Join table="tna.elementwidth_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Complex path="net:NetworkReference">
+        <Complex path="net:element">
+          <Primitive path="@nilReason" mapping="networkreference_nilreason"/>
+          <Primitive path="@xlink:href" mapping="networkreference_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn-a:width">
+      <Primitive path="text()" mapping="width"/>
+      <Primitive path="@uom" mapping="width_uom"/>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:FieldElevation" table="tna.fieldelevation">
+    <FIDMapping prefix="TN-A_FIELDELEVATION_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:networkRef">
+      <Join table="tna.fieldelevation_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Complex path="net:NetworkReference">
+        <Complex path="net:element">
+          <Primitive path="@nilReason" mapping="networkreference_nilreason"/>
+          <Primitive path="@xlink:href" mapping="networkreference_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn-a:altitude">
+      <Primitive path="text()" mapping="altitude"/>
+      <Primitive path="@uom" mapping="altitude_uom"/>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:LowerAltitudeLimit" table="tna.loweraltitudelimit">
+    <FIDMapping prefix="TN-A_LOWERALTITUDELIMIT_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:networkRef">
+      <Join table="tna.loweraltitudelimit_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Complex path="net:NetworkReference">
+        <Complex path="net:element">
+          <Primitive path="@nilReason" mapping="networkreference_nilreason"/>
+          <Primitive path="@xlink:href" mapping="networkreference_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn-a:altitude">
+      <Primitive path="text()" mapping="altitude"/>
+      <Primitive path="@uom" mapping="altitude_uom"/>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:SurfaceComposition" table="tna.surfacecomposition">
+    <FIDMapping prefix="TN-A_SURFACECOMPOSITION_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:networkRef">
+      <Join table="tna.surfacecomposition_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Complex path="net:NetworkReference">
+        <Complex path="net:element">
+          <Primitive path="@nilReason" mapping="networkreference_nilreason"/>
+          <Primitive path="@xlink:href" mapping="networkreference_href"/>
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn-a:surfaceComposition">
+      <Primitive path="@nilReason" mapping="surfacecomposition_nilreason"/>
+      <Primitive path="@xlink:href" mapping="surfacecomposition_href"/>
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:UpperAltitudeLimit" table="tna.upperaltitudelimit">
+    <FIDMapping prefix="TN-A_UPPERALTITUDELIMIT_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:networkRef">
+      <Join table="tna.upperaltitudelimit_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Complex path="net:NetworkReference">
+        <Complex path="net:element">
+          <Primitive path="@nilReason" mapping="networkreference_nilreason"/>
+          <Primitive path="@xlink:href" mapping="networkreference_href"/>
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn-a:altitude">
+      <Primitive path="text()" mapping="altitude"/>
+      <Primitive path="@uom" mapping="altitude_uom"/>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:UseRestriction" table="tna.userestriction">
+    <FIDMapping prefix="TN-A_USERESTRICTION_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:networkRef">
+      <Join table="tna.userestriction_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="net:NetworkReference">
+        <Complex path="net:element">
+          <Primitive path="@nilReason" mapping="networkreference_nilreason"/>
+          <Primitive path="@xlink:href" mapping="networkreference_href"/>
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn-a:restriction">
+      <Primitive path="@nilReason" mapping="restriction_nilreason"/>
+      <Primitive path="@xlink:href" mapping="restriction_href"/>
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+  </FeatureTypeMapping>
+  
+  <!-- == TransportLinkSequenceTypes == -->
+  <FeatureTypeMapping name="tn-a:AirLinkSequence" table="tna.airlinksequence">
+    <FIDMapping prefix="TN-A_AIRLINKSEQUENCE_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.airlinksequence_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:link">
+      <Join table="tna.airlinksequence_link" fromColumns="id" toColumns="parentfk"/>
+      <Complex path="net:DirectedLink">
+        <Primitive path="net:direction" mapping="direction"/>
+        <Complex path="net:link">
+          <Primitive path="@nilReason" mapping="nilreason"/>
+          <Primitive path="@xlink:href" mapping="href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.airlinksequence_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+  </FeatureTypeMapping>
+
+  <!-- == TransportLinkSetTypes == -->
+  <FeatureTypeMapping name="tn-a:AirRoute" table="tna.airroute">
+    <FIDMapping prefix="TN-A_AIRROUTE_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.airroute_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>     
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:link">
+      <Join table="tna.airroute_link" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>  
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.airroute_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn:post">
+      <Join table="tna.airroute_post" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="tn-a:airRouteType">
+      <Primitive path="@xsi:nil" mapping="airroutetype_nil"/>
+      <Primitive path="@nilReason" mapping="airroutetype_nilreason"/>
+      <Primitive path="@xlink:href" mapping="airroutetype_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="tn-a:designator">
+      <Primitive path="text()" mapping="designator"/>
+      <Primitive path="@nilReason" mapping="designator_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="designator_nil"/>
+    </Complex>
+  </FeatureTypeMapping>
+
+  <!-- == TransportLinkTypes == -->
+  <FeatureTypeMapping name="tn-a:AirRouteLink" table="tna.airroutelink">
+    <FIDMapping prefix="TN-A_AIRROUTELINK_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.airroutelink_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:centrelineGeometry">
+      <Primitive path="@nilReason" mapping="centrelinegeometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="centrelinegeometry_remoteschema"/>      
+      <Geometry path="." mapping="centrelinegeometry"/>
+    </Complex>
+    <Primitive path="net:fictitious" mapping="fictitious"/>
+    <Complex path="net:endNode">
+      <Primitive path="@nilReason" mapping="endnode_nilreason"/>
+      <Primitive path="@xlink:href" mapping="endnode_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:startNode">
+      <Primitive path="@nilReason" mapping="startnode_nilreason"/>
+      <Primitive path="@xlink:href" mapping="startnode_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.airroutelink_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn-a:airRouteLinkClass">
+      <Primitive path="@xsi:nil" mapping="airroutelinkclass_nil"/>
+      <Primitive path="@nilReason" mapping="airroutelinkclass_nilreason"/>
+      <Primitive path="@xlink:href" mapping="airroutelinkclass_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:ProcedureLink" table="tna.procedurelink">
+    <FIDMapping prefix="TN-A_PROCEDURELINK_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.procedurelink_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:centrelineGeometry">
+      <Primitive path="@nilReason" mapping="centrelinegeometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="centrelinegeometry_remoteschema"/>      
+      <Geometry path="." mapping="centrelinegeometry"/>
+    </Complex>
+    <Primitive path="net:fictitious" mapping="fictitious"/>
+    <Complex path="net:endNode">
+      <Primitive path="@nilReason" mapping="endnode_nilreason"/>
+      <Primitive path="@xlink:href" mapping="endnode_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:startNode">
+      <Primitive path="@nilReason" mapping="startnode_nilreason"/>
+      <Primitive path="@xlink:href" mapping="startnode_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.procedurelink_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:InstrumentApproachProcedure" table="tna.instrumentapproachprocedure">
+    <FIDMapping prefix="TN-A_INSTRUMENTAPPROACHPROCEDURE_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.instrumentapproachprocedure_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:centrelineGeometry">
+      <Primitive path="@nilReason" mapping="centrelinegeometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="centrelinegeometry_remoteschema"/>      
+      <Geometry path="." mapping="centrelinegeometry"/>
+    </Complex>
+    <Primitive path="net:fictitious" mapping="fictitious"/>
+    <Complex path="net:endNode">
+      <Primitive path="@nilReason" mapping="endnode_nilreason"/>
+      <Primitive path="@xlink:href" mapping="endnode_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:startNode">
+      <Primitive path="@nilReason" mapping="startnode_nilreason"/>
+      <Primitive path="@xlink:href" mapping="startnode_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.instrumentapproachprocedure_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:StandardInstrumentArrival" table="tna.standardinstrumentarrival">
+    <FIDMapping prefix="TN-A_STANDARDINSTRUMENTARRIVAL_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.standardinstrumentarrival_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:centrelineGeometry">
+      <Primitive path="@nilReason" mapping="centrelinegeometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="centrelinegeometry_remoteschema"/>      
+      <Geometry path="." mapping="centrelinegeometry"/>
+    </Complex>
+    <Primitive path="net:fictitious" mapping="fictitious"/>
+    <Complex path="net:endNode">
+      <Primitive path="@nilReason" mapping="endnode_nilreason"/>
+      <Primitive path="@xlink:href" mapping="endnode_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:startNode">
+      <Primitive path="@nilReason" mapping="startnode_nilreason"/>
+      <Primitive path="@xlink:href" mapping="startnode_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.standardinstrumentarrival_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn-a:designator">
+      <Primitive path="text()" mapping="designator"/>
+      <Primitive path="@nilReason" mapping="designator_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="designator_nil"/>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:StandardInstrumentDeparture" table="tna.standardinstrumentdeparture">
+    <FIDMapping prefix="TN-A_STANDARDINSTRUMENTDEPARTURE_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.standardinstrumentdeparture_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:centrelineGeometry">
+      <Primitive path="@nilReason" mapping="centrelinegeometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="centrelinegeometry_remoteschema"/>      
+      <Geometry path="." mapping="centrelinegeometry"/>
+    </Complex>
+    <Primitive path="net:fictitious" mapping="fictitious"/>
+    <Complex path="net:endNode">
+      <Primitive path="@nilReason" mapping="endnode_nilreason"/>
+      <Primitive path="@xlink:href" mapping="endnode_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:startNode">
+      <Primitive path="@nilReason" mapping="startnode_nilreason"/>
+      <Primitive path="@xlink:href" mapping="startnode_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.standardinstrumentdeparture_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn-a:designator">
+      <Primitive path="text()" mapping="designator"/>
+      <Primitive path="@nilReason" mapping="designator_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="designator_nil"/>
+    </Complex>
+  </FeatureTypeMapping>
+
+  <!-- == TransportAreaTypes == -->
+  <FeatureTypeMapping name="tn-a:AirspaceArea" table="tna.airspacearea">
+    <FIDMapping prefix="TN-A_AIRSPACEAREA_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.airspacearea_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>      
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.airspacearea_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn-a:AirspaceAreaType">
+      <Primitive path="@nilReason" mapping="airspaceareatype_nilreason"/>
+      <Primitive path="@xlink:href" mapping="airspaceareatype_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:ApronArea" table="tna.apronarea">
+    <FIDMapping prefix="TN-A_APRONAREA_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.apronarea_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>      
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.apronarea_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:RunwayArea" table="tna.runwayarea">
+    <FIDMapping prefix="TN-A_RUNWAYAREA_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.runwayarea_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>      
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.runwayarea_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn-a:designator">
+      <Primitive path="text()" mapping="designator"/>
+      <Primitive path="@nilReason" mapping="designator_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="designator_nil"/>
+    </Complex>
+    <Complex path="tn-a:runwayType">
+      <Primitive path="@xsi:nil" mapping="runwaytype_nil"/>
+      <Primitive path="@nilReason" mapping="runwaytype_nilreason"/>
+      <Primitive path="@xlink:href" mapping="runwaytype_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:TaxiwayArea" table="tna.taxiwayarea">
+    <FIDMapping prefix="TN-A_TAXIWAYAREA_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.taxiwayarea_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.taxiwayarea_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="tn-a:designator">
+      <Primitive path="text()" mapping="designator"/>
+      <Primitive path="@nilReason" mapping="designator_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="designator_nil"/>
+    </Complex>
+  </FeatureTypeMapping>
+
+  <!-- == TransportNodeTypes == -->
+  <FeatureTypeMapping name="tn-a:DesignatedPoint" table="tna.designatedpoint">
+    <FIDMapping prefix="TN-A_DESIGNATEDPOINT_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.designatedpoint_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>      
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Complex path="net:spokeEnd">
+      <Join table="tna.designatedpoint_spokeend" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:spokeStart">
+      <Join table="tna.designatedpoint_spokestart" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.designatedpoint_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Primitive path="tn-a:significantPoint" mapping="significantpoint"/>
+    <Complex path="tn-a:designator">
+      <Primitive path="text()" mapping="designator"/>
+      <Primitive path="@nilReason" mapping="designator_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="designator_nil"/>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:Navaid" table="tna.navaid">
+    <FIDMapping prefix="TN-A_NAVAID_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.navaid_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>      
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Complex path="net:spokeEnd">
+      <Join table="tna.navaid_spokeend" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:spokeStart">
+      <Join table="tna.navaid_spokestart" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.navaid_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Primitive path="tn-a:significantPoint" mapping="significantpoint"/>
+    <Complex path="tn-a:navaidType">
+      <Primitive path="@xsi:nil" mapping="navaidtype_nil"/>
+      <Primitive path="@nilReason" mapping="navaidtype_nilreason"/>
+      <Primitive path="@xlink:href" mapping="navaidtype_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="tn-a:designator">
+      <Primitive path="text()" mapping="designator"/>
+      <Primitive path="@nilReason" mapping="designator_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="designator_nil"/>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:RunwayCentrelinePoint" table="tna.runwaycentrelinepoint">
+    <FIDMapping prefix="TN-A_RUNWAYCENTRELINEPOINT_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.runwaycentrelinepoint_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>      
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Complex path="net:spokeEnd">
+      <Join table="tna.runwaycentrelinepoint_spokeend" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:spokeStart">
+      <Join table="tna.runwaycentrelinepoint_spokestart" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>          
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.runwaycentrelinepoint_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Primitive path="tn-a:significantPoint" mapping="significantpoint"/>
+    <Complex path="tn-a:pointRole">
+      <Primitive path="@nilReason" mapping="pointrole_nilreason"/>
+      <Primitive path="@xlink:href" mapping="pointrole_href"/>      
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-a:TouchDownLiftOff" table="tna.touchdownliftoff">
+    <FIDMapping prefix="TN-A_TOUCHDOWNLIFTOFF_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.touchdownliftoff_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Complex path="net:spokeEnd">
+      <Join table="tna.touchdownliftoff_spokeend" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:spokeStart">
+      <Join table="tna.touchdownliftoff_spokestart" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.touchdownliftoff_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Primitive path="tn-a:significantPoint" mapping="significantpoint"/>
+    <Complex path="tn-a:designator">
+      <Primitive path="text()" mapping="designator"/>
+      <Primitive path="@nilReason" mapping="designator_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="designator_nil"/>
+    </Complex>
+  </FeatureTypeMapping>
+
+  <!-- == ELF Air Transport Network ============================================================== -->
+  <FeatureTypeMapping name="elf-tn-a:AerodromeArea" table="tna.aerodromearea">
+    <FIDMapping prefix="ELF-TN-A_AERODROMEAREA_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.aerodromearea_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.aerodromearea_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="elf-tn-a:area">
+      <Primitive path="text()" mapping="area"/>
+      <Primitive path="@uom" mapping="area_uom"/>
+    </Complex>
+    <Primitive path="elf-tn-a:transEuropeanTransportNetwork" mapping="transeuropeantransportnetwork"/>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="elf-tn-a:AerodromeNode" table="tna.aerodromenode">
+    <FIDMapping prefix="ELF-TN-A_AERODROMENODE_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tna.aerodromenode_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Complex path="net:spokeEnd">
+      <Join table="tna.aerodromenode_spokeend" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="net:spokeStart">
+      <Join table="tna.aerodromenode_spokestart" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.aerodromenode_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Primitive path="tn-a:significantPoint" mapping="significantpoint"/>
+    <Complex path="tn-a:designatorIATA">
+      <Primitive path="text()" mapping="designatoriata"/>
+      <Primitive path="@nilReason" mapping="designatoriata_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="designatoriata_nil"/>
+    </Complex>
+    <Complex path="tn-a:locationIndicatorICAO">
+      <Primitive path="text()" mapping="locationindicatoricao"/>
+      <Primitive path="@nilReason" mapping="locationindicatoricao_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="locationindicatoricao_nil"/>
+    </Complex>
+    <Complex path="tn-a:controlTowers">
+      <Join table="tna.aerodromenode_controltowers" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xlink:href" mapping="href"/>
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+    <Primitive path="elf-tn-a:transEuropeanTransportNetwork" mapping="transeuropeantransportnetwork"/>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="elf-tn-a:FunctionalUseCategory" table="tna.functionalusecategory">
+    <FIDMapping prefix="ELF-TN-A_FUNCTIONALUSECATEGORY_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:networkRef">
+      <Join table="tna.functionalusecategory_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Complex path="net:NetworkReference">
+        <Complex path="net:element">
+          <Primitive path="@nilReason" mapping="networkreference_nilreason"/>
+          <Primitive path="@xlink:href" mapping="networkreference_href"/>
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="elf-tn-a:functionalUseCategory">
+      <Primitive path="@nilReason" mapping="functionalusecategory_nilreason"/>
+      <Primitive path="@xlink:href" mapping="functionalusecategory_href"/>
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="elf-tn-a:RunwayLine" table="tna.runwayline">
+    <FIDMapping prefix="ELF-TN-A_RUNWAYLINE_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="elf-tn-a:geographicalName">
+      <Primitive path="@nilReason" mapping="gn_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="gn_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="gn_language"/>
+          <Primitive path="@nilReason" mapping="gn_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_nativeness_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_nativeness_href"/>
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="gn_namestatus_nilreason"/>
+          <Primitive path="@xlink:href" mapping="gn_namestatus_href"/>
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="gn_sourceofname"/>
+          <Primitive path="@nilReason" mapping="gn_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tna.runwayline_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="script"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="elf-tn-a:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="elf-tn-a:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Complex path="elf-tn-a:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="elf-tn-a:length">
+      <Primitive path="text()" mapping="length"/>
+      <Primitive path="@uom" mapping="length_uom"/>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="elf-tn-a:TransportationUseCategory" table="tna.transportationusecategory">
+    <FIDMapping prefix="ELF-TN-A_TRANSPORTATIONUSECATEGORY_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="net:networkRef">
+      <Join table="tna.transportationusecategory_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Complex path="net:NetworkReference">
+        <Complex path="net:element">
+          <Primitive path="@nilReason" mapping="networkreference_nilreason"/>
+          <Primitive path="@xlink:href" mapping="networkreference_href"/>
+          <!-- TODO: additional ReferencedType attributes -->
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+    <Complex path="elf-tn-a:transportationUseCategory">
+      <Primitive path="@nilReason" mapping="transportationusecategory_nilreason"/>
+      <Primitive path="@xlink:href" mapping="transportationusecategory_href"/>
+      <!-- TODO: additional ReferencedType attributes -->
+    </Complex>
+  </FeatureTypeMapping>
+</SQLFeatureStore>
