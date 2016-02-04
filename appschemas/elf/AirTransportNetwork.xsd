@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema elementFormDefault="qualified" targetNamespace="http://www.locationframework.eu/schemas/AirTransportNetwork/1.0" version="1.0" 
-        xmlns="http://www.w3.org/2001/XMLSchema" 
+<schema targetNamespace="http://www.locationframework.eu/schemas/AirTransportNetwork/1.0" version="1.0" elementFormDefault="qualified" 
         xmlns:elf-tn-a="http://www.locationframework.eu/schemas/AirTransportNetwork/1.0" 
+        xmlns="http://www.w3.org/2001/XMLSchema" 
         xmlns:tn-a="http://inspire.ec.europa.eu/schemas/tn-a/4.0"
         xmlns:tn="http://inspire.ec.europa.eu/schemas/tn/4.0" 
         xmlns:gn="http://inspire.ec.europa.eu/schemas/gn/4.0" 

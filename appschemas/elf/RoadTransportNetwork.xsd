@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema  
-        elementFormDefault="qualified" 
-        targetNamespace="http://www.locationframework.eu/schemas/RoadTransportNetwork/1.0"
-        version="1.0"
-        xmlns="http://www.w3.org/2001/XMLSchema" 
+<schema targetNamespace="http://www.locationframework.eu/schemas/RoadTransportNetwork/1.0" version="1.0" elementFormDefault="qualified" 
         xmlns:elf-tn-ro="http://www.locationframework.eu/schemas/RoadTransportNetwork/1.0" 
+        xmlns="http://www.w3.org/2001/XMLSchema" 
         xmlns:gml="http://www.opengis.net/gml/3.2" 
         xmlns:gmlexr="http://www.opengis.net/gml/3.3/exr" 
         xmlns:tn="http://inspire.ec.europa.eu/schemas/tn/4.0" 

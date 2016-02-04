@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema elementFormDefault="qualified" targetNamespace="http://www.locationframework.eu/schemas/AdministrativeUnits/1.0" version="1.0"
+<schema targetNamespace="http://www.locationframework.eu/schemas/AdministrativeUnits/1.0" version="1.0" elementFormDefault="qualified"
+        xmlns:elf-au="http://www.locationframework.eu/schemas/AdministrativeUnits/1.0" 
+        xmlns:elf-gn="http://www.locationframework.eu/schemas/GeographicalNames/1.0" 
         xmlns="http://www.w3.org/2001/XMLSchema" 
         xmlns:au="http://inspire.ec.europa.eu/schemas/au/4.0" 
         xmlns:base="http://inspire.ec.europa.eu/schemas/base/3.3" 
         xmlns:base2="http://inspire.ec.europa.eu/schemas/base2/2.0" 
-        xmlns:elf-au="http://www.locationframework.eu/schemas/AdministrativeUnits/1.0" 
-        xmlns:elf-gn="http://www.locationframework.eu/schemas/GeographicalNames/1.0" 
         xmlns:gml="http://www.opengis.net/gml/3.2" 
         xmlns:gmlexr="http://www.opengis.net/gml/3.3/exr" 
         xmlns:gn="http://inspire.ec.europa.eu/schemas/gn/4.0">

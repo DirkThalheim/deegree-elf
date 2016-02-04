@@ -1,8 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:base="http://inspire.ec.europa.eu/schemas/base/3.3" xmlns:elf-gn="http://www.locationframework.eu/schemas/GeographicalNames/0.3" xmlns:elf-misc="http://www.locationframework.eu/schemas/Miscellaneous/0.3" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gmlexr="http://www.opengis.net/gml/3.3/exr" elementFormDefault="qualified" targetNamespace="http://www.locationframework.eu/schemas/Miscellaneous/0.3" version="0.3">
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.locationframework.eu/schemas/Miscellaneous/1.0" version="1.0" elementFormDefault="qualified" 
+        xmlns:elf-misc="http://www.locationframework.eu/schemas/Miscellaneous/1.0" 
+        xmlns:elf-gn="http://www.locationframework.eu/schemas/GeographicalNames/1.0" 
+        xmlns="http://www.w3.org/2001/XMLSchema" 
+        xmlns:base="http://inspire.ec.europa.eu/schemas/base/3.3" 
+        xmlns:gml="http://www.opengis.net/gml/3.2" 
+        xmlns:gmlexr="http://www.opengis.net/gml/3.3/exr">
+        
   <import namespace="http://inspire.ec.europa.eu/schemas/base/3.3" schemaLocation="http://inspire.ec.europa.eu/schemas/base/3.3/BaseTypes.xsd"/>
-  <import namespace="http://www.locationframework.eu/schemas/GeographicalNames/0.3" schemaLocation="GeographicalNames.xsd"/>
+  <import namespace="http://www.locationframework.eu/schemas/GeographicalNames/1.0" schemaLocation="GeographicalNames.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.3/exr" schemaLocation="http://schemas.opengis.net/gml/3.3/extdEncRule.xsd"/>
+  
   <!--XML Schema document created by ShapeChange - http://shapechange.net/-->
   <element name="AmusementPark" substitutionGroup="elf-misc:LandmarkFeature" type="elf-misc:AmusementParkType"/>
   <complexType name="AmusementParkType">
