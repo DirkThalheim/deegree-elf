@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema targetNamespace="http://www.locationframework.eu/schemas/AirTransportNetwork/1.0" version="1.0" elementFormDefault="qualified" 
-        xmlns:elf-tn-a="http://www.locationframework.eu/schemas/AirTransportNetwork/1.0" 
+<schema elementFormDefault="qualified" targetNamespace="http://www.locationframework.eu/schemas/AirTransportNetwork/1.0" version="1.0" 
         xmlns="http://www.w3.org/2001/XMLSchema" 
+        xmlns:elf-tn-a="http://www.locationframework.eu/schemas/AirTransportNetwork/1.0" 
         xmlns:tn-a="http://inspire.ec.europa.eu/schemas/tn-a/4.0"
         xmlns:tn="http://inspire.ec.europa.eu/schemas/tn/4.0" 
         xmlns:gn="http://inspire.ec.europa.eu/schemas/gn/4.0" 
@@ -9,10 +9,10 @@
         xmlns:gml="http://www.opengis.net/gml/3.2" 
         xmlns:gmlexr="http://www.opengis.net/gml/3.3/exr"> 
         
-  <import namespace="http://inspire.ec.europa.eu/schemas/base/3.3" schemaLocation="../inspire/BaseTypes.xsd"/>
-  <import namespace="http://inspire.ec.europa.eu/schemas/gn/4.0" schemaLocation="../inspire/GeographicalNames.xsd"/>
-  <import namespace="http://inspire.ec.europa.eu/schemas/tn-a/4.0" schemaLocation="../inspire/AirTransportNetwork.xsd"/>
-  <import namespace="http://inspire.ec.europa.eu/schemas/tn/4.0" schemaLocation="../inspire/CommonTransportElements.xsd"/>
+  <import namespace="http://inspire.ec.europa.eu/schemas/base/3.3" schemaLocation="http://inspire.ec.europa.eu/schemas/base/3.3/BaseTypes.xsd"/>
+  <import namespace="http://inspire.ec.europa.eu/schemas/gn/4.0" schemaLocation="http://inspire.ec.europa.eu/schemas/gn/4.0/GeographicalNames.xsd"/>
+  <import namespace="http://inspire.ec.europa.eu/schemas/tn-a/4.0" schemaLocation="http://inspire.ec.europa.eu/schemas/tn-a/4.0/AirTransportNetwork.xsd"/>
+  <import namespace="http://inspire.ec.europa.eu/schemas/tn/4.0" schemaLocation="http://inspire.ec.europa.eu/schemas/tn/4.0/CommonTransportElements.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
   <import namespace="http://www.opengis.net/gml/3.3/exr" schemaLocation="http://schemas.opengis.net/gml/3.3/extdEncRule.xsd"/>
   
