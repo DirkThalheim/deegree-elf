@@ -14,8 +14,6 @@ COMMENT ON SCHEMA au
 CREATE TABLE au.adminboundary (
     id text,
     geometry_nilreason text,
-    geometry_remoteschema text,
-    geometry_owns boolean,
     inspireid_localid text,
     country_nilreason text,
     country text,
@@ -61,8 +59,6 @@ CREATE TABLE au.condominium (
     id text,
     inspireid_localid text,
     geometry_nilreason text,
-    geometry_remoteschema text,
-    geometry_owns boolean,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -283,8 +279,6 @@ CREATE INDEX adminunit_boundary_parentfk_idx ON au.adminunit_boundary (parentfk)
 CREATE TABLE au.adminunitarea (
     id text,
     geometry_nilreason text,
-    geometry_remoteschema text,
-    geometry_owns boolean,
     inspireid_localid text,
     landcovertype_nilreason text,
     landcovertype_href text,

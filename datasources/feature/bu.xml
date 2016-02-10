@@ -1,0 +1,778 @@
+<SQLFeatureStore configVersion="3.1.0" 
+                 xmlns="http://www.deegree.org/datasource/feature/sql" 
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                 xmlns:base="http://inspire.ec.europa.eu/schemas/base/3.3" 
+                 xmlns:bu-base="http://inspire.ec.europa.eu/schemas/bu-base/4.0" 
+                 xmlns:bu-core2d="http://inspire.ec.europa.eu/schemas/bu-core2d/4.0" 
+                 xmlns:gn="http://inspire.ec.europa.eu/schemas/gn/4.0" 
+                 xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" 
+                 xmlns:elf-bu-core2d="http://www.locationframework.eu/schemas/BuildingsCore2D/1.0" 
+                 xmlns:xlink="http://www.w3.org/1999/xlink" 
+                 xmlns:gml="http://www.opengis.net/gml/3.2"
+                 xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.1.0/sql.xsd">
+                 
+  <JDBCConnId>elf_master</JDBCConnId>
+  <StorageCRS srid="4258" dim="2D">EPSG:4258</StorageCRS>
+  <GMLSchema>../../appschemas/elf/BuildingsCore2D.xsd</GMLSchema>
+  
+  <FeatureTypeMapping name="bu-core2d:Building" table="bu.building">
+    <FIDMapping prefix="BU-CORE2D_BUILDING_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="bu-base:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="bu-base:conditionOfConstruction">
+      <Primitive path="@owns" mapping="conditionofconstruction_owns"/>
+      <Primitive path="@nilReason" mapping="conditionofconstruction_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="conditionofconstruction_remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="conditionofconstruction_nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="conditionofconstruction_fk" toColumns="id"/>
+        <Href mapping="conditionofconstruction_href"/>
+      </Feature>
+    </Complex>
+    <Complex path="bu-base:dateOfConstruction">
+      <Primitive path="@nilReason" mapping="dateofconstruction_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="dateofconstruction_nil"/>
+      <Complex path="bu-base:DateOfEvent">
+        <Complex path="bu-base:anyPoint">
+          <Primitive path="text()" mapping="dateofconstruction_anypoint"/>
+          <Primitive path="@nilReason" mapping="dateofconstruction_anypoint_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofconstruction_anypoint_nil"/>
+        </Complex>
+        <Complex path="bu-base:beginning">
+          <Primitive path="text()" mapping="dateofconstruction_beginning"/>
+          <Primitive path="@nilReason" mapping="dateofconstruction_beginning_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofconstruction_beginning_nil"/>
+        </Complex>
+        <Complex path="bu-base:end">
+          <Primitive path="text()" mapping="dateofconstruction_end"/>
+          <Primitive path="@nilReason" mapping="dateofconstruction_end_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofconstruction_end_nil"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:dateOfDemolition">
+      <Primitive path="@nilReason" mapping="dateofdemolition_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="dateofdemolition_nil"/>
+      <Complex path="bu-base:DateOfEvent">
+        <Complex path="bu-base:anyPoint">
+          <Primitive path="text()" mapping="dateofdemolition_anypoint"/>
+          <Primitive path="@nilReason" mapping="dateofdemolition_anypoint_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofdemolition_anypoint_nil"/>
+        </Complex>
+        <Complex path="bu-base:beginning">
+          <Primitive path="text()" mapping="dateofdemolition_beginning"/>
+          <Primitive path="@nilReason" mapping="dateofdemolition_beginning_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofdemolition_beginning_nil"/>
+        </Complex>
+        <Complex path="bu-base:end">
+          <Primitive path="text()" mapping="dateofdemolition_end"/>
+          <Primitive path="@nilReason" mapping="dateofdemolition_end_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofdemolition_end_nil"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:dateOfRenovation">
+      <Primitive path="@nilReason" mapping="dateofrenovation_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="dateofrenovation_nil"/>
+      <Complex path="bu-base:DateOfEvent">
+        <Complex path="bu-base:anyPoint">
+          <Primitive path="text()" mapping="dateofrenovation_anypoint"/>
+          <Primitive path="@nilReason" mapping="dateofrenovation_anypoint_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofrenovation_anypoint_nil"/>
+        </Complex>
+        <Complex path="bu-base:beginning">
+          <Primitive path="text()" mapping="dateofrenovation_beginning"/>
+          <Primitive path="@nilReason" mapping="dateofrenovation_beginning_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofrenovation_beginning_nil"/>
+        </Complex>
+        <Complex path="bu-base:end">
+          <Primitive path="text()" mapping="dateofrenovation_end"/>
+          <Primitive path="@nilReason" mapping="dateofrenovation_end_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofrenovation_end_nil"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:elevation">
+      <Join table="bu.building_elevation" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="bu-base:Elevation">
+        <Complex path="bu-base:elevationReference">
+          <Primitive path="@owns" mapping="elevation_elevationreference_owns"/>
+          <Primitive path="@nilReason" mapping="elevation_elevationreference_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="elevation_elevationreference_remoteschema"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="elevation_elevationreference_fk" toColumns="id"/>
+            <Href mapping="elevation_elevationreference_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="bu-base:elevationValue">
+          <Primitive path="text()" mapping="elevation_elevationvalue"/>
+          <Primitive path="@srsName" mapping="elevation_elevationvalue_srsname"/>
+          <Primitive path="@srsDimension" mapping="elevation_elevationvalue_srsdimension"/>
+          <Primitive path="@axisLabels" mapping="elevation_elevationvalue_axislabels"/>
+          <Primitive path="@uomLabels" mapping="elevation_elevationvalue_uomlabels"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion"/>
+      <Primitive path="@nilReason" mapping="endlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
+    </Complex>
+    <Complex path="bu-base:externalReference">
+      <Join table="bu.building_externalreference" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="bu-base:ExternalReference">
+        <Primitive path="bu-base:informationSystem" mapping="informationsystem"/>
+        <Complex path="bu-base:informationSystemName">
+          <Primitive path="@gco:nilReason" mapping="informationsystemname_nilreason"/>
+          <Primitive path="gco:CharacterString" mapping="informationsystemname_characterstring"/>
+          <Complex path="gmd:PT_FreeText">
+            <Primitive path="@id" mapping="informationsystemname_pt_freetext_id"/>
+            <Primitive path="@uuid" mapping="informationsystemname_pt_freetext_uuid"/>
+            <Complex path="gmd:textGroup">
+              <Join table="bu.building_informationsystemname_pt_freete_0" fromColumns="id" toColumns="parentfk"/>
+              <Primitive path="@xlink:type" mapping="informationsystemname_pt_freetext_type"/>
+              <Primitive path="@xlink:href" mapping="informationsystemname_pt_freetext_href"/>
+              <Primitive path="@xlink:role" mapping="informationsystemname_pt_freetext_role"/>
+              <Primitive path="@xlink:arcrole" mapping="informationsystemname_pt_freetext_arcrole"/>
+              <Primitive path="@xlink:title" mapping="informationsystemname_pt_freetext_title"/>
+              <Primitive path="@xlink:show" mapping="informationsystemname_pt_freetext_show"/>
+              <Primitive path="@xlink:actuate" mapping="informationsystemname_pt_freetext_actuate"/>
+              <Primitive path="@uuidref" mapping="informationsystemname_pt_freetext_uuidref"/>
+              <Primitive path="@gco:nilReason" mapping="informationsystemname_pt_freetext_nilreason"/>
+              <Complex path="gmd:LocalisedCharacterString">
+                <Primitive path="text()" mapping="informationsystemname_pt_freetext_localisedcharacterstring"/>
+                <Primitive path="@id" mapping="informationsystemname_pt_freetext_localisedcharacterstring_id"/>
+                <Primitive path="@locale" mapping="informationsystemname_pt_freetext_localisedcharacterstring_locale"/>
+              </Complex>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Primitive path="bu-base:reference" mapping="reference"/>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:heightAboveGround">
+      <Join table="bu.building_heightaboveground" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="bu-base:HeightAboveGround">
+        <Complex path="bu-base:heightReference">
+          <Primitive path="@owns" mapping="heightaboveground_heightreference_owns"/>
+          <Primitive path="@nilReason" mapping="heightaboveground_heightreference_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="heightaboveground_heightreference_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="heightaboveground_heightreference_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="heightaboveground_heightreference_fk" toColumns="id"/>
+            <Href mapping="heightaboveground_heightreference_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="bu-base:lowReference">
+          <Primitive path="@owns" mapping="heightaboveground_lowreference_owns"/>
+          <Primitive path="@nilReason" mapping="heightaboveground_lowreference_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="heightaboveground_lowreference_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="heightaboveground_lowreference_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="heightaboveground_lowreference_fk" toColumns="id"/>
+            <Href mapping="heightaboveground_lowreference_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="bu-base:status">
+          <Primitive path="@owns" mapping="heightaboveground_status_owns"/>
+          <Primitive path="@nilReason" mapping="heightaboveground_status_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="heightaboveground_status_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="heightaboveground_status_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="heightaboveground_status_fk" toColumns="id"/>
+            <Href mapping="heightaboveground_status_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="bu-base:value">
+          <Primitive path="text()" mapping="heightaboveground_value"/>
+          <Primitive path="@uom" mapping="heightaboveground_value_uom"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid_localid"/>
+        <Primitive path="base:namespace" mapping="'DE.BKG.HU'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:name">
+      <Join table="bu.building_name" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="language"/>
+          <Primitive path="@nilReason" mapping="language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@owns" mapping="nativeness_owns"/>
+          <Primitive path="@nilReason" mapping="nativeness_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="nativeness_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="nativeness_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="nativeness_fk" toColumns="id"/>
+            <Href mapping="nativeness_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@owns" mapping="namestatus_owns"/>
+          <Primitive path="@nilReason" mapping="namestatus_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="namestatus_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="namestatus_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="namestatus_fk" toColumns="id"/>
+            <Href mapping="namestatus_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="sourceofname"/>
+          <Primitive path="@nilReason" mapping="sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:pronunciation">
+          <Primitive path="@nilReason" mapping="pronunciation_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="pronunciation_nil"/>
+          <Complex path="gn:PronunciationOfName">
+            <Complex path="gn:pronunciationSoundLink">
+              <Primitive path="text()" mapping="pronunciation_pronunciationsoundlink"/>
+              <Primitive path="@nilReason" mapping="pronunciation_pronunciationsoundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciation_pronunciationsoundlink_nil"/>
+            </Complex>
+            <Complex path="gn:pronunciationIPA">
+              <Primitive path="text()" mapping="pronunciation_pronunciationipa"/>
+              <Primitive path="@nilReason" mapping="pronunciation_pronunciationipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciation_pronunciationipa_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="bu.building_name_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="spellingofname_text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="spellingofname_script"/>
+              <Primitive path="@nilReason" mapping="spellingofname_script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="spellingofname_script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="spellingofname_transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="spellingofname_transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="spellingofname_transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:grammaticalGender">
+          <Primitive path="@owns" mapping="grammaticalgender_owns"/>
+          <Primitive path="@nilReason" mapping="grammaticalgender_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalgender_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="grammaticalgender_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="grammaticalgender_fk" toColumns="id"/>
+            <Href mapping="grammaticalgender_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:grammaticalNumber">
+          <Primitive path="@owns" mapping="grammaticalnumber_owns"/>
+          <Primitive path="@nilReason" mapping="grammaticalnumber_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalnumber_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="grammaticalnumber_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="grammaticalnumber_fk" toColumns="id"/>
+            <Href mapping="grammaticalnumber_href"/>
+          </Feature>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:buildingNature">
+      <Join table="bu.building_buildingnature" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="id"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="bu-base:currentUse">
+      <Join table="bu.building_currentuse" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="bu-base:CurrentUse">
+        <Complex path="bu-base:currentUse">
+          <Primitive path="@owns" mapping="currentuse_currentuse_owns"/>
+          <Primitive path="@nilReason" mapping="currentuse_currentuse_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="currentuse_currentuse_remoteschema"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="currentuse_currentuse_fk" toColumns="id"/>
+            <Href mapping="currentuse_currentuse_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="bu-base:percentage">
+          <Primitive path="text()" mapping="currentuse_percentage"/>
+          <Primitive path="@nilReason" mapping="currentuse_percentage_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="currentuse_percentage_nil"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:numberOfDwellings">
+      <Primitive path="text()" mapping="numberofdwellings"/>
+      <Primitive path="@nilReason" mapping="numberofdwellings_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="numberofdwellings_nil"/>
+    </Complex>
+    <Complex path="bu-base:numberOfBuildingUnits">
+      <Primitive path="text()" mapping="numberofbuildingunits"/>
+      <Primitive path="@nilReason" mapping="numberofbuildingunits_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="numberofbuildingunits_nil"/>
+    </Complex>
+    <Complex path="bu-base:numberOfFloorsAboveGround">
+      <Primitive path="text()" mapping="numberoffloorsaboveground"/>
+      <Primitive path="@nilReason" mapping="numberoffloorsaboveground_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="numberoffloorsaboveground_nil"/>
+    </Complex>
+    <Complex path="bu-base:parts">
+      <Join table="bu.building_parts" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="id"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="bu-core2d:geometry2D">
+      <Complex path="bu-base:BuildingGeometry2D">
+        <Complex path="bu-base:geometry">
+          <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+          <Geometry path="." mapping="geometry"/>
+        </Complex>
+        <Primitive path="bu-base:referenceGeometry" mapping="geometry2d_referencegeometry"/>
+        <Complex path="bu-base:horizontalGeometryReference">
+          <Primitive path="@owns" mapping="geometry2d_horizontalgeometryreference_owns"/>
+          <Primitive path="@nilReason" mapping="geometry2d_horizontalgeometryreference_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="geometry2d_horizontalgeometryreference_remoteschema"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="geometry2d_horizontalgeometryreference_fk" toColumns="id"/>
+            <Href mapping="geometry2d_horizontalgeometryreference_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="bu-base:verticalGeometryReference">
+          <Primitive path="@owns" mapping="geometry2d_verticalgeometryreference_owns"/>
+          <Primitive path="@nilReason" mapping="geometry2d_verticalgeometryreference_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="geometry2d_verticalgeometryreference_remoteschema"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="geometry2d_verticalgeometryreference_fk" toColumns="id"/>
+            <Href mapping="geometry2d_verticalgeometryreference_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="bu-base:horizontalGeometryEstimatedAccuracy">
+          <Primitive path="text()" mapping="geometry2d_horizontalgeometryestimatedaccuracy"/>
+          <Primitive path="@nilReason" mapping="geometry2d_horizontalgeometryestimatedaccuracy_nilreason"/>
+          <Primitive path="@uom" mapping="geometry2d_horizontalgeometryestimatedaccuracy_uom"/>
+          <Primitive path="@xsi:nil" mapping="geometry2d_horizontalgeometryestimatedaccuracy_nil"/>
+        </Complex>
+        <Complex path="bu-base:verticalGeometryEstimatedAccuracy">
+          <Primitive path="text()" mapping="geometry2d_verticalgeometryestimatedaccuracy"/>
+          <Primitive path="@nilReason" mapping="geometry2d_verticalgeometryestimatedaccuracy_nilreason"/>
+          <Primitive path="@uom" mapping="geometry2d_verticalgeometryestimatedaccuracy_uom"/>
+          <Primitive path="@xsi:nil" mapping="geometry2d_verticalgeometryestimatedaccuracy_nil"/>
+        </Complex>
+      </Complex>
+    </Complex>
+  </FeatureTypeMapping>
+
+  <FeatureTypeMapping name="bu-core2d:BuildingPart" table="bu.buildingpart">
+    <FIDMapping prefix="BU-CORE2D_BUILDINGPART_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="bu-base:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="bu-base:conditionOfConstruction">
+      <Primitive path="@owns" mapping="conditionofconstruction_owns"/>
+      <Primitive path="@nilReason" mapping="conditionofconstruction_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="conditionofconstruction_remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="conditionofconstruction_nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="conditionofconstruction_fk" toColumns="id"/>
+        <Href mapping="conditionofconstruction_href"/>
+      </Feature>
+    </Complex>
+    <Complex path="bu-base:dateOfConstruction">
+      <Primitive path="@nilReason" mapping="dateofconstruction_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="dateofconstruction_nil"/>
+      <Complex path="bu-base:DateOfEvent">
+        <Complex path="bu-base:anyPoint">
+          <Primitive path="text()" mapping="dateofconstruction_anypoint"/>
+          <Primitive path="@nilReason" mapping="dateofconstruction_anypoint_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofconstruction_anypoint_nil"/>
+        </Complex>
+        <Complex path="bu-base:beginning">
+          <Primitive path="text()" mapping="dateofconstruction_beginning"/>
+          <Primitive path="@nilReason" mapping="dateofconstruction_beginning_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofconstruction_beginning_nil"/>
+        </Complex>
+        <Complex path="bu-base:end">
+          <Primitive path="text()" mapping="dateofconstruction_end"/>
+          <Primitive path="@nilReason" mapping="dateofconstruction_end_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofconstruction_end_nil"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:dateOfDemolition">
+      <Primitive path="@nilReason" mapping="dateofdemolition_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="dateofdemolition_nil"/>
+      <Complex path="bu-base:DateOfEvent">
+        <Complex path="bu-base:anyPoint">
+          <Primitive path="text()" mapping="dateofdemolition_anypoint"/>
+          <Primitive path="@nilReason" mapping="dateofdemolition_anypoint_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofdemolition_anypoint_nil"/>
+        </Complex>
+        <Complex path="bu-base:beginning">
+          <Primitive path="text()" mapping="dateofdemolition_beginning"/>
+          <Primitive path="@nilReason" mapping="dateofdemolition_beginning_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofdemolition_beginning_nil"/>
+        </Complex>
+        <Complex path="bu-base:end">
+          <Primitive path="text()" mapping="dateofdemolition_end"/>
+          <Primitive path="@nilReason" mapping="dateofdemolition_end_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofdemolition_end_nil"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:dateOfRenovation">
+      <Primitive path="@nilReason" mapping="dateofrenovation_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="dateofrenovation_nil"/>
+      <Complex path="bu-base:DateOfEvent">
+        <Complex path="bu-base:anyPoint">
+          <Primitive path="text()" mapping="dateofrenovation_anypoint"/>
+          <Primitive path="@nilReason" mapping="dateofrenovation_anypoint_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofrenovation_anypoint_nil"/>
+        </Complex>
+        <Complex path="bu-base:beginning">
+          <Primitive path="text()" mapping="dateofrenovation_beginning"/>
+          <Primitive path="@nilReason" mapping="dateofrenovation_beginning_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofrenovation_beginning_nil"/>
+        </Complex>
+        <Complex path="bu-base:end">
+          <Primitive path="text()" mapping="dateofrenovation_end"/>
+          <Primitive path="@nilReason" mapping="dateofrenovation_end_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="dateofrenovation_end_nil"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:elevation">
+      <Join table="bu.buildingpart_elevation" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="bu-base:Elevation">
+        <Complex path="bu-base:elevationReference">
+          <Primitive path="@owns" mapping="elevation_elevationreference_owns"/>
+          <Primitive path="@nilReason" mapping="elevation_elevationreference_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="elevation_elevationreference_remoteschema"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="elevation_elevationreference_fk" toColumns="id"/>
+            <Href mapping="elevation_elevationreference_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="bu-base:elevationValue">
+          <Primitive path="text()" mapping="elevation_elevationvalue"/>
+          <Primitive path="@srsName" mapping="elevation_elevationvalue_srsname"/>
+          <Primitive path="@srsDimension" mapping="elevation_elevationvalue_srsdimension"/>
+          <Primitive path="@axisLabels" mapping="elevation_elevationvalue_axislabels"/>
+          <Primitive path="@uomLabels" mapping="elevation_elevationvalue_uomlabels"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion"/>
+      <Primitive path="@nilReason" mapping="endlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
+    </Complex>
+    <Complex path="bu-base:externalReference">
+      <Join table="bu.buildingpart_externalreference" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="bu-base:ExternalReference">
+        <Primitive path="bu-base:informationSystem" mapping="informationsystem"/>
+        <Complex path="bu-base:informationSystemName">
+          <Primitive path="@gco:nilReason" mapping="informationsystemname_nilreason"/>
+          <Primitive path="gco:CharacterString" mapping="informationsystemname_characterstring"/>
+          <Complex path="gmd:PT_FreeText">
+            <Primitive path="@id" mapping="informationsystemname_pt_freetext_id"/>
+            <Primitive path="@uuid" mapping="informationsystemname_pt_freetext_uuid"/>
+            <Complex path="gmd:textGroup">
+              <Join table="bu.buildingpart_informationsystemname_pt_fr_5" fromColumns="id" toColumns="parentfk"/>
+              <Primitive path="@xlink:type" mapping="informationsystemname_pt_freetext_type"/>
+              <Primitive path="@xlink:href" mapping="informationsystemname_pt_freetext_href"/>
+              <Primitive path="@xlink:role" mapping="informationsystemname_pt_freetext_role"/>
+              <Primitive path="@xlink:arcrole" mapping="informationsystemname_pt_freetext_arcrole"/>
+              <Primitive path="@xlink:title" mapping="informationsystemname_pt_freetext_title"/>
+              <Primitive path="@xlink:show" mapping="informationsystemname_pt_freetext_show"/>
+              <Primitive path="@xlink:actuate" mapping="informationsystemname_pt_freetext_actuate"/>
+              <Primitive path="@uuidref" mapping="informationsystemname_pt_freetext_uuidref"/>
+              <Primitive path="@gco:nilReason" mapping="informationsystemname_pt_freetext_nilreason"/>
+              <Complex path="gmd:LocalisedCharacterString">
+                <Primitive path="text()" mapping="informationsystemname_pt_freetext_localisedcharacterstring"/>
+                <Primitive path="@id" mapping="informationsystemname_pt_freetext_localisedcharacterstring_id"/>
+                <Primitive path="@locale" mapping="informationsystemname_pt_freetext_localisedcharacterstring_locale"/>
+              </Complex>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Primitive path="bu-base:reference" mapping="reference"/>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:heightAboveGround">
+      <Join table="bu.buildingpart_heightaboveground" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="bu-base:HeightAboveGround">
+        <Complex path="bu-base:heightReference">
+          <Primitive path="@owns" mapping="heightaboveground_heightreference_owns"/>
+          <Primitive path="@nilReason" mapping="heightaboveground_heightreference_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="heightaboveground_heightreference_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="heightaboveground_heightreference_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="heightaboveground_heightreference_fk" toColumns="id"/>
+            <Href mapping="heightaboveground_heightreference_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="bu-base:lowReference">
+          <Primitive path="@owns" mapping="heightaboveground_lowreference_owns"/>
+          <Primitive path="@nilReason" mapping="heightaboveground_lowreference_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="heightaboveground_lowreference_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="heightaboveground_lowreference_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="heightaboveground_lowreference_fk" toColumns="id"/>
+            <Href mapping="heightaboveground_lowreference_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="bu-base:status">
+          <Primitive path="@owns" mapping="heightaboveground_status_owns"/>
+          <Primitive path="@nilReason" mapping="heightaboveground_status_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="heightaboveground_status_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="heightaboveground_status_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="heightaboveground_status_fk" toColumns="id"/>
+            <Href mapping="heightaboveground_status_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="bu-base:value">
+          <Primitive path="text()" mapping="heightaboveground_value"/>
+          <Primitive path="@uom" mapping="heightaboveground_value_uom"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid_localid"/>
+        <Primitive path="base:namespace" mapping="'DE.BKG.HU'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:name">
+      <Join table="bu.buildingpart_name" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="language"/>
+          <Primitive path="@nilReason" mapping="language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@owns" mapping="nativeness_owns"/>
+          <Primitive path="@nilReason" mapping="nativeness_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="nativeness_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="nativeness_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="nativeness_fk" toColumns="id"/>
+            <Href mapping="nativeness_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@owns" mapping="namestatus_owns"/>
+          <Primitive path="@nilReason" mapping="namestatus_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="namestatus_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="namestatus_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="namestatus_fk" toColumns="id"/>
+            <Href mapping="namestatus_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="sourceofname"/>
+          <Primitive path="@nilReason" mapping="sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:pronunciation">
+          <Primitive path="@nilReason" mapping="pronunciation_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="pronunciation_nil"/>
+          <Complex path="gn:PronunciationOfName">
+            <Complex path="gn:pronunciationSoundLink">
+              <Primitive path="text()" mapping="pronunciation_pronunciationsoundlink"/>
+              <Primitive path="@nilReason" mapping="pronunciation_pronunciationsoundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciation_pronunciationsoundlink_nil"/>
+            </Complex>
+            <Complex path="gn:pronunciationIPA">
+              <Primitive path="text()" mapping="pronunciation_pronunciationipa"/>
+              <Primitive path="@nilReason" mapping="pronunciation_pronunciationipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciation_pronunciationipa_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="bu.buildingpart_name_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="spellingofname_text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="spellingofname_script"/>
+              <Primitive path="@nilReason" mapping="spellingofname_script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="spellingofname_script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="spellingofname_transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="spellingofname_transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="spellingofname_transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:grammaticalGender">
+          <Primitive path="@owns" mapping="grammaticalgender_owns"/>
+          <Primitive path="@nilReason" mapping="grammaticalgender_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalgender_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="grammaticalgender_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="grammaticalgender_fk" toColumns="id"/>
+            <Href mapping="grammaticalgender_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:grammaticalNumber">
+          <Primitive path="@owns" mapping="grammaticalnumber_owns"/>
+          <Primitive path="@nilReason" mapping="grammaticalnumber_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalnumber_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="grammaticalnumber_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="grammaticalnumber_fk" toColumns="id"/>
+            <Href mapping="grammaticalnumber_href"/>
+          </Feature>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:buildingNature">
+      <Join table="bu.buildingpart_buildingnature" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="id"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="bu-base:currentUse">
+      <Join table="bu.buildingpart_currentuse" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="bu-base:CurrentUse">
+        <Complex path="bu-base:currentUse">
+          <Primitive path="@owns" mapping="currentuse_currentuse_owns"/>
+          <Primitive path="@nilReason" mapping="currentuse_currentuse_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="currentuse_currentuse_remoteschema"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="currentuse_currentuse_fk" toColumns="id"/>
+            <Href mapping="currentuse_currentuse_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="bu-base:percentage">
+          <Primitive path="text()" mapping="currentuse_percentage"/>
+          <Primitive path="@nilReason" mapping="currentuse_percentage_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="currentuse_percentage_nil"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="bu-base:numberOfDwellings">
+      <Primitive path="text()" mapping="numberofdwellings"/>
+      <Primitive path="@nilReason" mapping="numberofdwellings_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="numberofdwellings_nil"/>
+    </Complex>
+    <Complex path="bu-base:numberOfBuildingUnits">
+      <Primitive path="text()" mapping="numberofbuildingunits"/>
+      <Primitive path="@nilReason" mapping="numberofbuildingunits_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="numberofbuildingunits_nil"/>
+    </Complex>
+    <Complex path="bu-base:numberOfFloorsAboveGround">
+      <Primitive path="text()" mapping="numberoffloorsaboveground"/>
+      <Primitive path="@nilReason" mapping="numberoffloorsaboveground_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="numberoffloorsaboveground_nil"/>
+    </Complex>
+    <Complex path="bu-core2d:geometry2D">
+      <Join table="bu.buildingpart_geometry2d" fromColumns="id" toColumns="parentfk"/>
+      <Complex path="bu-base:BuildingGeometry2D">
+        <Complex path="bu-base:geometry">
+          <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+          <Geometry path="." mapping="geometry"/>
+        </Complex>
+        <Primitive path="bu-base:referenceGeometry" mapping="referencegeometry"/>
+        <Complex path="bu-base:horizontalGeometryReference">
+          <Primitive path="@owns" mapping="horizontalgeometryreference_owns"/>
+          <Primitive path="@nilReason" mapping="horizontalgeometryreference_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="horizontalgeometryreference_remoteschema"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="horizontalgeometryreference_fk" toColumns="id"/>
+            <Href mapping="horizontalgeometryreference_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="bu-base:verticalGeometryReference">
+          <Primitive path="@owns" mapping="verticalgeometryreference_owns"/>
+          <Primitive path="@nilReason" mapping="verticalgeometryreference_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="verticalgeometryreference_remoteschema"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="verticalgeometryreference_fk" toColumns="id"/>
+            <Href mapping="verticalgeometryreference_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="bu-base:horizontalGeometryEstimatedAccuracy">
+          <Primitive path="text()" mapping="horizontalgeometryestimatedaccuracy"/>
+          <Primitive path="@nilReason" mapping="horizontalgeometryestimatedaccuracy_nilreason"/>
+          <Primitive path="@uom" mapping="horizontalgeometryestimatedaccuracy_uom"/>
+          <Primitive path="@xsi:nil" mapping="horizontalgeometryestimatedaccuracy_nil"/>
+        </Complex>
+        <Complex path="bu-base:verticalGeometryEstimatedAccuracy">
+          <Primitive path="text()" mapping="verticalgeometryestimatedaccuracy"/>
+          <Primitive path="@nilReason" mapping="verticalgeometryestimatedaccuracy_nilreason"/>
+          <Primitive path="@uom" mapping="verticalgeometryestimatedaccuracy_uom"/>
+          <Primitive path="@xsi:nil" mapping="verticalgeometryestimatedaccuracy_nil"/>
+        </Complex>
+      </Complex>
+    </Complex>
+  </FeatureTypeMapping>
+
+</SQLFeatureStore>

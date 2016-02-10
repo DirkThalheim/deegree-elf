@@ -21,12 +21,9 @@
   
   <!-- 
     Only FeatureTypes from namespace au and elf-au are implemented.
-
-    No mappings for:
-    * */endLifespanVersion
-    
-    All atributes with a type ReferencedType have only following attributes:
-    * xlink:href, nil and nil_reason
+    * simplyfied inspireId
+    * no mappig for endLifespanVersion
+    * no mapping for geometry/@owns and geoemtry/@remoteSchema 
   -->
   
   <FeatureTypeMapping name="au:AdministrativeBoundary" table="au.adminboundary">
@@ -36,8 +33,6 @@
     </FIDMapping>
     <Complex path="au:geometry">
       <Primitive path="@nilReason" mapping="geometry_nilreason"/>
-      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>
-      <Primitive path="@owns" mapping="geometry_owns"/>
       <Geometry path="." mapping="geometry"/>
     </Complex>
     <Complex path="au:inspireId">
@@ -158,8 +153,6 @@
     </Complex>    
     <Complex path="au:geometry">
       <Primitive path="@nilReason" mapping="geometry_nilreason"/>
-      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>
-      <Primitive path="@owns" mapping="geometry_owns"/>
       <Geometry path="." mapping="geometry"/>
     </Complex>
     <Complex path="au:beginLifespanVersion">
@@ -176,6 +169,204 @@
     </Complex>
   </FeatureTypeMapping>
 
+  <FeatureTypeMapping name="au:AdministrativeUnit" table="au.adminunit">
+    <FIDMapping prefix="ADMINISTRATIVEUNIT_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="au:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Primitive path="au:nationalCode" mapping="nationalcode"/>
+    <Complex path="au:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid_localid"/>
+        <Primitive path="base:namespace" mapping="'DE.BKG.VG25'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="au:nationalLevel">
+      <Primitive path="@nilReason" mapping="nationallevel_nilreason"/>
+      <Feature path=".">
+        <Href mapping="nationallevel_href"/>
+      </Feature>
+    </Complex>
+    <Complex path="au:nationalLevelName">
+      <Join table="au.adminunit_nationallevelname" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@gco:nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="gmd:LocalisedCharacterString">
+        <Primitive path="text()" mapping="localisedcharacterstring"/>
+        <Primitive path="@id" mapping="localisedcharacterstring_id"/>
+        <Primitive path="@locale" mapping="localisedcharacterstring_locale"/>
+      </Complex>
+    </Complex>
+    <Complex path="au:country">
+      <Primitive path="@gco:nilReason" mapping="country_nilreason"/>
+      <Complex path="gmd:Country">
+        <Primitive path="text()" mapping="country"/>
+        <Primitive path="@codeList" mapping="'http://inspire.ec.europa.eu/codelist/CountryCode'"/>
+        <Primitive path="@codeListValue" mapping="country_codelistvalue"/>
+        <!-- Primitive path="@codeSpace" mapping="country_codespace"/ -->
+      </Complex>
+    </Complex>
+    <Complex path="au:name">
+      <Join table="au.adminunit_name" fromColumns="id" toColumns="parentfk"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="language"/>
+          <Primitive path="@nilReason" mapping="language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="nativeness_nilreason"/>
+          <Feature path=".">
+            <Href mapping="nativeness_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@xsi:nil" mapping="'false'"/>
+          <Primitive path="@nilReason" mapping="namestatus_nilreason"/>
+          <Feature path=".">
+            <Href mapping="namestatus_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="@xsi:nil" mapping="sourceofname_nil"/>
+          <Primitive path="text()" mapping="sourceofname"/>
+          <Primitive path="@nilReason" mapping="sourceofname_nilreason"/>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="au.adminunit_name_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="text"/>
+            <Complex path="gn:script">
+              <Primitive path="@xsi:nil" mapping="script_nil"/>
+              <Primitive path="@nilReason" mapping="script_nilreason"/>
+              <Primitive path="text()" mapping="script"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+              <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+              <Primitive path="text()" mapping="transliterationscheme"/>
+            </Complex>
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>    
+    <Complex path="au:residenceOfAuthority">
+      <Join table="au.adminunit_residence" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Complex path="au:ResidenceOfAuthority">
+        <Complex path="au:name">
+          <Join table="au.adminunit_residence_name" fromColumns="id" toColumns="parentfk"/>
+          <Complex path="gn:GeographicalName">
+            <Complex path="gn:language">
+              <Primitive path="text()" mapping="language"/>
+              <Primitive path="@nilReason" mapping="language_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="language_nil"/>
+            </Complex>
+            <Complex path="gn:nativeness">
+              <Primitive path="@xsi:nil" mapping="'false'"/>
+              <Primitive path="@nilReason" mapping="nativeness_nilreason"/>
+              <Feature path=".">
+                <Href mapping="nativeness_href"/>
+              </Feature>
+            </Complex>
+            <Complex path="gn:nameStatus">
+              <Primitive path="@xsi:nil" mapping="'false'"/>
+              <Primitive path="@nilReason" mapping="namestatus_nilreason"/>
+              <Feature path=".">
+                <Href mapping="namestatus_href"/>
+              </Feature>
+            </Complex>
+            <Complex path="gn:sourceOfName">
+              <Primitive path="@xsi:nil" mapping="sourceofname_nil"/>
+              <Primitive path="text()" mapping="sourceofname"/>
+              <Primitive path="@nilReason" mapping="sourceofname_nilreason"/>
+            </Complex>
+            <Complex path="gn:spelling">
+              <Join table="au.adminunit_residence_name_spelling" fromColumns="id" toColumns="parentfk"/>
+              <Complex path="gn:SpellingOfName">
+                <Primitive path="gn:text" mapping="text"/>
+                <Complex path="gn:script">
+                  <Primitive path="@xsi:nil" mapping="script_nil"/>
+                  <Primitive path="@nilReason" mapping="script_nilreason"/>
+                  <Primitive path="text()" mapping="script"/>
+                </Complex>
+                <Complex path="gn:transliterationScheme">
+                  <Primitive path="@xsi:nil" mapping="transliterationscheme_nil"/>
+                  <Primitive path="@nilReason" mapping="transliterationscheme_nilreason"/>
+                  <Primitive path="text()" mapping="transliterationscheme"/>
+                </Complex>
+              </Complex>
+            </Complex>
+          </Complex>
+        </Complex>    
+        <Complex path="au:geometry">
+          <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+          <Geometry path="." mapping="geometry"/>
+        </Complex>
+      </Complex>
+    </Complex> 
+    <Complex path="au:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="au:condominium">
+      <!-- n:m relation -->
+      <Join table="au.adminunit_condominium" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Feature path=".">
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="au:lowerLevelUnit">
+      <Join table="au.adminunit_lowerlevelunit" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Feature path=".">
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="au:upperLevelUnit">
+      <Primitive path="@owns" mapping="upperlevelunit_owns"/>
+      <Primitive path="@nilReason" mapping="upperlevelunit_nilreason"/>
+      <Feature path=".">
+        <Href mapping="upperlevelunit_href"/>
+      </Feature>
+    </Complex>
+    <Complex path="au:administeredBy">
+      <Join table="au.adminunit_administeredby" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Feature path=".">
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="au:coAdminister">
+      <Join table="au.adminunit_coadminister" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Feature path=".">
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="au:boundary">
+      <Join table="au.adminunit_boundary" fromColumns="id" toColumns="parentfk"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Feature path=".">
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+  </FeatureTypeMapping>
+  
+  <!-- extended ELF-FeatureTypes -->
   <FeatureTypeMapping name="elf-au:AdministrativeUnit" table="au.adminunit">
     <FIDMapping prefix="ADMINISTRATIVEUNIT_">
       <Column name="id" type="string"/>
@@ -395,45 +586,5 @@
     <!-- TODO: elf-au:namedPlacePoint-->
   </FeatureTypeMapping>
 
-  <FeatureTypeMapping name="elf-au:AdministrativeUnitArea" table="au.adminunitarea">
-    <FIDMapping prefix="ELF-AU_ADMINISTRATIVEUNITAREA_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
-    </FIDMapping>
-    <Complex path="elf-au:geometry">
-      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
-      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>
-      <Primitive path="@owns" mapping="geometry_owns"/>
-      <Geometry path="." mapping="geometry"/>
-    </Complex>
-    <Complex path="elf-au:inspireID">
-      <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'DE.BKG.VG25'"/>
-        <Complex path="base:versionId">
-          <!-- Primitive path="text()" mapping="inspireid_versionid"/-->
-          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
-          <Primitive path="@xsi:nil" mapping="'true'"/>
-        </Complex>
-      </Complex>
-    </Complex>
-    <Complex path="elf-au:landCoverType">
-      <Primitive path="@nilReason" mapping="landcovertype_nilreason"/>
-      <Feature path=".">
-        <Href mapping="landcovertype_href"/>
-      </Feature>
-    </Complex>
-    <Complex path="elf-au:beginLifespanVersion">
-      <Primitive path="text()" mapping="beginlifespanversion"/>
-      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
-      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
-    </Complex>
-    <Complex path="elf-au:adminUnit">
-      <Join table="au.adminunit_adminunitarea" fromColumns="id" toColumns="fk_adminunitarea"/>
-      <Feature path=".">
-        <Href mapping="href_adminunitarea"/>
-      </Feature>
-    </Complex>
-  </FeatureTypeMapping>
-  
+  <FeatureTypeMapping name="elf-au:AdministrativeUnitArea" table="au.adminunitarea">  
 </SQLFeatureStore>
