@@ -583,8 +583,45 @@
         <Href mapping="href_adminunit"/>
       </Feature>
     </Complex>
-    <!-- TODO: elf-au:namedPlacePoint-->
+    <!-- TODO: elf-au:namedPlacePoint -->
   </FeatureTypeMapping>
 
-  <FeatureTypeMapping name="elf-au:AdministrativeUnitArea" table="au.adminunitarea">  
+  <FeatureTypeMapping name="elf-au:AdministrativeUnitArea" table="au.adminunitarea">
+    <FIDMapping prefix="ELF-AU_ADMINISTRATIVEUNITAREA_">
+      <Column name="id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="elf-au:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Complex path="elf-au:inspireID">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid_localid"/>
+        <Primitive path="base:namespace" mapping="'DE.BKG.VG25'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text()" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="elf-au:landCoverType">
+      <Primitive path="@nilReason" mapping="landcovertype_nilreason"/>
+      <Feature path=".">
+        <Href mapping="landcovertype_href"/>
+      </Feature>
+    </Complex>
+    <Complex path="elf-au:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="elf-au:adminUnit">
+      <Join table="au.adminunit_adminunitarea" fromColumns="id" toColumns="fk_adminunitarea"/>
+      <Feature path=".">
+        <Href mapping="href_adminunitarea"/>
+      </Feature>
+    </Complex>
+  </FeatureTypeMapping>
 </SQLFeatureStore>
