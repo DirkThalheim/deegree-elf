@@ -1,0 +1,141 @@
+﻿<!--Created with Liquid XML Studio 2012 Designer Edition 10.1.5.4204 (http://www.liquid-technologies.com)-->
+<SQLFeatureStore configVersion="3.1.0" 
+                 xmlns="http://www.deegree.org/datasource/feature/sql" 
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                 xmlns:base="http://inspire.ec.europa.eu/schemas/base/3.3" 
+                 xmlns:base2="http://inspire.ec.europa.eu/schemas/base2/2.0" 
+                 xmlns:bu-base="http://inspire.ec.europa.eu/schemas/bu-base/4.0" 
+                 xmlns:gn="http://inspire.ec.europa.eu/schemas/gn/4.0" 
+                 xmlns:lcn="http://inspire.ec.europa.eu/schemas/lcn/4.0" 
+                 xmlns:lcv="http://inspire.ec.europa.eu/schemas/lcv/4.0" 
+                 xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" 
+                 xmlns:elf-lc="http://www.locationframework.eu/schemas/LandCover/1.0" 
+                 xmlns:xlink="http://www.w3.org/1999/xlink" 
+                 xmlns:gml="http://www.opengis.net/gml/3.2"
+                 xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.1.0/sql.xsd">
+    
+    <JDBCConnId>elf</JDBCConnId>
+    <StorageCRS srid="0" dim="2D">EPSG:4258</StorageCRS>
+    <GMLSchema>..\..\appschemas\LandCover.xsd</GMLSchema>
+
+    <FeatureTypeMapping name="lcv:LandCoverDataset" table="lcv.landcoverdataset">
+        <FIDMapping prefix="LANDCOVERDATASET_">
+            <Column name="id" type="string" />
+            <UUIDGenerator />
+        </FIDMapping>
+        <Complex path="gml:identifier">
+            <Primitive path="text()" mapping="identifier" />
+            <Primitive path="@codeSpace" mapping="identifier_codespace" />
+        </Complex>
+        <Complex path="lcv:inspireId">
+            <Complex path="base:Identifier">
+                <Primitive path="base:localId" mapping="identifier_localid" />
+                <Primitive path="base:namespace" mapping="identifier_namespace" />
+                <Complex path="base:versionId">
+                    <Primitive path="text()" mapping="identifier_versionid" />
+                    <Primitive path="@nilReason" mapping="identifier_versionid_nilreason" />
+                    <Primitive path="@xsi:nil" mapping="identifier_versionid_xsi_nil" />
+                </Complex>
+            </Complex>
+        </Complex>
+        <Complex path="lcv:beginLifespanVersion">
+            <Primitive path="text()" mapping="beginlifespanversion" />
+            <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason" />
+            <Primitive path="@xsi:nil" mapping="beginlifespanversion_xsi_nil" />
+        </Complex>
+        <Primitive path="lcv:name" mapping="name" />
+        <Complex path="lcv:validFrom">
+            <Primitive path="text()" mapping="validfrom" />
+            <Primitive path="@nilReason" mapping="validfrom_nilreason" />
+            <Primitive path="@xsi:nil" mapping="validfrom_xsi_nil" />
+        </Complex>
+        <Complex path="lcv:validTo">
+            <Primitive path="text()" mapping="validto" />
+            <Primitive path="@nilReason" mapping="validto_nilreason" />
+            <Primitive path="@xsi:nil" mapping="validto_xsi_nil" />
+        </Complex>
+        <Complex path="lcv:member">
+            <Join table="lcv.landcoverdataset_member" fromColumns="id" toColumns="parentfk" orderColumns="num" numbered="true" />
+            <Primitive path="@nilReason" mapping="nilreason" />
+            <Primitive path="@gml:remoteSchema" mapping="remoteschema" />
+            <Primitive path="@owns" mapping="owns" />
+            <Feature path=".">
+                <Join table="?" fromColumns="fk" toColumns="id" />
+                <Href mapping="href" />
+            </Feature>
+        </Complex>
+    </FeatureTypeMapping>
+    
+    <FeatureTypeMapping name="lcv:LandCoverUnit" table="lcv.landcoverunit">
+        <FIDMapping prefix="LANDCOVERUNIT_">
+            <Column name="id" type="string" />
+            <UUIDGenerator />
+        </FIDMapping>
+        <Complex path="gml:identifier">
+            <Primitive path="text()" mapping="identifier" />
+            <Primitive path="@codeSpace" mapping="identifier_codespace" />
+        </Complex>
+        <Complex path="lcv:inspireId">
+            <Complex path="base:Identifier">
+                <Primitive path="base:localId" mapping="identifier_localid" />
+                <Primitive path="base:namespace" mapping="identifier_namespace" />
+                <Complex path="base:versionId">
+                    <Primitive path="text()" mapping="identifier_versionid" />
+                    <Primitive path="@nilReason" mapping="identifier_versionid_nilreason" />
+                    <Primitive path="@xsi:nil" mapping="identifier_versionid_xsi_nil" />
+                </Complex>
+            </Complex>
+        </Complex>
+        <Complex path="lcv:beginLifespanVersion">
+            <Primitive path="text()" mapping="beginlifespanversion" />
+            <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason" />
+            <Primitive path="@xsi:nil" mapping="beginlifespanversion_xsi_nil" />
+        </Complex>
+        <Complex path="lcv:geometry">
+            <Primitive path="@nilReason" mapping="geometry_nilreason" />
+            <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema" />
+            <Primitive path="@owns" mapping="geometry_owns" />
+            <Geometry path="." mapping="geometry" />
+        </Complex>
+        <Complex path="lcv:landCoverObservation">
+            <Join table="lcv.landcoverunit_landcoverobservation" fromColumns="id" toColumns="parentfk" orderColumns="num" numbered="true" />
+            <Complex path="lcv:LandCoverObservation">
+                <Complex path="lcv:class">
+                    <Primitive path="@owns" mapping="class_owns" />
+                    <Primitive path="@nilReason" mapping="class_nilreason" />
+                    <Primitive path="@gml:remoteSchema" mapping="class_remoteschema" />
+                    <Feature path=".">
+                        <Join table="?" fromColumns="class_fk" toColumns="id" />
+                        <Href mapping="class_href" />
+                    </Feature>
+                </Complex>
+                <Complex path="lcv:mosaic">
+                    <Join table="lcv.landcoverunit_mosaic" fromColumns="id" toColumns="parentfk" orderColumns="num" numbered="true" />
+                    <Primitive path="@nilReason" mapping="nilreason" />
+                    <Primitive path="@xsi:nil" mapping="xsi_nil" />
+                    <Complex path="lcv:LandCoverValue">
+                        <Complex path="lcv:class">
+                            <Primitive path="@owns" mapping="landcovervalue_class_owns" />
+                            <Primitive path="@nilReason" mapping="landcovervalue_class_nilreason" />
+                            <Primitive path="@gml:remoteSchema" mapping="landcovervalue_class_remoteschema" />
+                            <Feature path=".">
+                                <Join table="?" fromColumns="landcovervalue_class_fk" toColumns="id" />
+                                <Href mapping="landcovervalue_class_href" />
+                            </Feature>
+                        </Complex>
+                        <Complex path="lcv:coveredPercentage">
+                            <Primitive path="text()" mapping="landcovervalue_coveredpercentage" />
+                            <Primitive path="@nilReason" mapping="landcovervalue_coveredpercentage_nilreason" />
+                            <Primitive path="@xsi:nil" mapping="landcovervalue_coveredpercentage_xsi_nil" />
+                        </Complex>
+                    </Complex>
+                </Complex>
+                <Complex path="lcv:observationDate">
+                    <Primitive path="text()" mapping="observationdate" />
+                    <Primitive path="@nilReason" mapping="observationdate_nilreason" />
+                    <Primitive path="@xsi:nil" mapping="observationdate_xsi_nil" />
+                </Complex>
+            </Complex>
+        </Complex>
+    </FeatureTypeMapping>
+</SQLFeatureStore>
