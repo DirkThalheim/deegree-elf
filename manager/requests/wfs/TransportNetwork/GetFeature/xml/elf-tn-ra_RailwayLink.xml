@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetFeature version="2.0.0" service="WFS" 
+            xmlns="http://www.opengis.net/wfs/2.0" 
+            xmlns:tn-ra="http://inspire.ec.europa.eu/schemas/tn-ra/4.0" 
+            xmlns:elf-tn-ra="http://www.locationframework.eu/schemas/RailwayTransportNetwork/1.0"
+            xmlns:gml="http://www.opengis.net/gml" 
+            xmlns:ogc="http://www.opengis.net/ogc" 
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.opengis.net/wfs/2.0 http://schemas.opengis.net/wfs/2.0/wfs.xsd" count="10">
+  <Query typeNames="elf-tn-ra:RailwayLink" />
+</GetFeature>

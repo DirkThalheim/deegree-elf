@@ -3007,7 +3007,7 @@
   ================================================================
   -->
   <!-- == INSPIRE Transport Network Railway =================================== -->
-  <FeatureTypeMapping name="tn-ra:NominalTrackGauge" table="tnro.tnra.nominaltrackgauge">
+  <FeatureTypeMapping name="tn-ra:NominalTrackGauge" table="tnra.nominaltrackgauge">
     <FIDMapping prefix="TN-RA_NOMINALTRACKGAUGE_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -3017,7 +3017,7 @@
       <Primitive path="@codeSpace" mapping="identifier_codespace"/>
     </Complex>
     <Complex path="net:networkRef">
-      <Join table="tnro.tnra.nominaltrackgauge_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.nominaltrackgauge_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Complex path="net:SimpleLinearReference">
@@ -3162,7 +3162,7 @@
       <Primitive path="@xsi:nil" mapping="nominalgaugecategory_nil"/>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-ra:NumberOfTracks" table="tnro.tnra.numberoftracks">
+  <FeatureTypeMapping name="tn-ra:NumberOfTracks" table="tnra.numberoftracks">
     <FIDMapping prefix="TN-RA_NUMBEROFTRACKS_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -3172,7 +3172,7 @@
       <Primitive path="@codeSpace" mapping="identifier_codespace"/>
     </Complex>
     <Complex path="net:networkRef">
-      <Join table="tnro.tnra.numberoftracks_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.numberoftracks_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Complex path="net:SimpleLinearReference">
@@ -3312,7 +3312,7 @@
     </Complex>
     <Primitive path="tn-ra:numberOfTracks" mapping="numberoftracks"/>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-ra:RailwayLine" table="tnro.tnra.railwayline">
+  <FeatureTypeMapping name="tn-ra:RailwayLine" table="tnra.railwayline">
     <FIDMapping prefix="TN-RA_RAILWAYLINE_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -3343,7 +3343,7 @@
       <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tnra.railwayline_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwayline_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -3354,7 +3354,7 @@
       </Feature>
     </Complex>
     <Complex path="net:link">
-      <Join table="tnro.tnra.railwayline_link" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwayline_link" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
       <Primitive path="@owns" mapping="owns"/>
@@ -3414,7 +3414,7 @@
           </Complex>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tnra.railwayline_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Join table="tnra.railwayline_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="geographicalname_spellingofname_text"/>
             <Complex path="gn:script">
@@ -3462,7 +3462,7 @@
       <Primitive path="@xsi:nil" mapping="validto_nil"/>
     </Complex>
     <Complex path="tn:post">
-      <Join table="tnro.tnra.railwayline_post" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwayline_post" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -3478,7 +3478,7 @@
       <Primitive path="@xsi:nil" mapping="railwaylinecode_nil"/>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-ra:RailwayNode" table="tnro.tnra.railwaynode">
+  <FeatureTypeMapping name="tn-ra:RailwayNode" table="tnra.railwaynode">
     <FIDMapping prefix="TN-RA_RAILWAYNODE_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -3509,7 +3509,7 @@
       <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tnra.railwaynode_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaynode_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -3526,7 +3526,7 @@
       <Geometry path="." mapping="geometry_value"/>
     </Complex>
     <Complex path="net:spokeEnd">
-      <Join table="tnro.tnra.railwaynode_spokeend" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaynode_spokeend" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -3537,7 +3537,7 @@
       </Feature>
     </Complex>
     <Complex path="net:spokeStart">
-      <Join table="tnro.tnra.railwaynode_spokestart" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaynode_spokestart" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -3598,7 +3598,7 @@
           </Complex>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tnra.railwaynode_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Join table="tnra.railwaynode_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="geographicalname_spellingofname_text"/>
             <Complex path="gn:script">
@@ -3656,7 +3656,7 @@
       </Feature>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-ra:RailwayStationCode" table="tnro.tnra.railwaystationcode">
+  <FeatureTypeMapping name="tn-ra:RailwayStationCode" table="tnra.railwaystationcode">
     <FIDMapping prefix="TN-RA_RAILWAYSTATIONCODE_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -3666,7 +3666,7 @@
       <Primitive path="@codeSpace" mapping="identifier_codespace"/>
     </Complex>
     <Complex path="net:networkRef">
-      <Join table="tnro.tnra.railwaystationcode_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaystationcode_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Complex path="net:SimpleLinearReference">
@@ -3801,7 +3801,7 @@
     </Complex>
     <Primitive path="tn-ra:stationCode" mapping="stationcode"/>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-ra:RailwayType" table="tnro.tnra.railwaytype">
+  <FeatureTypeMapping name="tn-ra:RailwayType" table="tnra.railwaytype">
     <FIDMapping prefix="TN-RA_RAILWAYTYPE_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -3811,7 +3811,7 @@
       <Primitive path="@codeSpace" mapping="identifier_codespace"/>
     </Complex>
     <Complex path="net:networkRef">
-      <Join table="tnro.tnra.railwaytype_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaytype_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Complex path="net:SimpleLinearReference">
@@ -3954,7 +3954,7 @@
       </Feature>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-ra:RailwayUse" table="tnro.tnra.railwayuse">
+  <FeatureTypeMapping name="tn-ra:RailwayUse" table="tnra.railwayuse">
     <FIDMapping prefix="TN-RA_RAILWAYUSE_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -3964,7 +3964,7 @@
       <Primitive path="@codeSpace" mapping="identifier_codespace"/>
     </Complex>
     <Complex path="net:networkRef">
-      <Join table="tnro.tnra.railwayuse_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwayuse_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Complex path="net:SimpleLinearReference">
@@ -4108,7 +4108,7 @@
     </Complex>
   </FeatureTypeMapping>
 
-<!--  <FeatureTypeMapping name="tn-ra:RailwayArea" table="tnro.tnra.railwayarea">
+<!--  <FeatureTypeMapping name="tn-ra:RailwayArea" table="tnra.railwayarea">
     <FIDMapping prefix="TN-RA_RAILWAYAREA_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -4139,7 +4139,7 @@
       <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tnra.railwayarea_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwayarea_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -4206,7 +4206,7 @@
           </Complex>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tnra.railwayarea_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Join table="tnra.railwayarea_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="geographicalname_spellingofname_text"/>
             <Complex path="gn:script">
@@ -4255,7 +4255,7 @@
     </Complex>
   </FeatureTypeMapping>
 -->
-<!--  <FeatureTypeMapping name="tn-ra:RailwayStationArea" table="tnro.tnra.railwaystationarea">
+<!--  <FeatureTypeMapping name="tn-ra:RailwayStationArea" table="tnra.railwaystationarea">
     <FIDMapping prefix="TN-RA_RAILWAYSTATIONAREA_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -4286,7 +4286,7 @@
       <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tnra.railwaystationarea_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaystationarea_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -4353,7 +4353,7 @@
           </Complex>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tnra.railwaystationarea_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Join table="tnra.railwaystationarea_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="geographicalname_spellingofname_text"/>
             <Complex path="gn:script">
@@ -4402,7 +4402,7 @@
     </Complex>
   </FeatureTypeMapping>
 -->
-<!--  <FeatureTypeMapping name="tn-ra:RailwayYardArea" table="tnro.tnra.railwayyardarea">
+<!--  <FeatureTypeMapping name="tn-ra:RailwayYardArea" table="tnra.railwayyardarea">
     <FIDMapping prefix="TN-RA_RAILWAYYARDAREA_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -4433,7 +4433,7 @@
       <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tnra.railwayyardarea_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwayyardarea_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -4500,7 +4500,7 @@
           </Complex>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tnra.railwayyardarea_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Join table="tnra.railwayyardarea_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="geographicalname_spellingofname_text"/>
             <Complex path="gn:script">
@@ -4549,7 +4549,7 @@
     </Complex>
   </FeatureTypeMapping>
 -->
-<!--  <FeatureTypeMapping name="tn-ra:RailwayYardNode" table="tnro.tnra.railwayyardnode">
+<!--  <FeatureTypeMapping name="tn-ra:RailwayYardNode" table="tnra.railwayyardnode">
     <FIDMapping prefix="TN-RA_RAILWAYYARDNODE_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -4580,7 +4580,7 @@
       <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tnra.railwayyardnode_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwayyardnode_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -4597,7 +4597,7 @@
       <Geometry path="." mapping="geometry_value"/>
     </Complex>
     <Complex path="net:spokeEnd">
-      <Join table="tnro.tnra.railwayyardnode_spokeend" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwayyardnode_spokeend" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -4608,7 +4608,7 @@
       </Feature>
     </Complex>
     <Complex path="net:spokeStart">
-      <Join table="tnro.tnra.railwayyardnode_spokestart" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwayyardnode_spokestart" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -4669,7 +4669,7 @@
           </Complex>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tnra.railwayyardnode_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Join table="tnra.railwayyardnode_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="geographicalname_spellingofname_text"/>
             <Complex path="gn:script">
@@ -4729,7 +4729,7 @@
   </FeatureTypeMapping>
 -->
 
-<!--  <FeatureTypeMapping name="tn-ra:DesignSpeed" table="tnro.tnra.designspeed">
+<!--  <FeatureTypeMapping name="tn-ra:DesignSpeed" table="tnra.designspeed">
     <FIDMapping prefix="TN-RA_DESIGNSPEED_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -4739,7 +4739,7 @@
       <Primitive path="@codeSpace" mapping="identifier_codespace"/>
     </Complex>
     <Complex path="net:networkRef">
-      <Join table="tnro.tnra.designspeed_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.designspeed_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Complex path="net:SimpleLinearReference">
@@ -4878,7 +4878,7 @@
     </Complex>
   </FeatureTypeMapping>
 -->
-<!--  <FeatureTypeMapping name="tn-ra:RailwayElectrification" table="tnro.tnra.railwayelectrification">
+<!--  <FeatureTypeMapping name="tn-ra:RailwayElectrification" table="tnra.railwayelectrification">
     <FIDMapping prefix="TN-RA_RAILWAYELECTRIFICATION_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -4888,7 +4888,7 @@
       <Primitive path="@codeSpace" mapping="identifier_codespace"/>
     </Complex>
     <Complex path="net:networkRef">
-      <Join table="tnro.tnra.railwayelectrification_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwayelectrification_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Complex path="net:SimpleLinearReference">
@@ -5024,7 +5024,7 @@
     <Primitive path="tn-ra:electrified" mapping="electrified"/>
   </FeatureTypeMapping>
 -->
-<!--  <FeatureTypeMapping name="tn-ra:RailwayLink" table="tnro.tnra.railwaylink">
+<!--  <FeatureTypeMapping name="tn-ra:RailwayLink" table="tnra.railwaylink">
     <FIDMapping prefix="TN-RA_RAILWAYLINK_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -5055,7 +5055,7 @@
       <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tnra.railwaylink_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaylink_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -5141,7 +5141,7 @@
           </Complex>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tnra.railwaylink_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Join table="tnra.railwaylink_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="geographicalname_spellingofname_text"/>
             <Complex path="gn:script">
@@ -5189,7 +5189,7 @@
       <Primitive path="@xsi:nil" mapping="validto_nil"/>
     </Complex>
   </FeatureTypeMapping>
--->  <FeatureTypeMapping name="tn-ra:RailwayLinkSequence" table="tnro.tnra.railwaylinksequence">
+-->  <FeatureTypeMapping name="tn-ra:RailwayLinkSequence" table="tnra.railwaylinksequence">
     <FIDMapping prefix="TN-RA_RAILWAYLINKSEQUENCE_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -5220,7 +5220,7 @@
       <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tnra.railwaylinksequence_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaylinksequence_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -5231,7 +5231,7 @@
       </Feature>
     </Complex>
     <Complex path="net:link">
-      <Join table="tnro.tnra.railwaylinksequence_link" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaylinksequence_link" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Complex path="net:DirectedLink">
         <Primitive path="net:direction" mapping="directedlink_direction"/>
         <Complex path="net:link">
@@ -5296,7 +5296,7 @@
           </Complex>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tnra.railwaylinksequence_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Join table="tnra.railwaylinksequence_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="geographicalname_spellingofname_text"/>
             <Complex path="gn:script">
@@ -5344,7 +5344,7 @@
       <Primitive path="@xsi:nil" mapping="validto_nil"/>
     </Complex>
   </FeatureTypeMapping>
-<!--  <FeatureTypeMapping name="tn-ra:RailwayStationNode" table="tnro.tnra.railwaystationnode">
+<!--  <FeatureTypeMapping name="tn-ra:RailwayStationNode" table="tnra.railwaystationnode">
     <FIDMapping prefix="TN-RA_RAILWAYSTATIONNODE_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -5375,7 +5375,7 @@
       <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tnra.railwaystationnode_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaystationnode_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -5392,7 +5392,7 @@
       <Geometry path="." mapping="geometry_value"/>
     </Complex>
     <Complex path="net:spokeEnd">
-      <Join table="tnro.tnra.railwaystationnode_spokeend" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaystationnode_spokeend" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -5403,7 +5403,7 @@
       </Feature>
     </Complex>
     <Complex path="net:spokeStart">
-      <Join table="tnro.tnra.railwaystationnode_spokestart" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaystationnode_spokestart" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -5464,7 +5464,7 @@
           </Complex>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tnra.railwaystationnode_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Join table="tnra.railwaystationnode_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="geographicalname_spellingofname_text"/>
             <Complex path="gn:script">
@@ -5530,7 +5530,7 @@
 -->
 
   <!-- == ELF Transport Network Railway =================================== -->
-  <FeatureTypeMapping name="elf-tn-ra:DesignSpeed" table="tnro.tnra.designspeed">
+  <FeatureTypeMapping name="elf-tn-ra:DesignSpeed" table="tnra.designspeed">
     <FIDMapping prefix="ELF-TN-RA_DESIGNSPEED_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -5540,7 +5540,7 @@
       <Primitive path="@codeSpace" mapping="identifier_codespace"/>
     </Complex>
     <Complex path="net:networkRef">
-      <Join table="tnro.tnra.designspeed_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.designspeed_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Complex path="net:SimpleLinearReference">
@@ -5687,7 +5687,7 @@
       </Feature>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="elf-tn-ra:RailwayClass" table="tnro.tnra.railwayclass">
+  <FeatureTypeMapping name="elf-tn-ra:RailwayClass" table="tnra.railwayclass">
     <FIDMapping prefix="ELF-TN-RA_RAILWAYCLASS_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -5697,7 +5697,7 @@
       <Primitive path="@codeSpace" mapping="identifier_codespace"/>
     </Complex>
     <Complex path="net:networkRef">
-      <Join table="tnro.tnra.railwayclass_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwayclass_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Complex path="net:SimpleLinearReference">
@@ -5840,7 +5840,7 @@
       </Feature>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="elf-tn-ra:RailwayElectrification" table="tnro.tnra.railwayelectrification">
+  <FeatureTypeMapping name="elf-tn-ra:RailwayElectrification" table="tnra.railwayelectrification">
     <FIDMapping prefix="ELF-TN-RA_RAILWAYELECTRIFICATION_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -5850,7 +5850,7 @@
       <Primitive path="@codeSpace" mapping="identifier_codespace"/>
     </Complex>
     <Complex path="net:networkRef">
-      <Join table="tnro.tnra.railwayelectrification_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwayelectrification_networkref" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Complex path="net:SimpleLinearReference">
@@ -5994,7 +5994,7 @@
       </Feature>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="elf-tn-ra:RailwayLink" table="tnro.tnra.railwaylink">
+  <FeatureTypeMapping name="elf-tn-ra:RailwayLink" table="tnra.railwaylink">
     <FIDMapping prefix="ELF-TN-RA_RAILWAYLINK_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -6025,7 +6025,7 @@
       <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tnra.railwaylink_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaylink_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -6111,7 +6111,7 @@
           </Complex>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tnra.railwaylink_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Join table="tnra.railwaylink_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="geographicalname_spellingofname_text"/>
             <Complex path="gn:script">
@@ -6160,7 +6160,7 @@
     </Complex>
     <Primitive path="elf-tn-ra:transEuropeanTransportNetwork" mapping="transeuropeantransportnetwork"/>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="elf-tn-ra:RailwayStationNode" table="tnro.tnra.railwaystationnode">
+  <FeatureTypeMapping name="elf-tn-ra:RailwayStationNode" table="tnra.railwaystationnode">
     <FIDMapping prefix="ELF-TN-RA_RAILWAYSTATIONNODE_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -6191,7 +6191,7 @@
       <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tnra.railwaystationnode_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaystationnode_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -6208,7 +6208,7 @@
       <Geometry path="." mapping="geometry_value"/>
     </Complex>
     <Complex path="net:spokeEnd">
-      <Join table="tnro.tnra.railwaystationnode_spokeend" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaystationnode_spokeend" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -6219,7 +6219,7 @@
       </Feature>
     </Complex>
     <Complex path="net:spokeStart">
-      <Join table="tnro.tnra.railwaystationnode_spokestart" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Join table="tnra.railwaystationnode_spokestart" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
       <Primitive path="@owns" mapping="owns"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
@@ -6280,7 +6280,7 @@
           </Complex>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tnra.railwaystationnode_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Join table="tnra.railwaystationnode_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="geographicalname_spellingofname_text"/>
             <Complex path="gn:script">
@@ -6372,13 +6372,13 @@
   <!-- == INSPIRE TransportNetwork Air ======================================== -->
 
   <!-- == TransportPropertyTypes == -->
-  <FeatureTypeMapping name="tn-a:AerodromeCategory" table="tnro.tna.aerodromecategory">
+  <FeatureTypeMapping name="tn-a:AerodromeCategory" table="tna.aerodromecategory">
     <FIDMapping prefix="TN-A_AERODROMECATEGORY_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
     </FIDMapping>
     <Complex path="net:networkRef">
-      <Join table="tnro.tna.aerodromecategory_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.aerodromecategory_networkref" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Complex path="net:NetworkReference">
         <Complex path="net:element">
@@ -6420,13 +6420,13 @@
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:AerodromeType" table="tnro.tna.aerodrometype">
+  <FeatureTypeMapping name="tn-a:AerodromeType" table="tna.aerodrometype">
     <FIDMapping prefix="TN-A_AERODROMETYPE_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
     </FIDMapping>
     <Complex path="net:networkRef">
-      <Join table="tnro.tna.aerodrometype_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.aerodrometype_networkref" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Complex path="net:NetworkReference">
         <Complex path="net:element">
@@ -6468,13 +6468,13 @@
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:ConditionOfAirFacility" table="tnro.tna.conditionofairfacility">
+  <FeatureTypeMapping name="tn-a:ConditionOfAirFacility" table="tna.conditionofairfacility">
     <FIDMapping prefix="TN-A_CONDITIONOFAIRFACILITY_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
     </FIDMapping>
     <Complex path="net:networkRef">
-      <Join table="tnro.tna.conditionofairfacility_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.conditionofairfacility_networkref" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Complex path="net:NetworkReference">
         <Complex path="net:element">
@@ -6516,13 +6516,13 @@
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:ElementLength" table="tnro.tna.elementlength">
+  <FeatureTypeMapping name="tn-a:ElementLength" table="tna.elementlength">
     <FIDMapping prefix="TN-A_ELEMENTLENGTH_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
     </FIDMapping>
     <Complex path="net:networkRef">
-      <Join table="tnro.tna.elementlength_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.elementlength_networkref" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Complex path="net:NetworkReference">
         <Complex path="net:element">
@@ -6563,13 +6563,13 @@
       <Primitive path="@uom" mapping="length_uom"/>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:ElementWidth" table="tnro.tna.elementwidth">
+  <FeatureTypeMapping name="tn-a:ElementWidth" table="tna.elementwidth">
     <FIDMapping prefix="TN-A_ELEMENTWIDTH_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
     </FIDMapping>
     <Complex path="net:networkRef">
-      <Join table="tnro.tna.elementwidth_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.elementwidth_networkref" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Complex path="net:NetworkReference">
         <Complex path="net:element">
@@ -6610,13 +6610,13 @@
       <Primitive path="@uom" mapping="width_uom"/>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:FieldElevation" table="tnro.tna.fieldelevation">
+  <FeatureTypeMapping name="tn-a:FieldElevation" table="tna.fieldelevation">
     <FIDMapping prefix="TN-A_FIELDELEVATION_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
     </FIDMapping>
     <Complex path="net:networkRef">
-      <Join table="tnro.tna.fieldelevation_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.fieldelevation_networkref" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Complex path="net:NetworkReference">
         <Complex path="net:element">
@@ -6657,13 +6657,13 @@
       <Primitive path="@uom" mapping="altitude_uom"/>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:LowerAltitudeLimit" table="tnro.tna.loweraltitudelimit">
+  <FeatureTypeMapping name="tn-a:LowerAltitudeLimit" table="tna.loweraltitudelimit">
     <FIDMapping prefix="TN-A_LOWERALTITUDELIMIT_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
     </FIDMapping>
     <Complex path="net:networkRef">
-      <Join table="tnro.tna.loweraltitudelimit_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.loweraltitudelimit_networkref" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Complex path="net:NetworkReference">
         <Complex path="net:element">
@@ -6704,13 +6704,13 @@
       <Primitive path="@uom" mapping="altitude_uom"/>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:SurfaceComposition" table="tnro.tna.surfacecomposition">
+  <FeatureTypeMapping name="tn-a:SurfaceComposition" table="tna.surfacecomposition">
     <FIDMapping prefix="TN-A_SURFACECOMPOSITION_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
     </FIDMapping>
     <Complex path="net:networkRef">
-      <Join table="tnro.tna.surfacecomposition_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.surfacecomposition_networkref" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Complex path="net:NetworkReference">
         <Complex path="net:element">
@@ -6752,13 +6752,13 @@
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:UpperAltitudeLimit" table="tnro.tna.upperaltitudelimit">
+  <FeatureTypeMapping name="tn-a:UpperAltitudeLimit" table="tna.upperaltitudelimit">
     <FIDMapping prefix="TN-A_UPPERALTITUDELIMIT_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
     </FIDMapping>
     <Complex path="net:networkRef">
-      <Join table="tnro.tna.upperaltitudelimit_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.upperaltitudelimit_networkref" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Complex path="net:NetworkReference">
         <Complex path="net:element">
@@ -6799,13 +6799,13 @@
       <Primitive path="@uom" mapping="altitude_uom"/>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:UseRestriction" table="tnro.tna.userestriction">
+  <FeatureTypeMapping name="tn-a:UseRestriction" table="tna.userestriction">
     <FIDMapping prefix="TN-A_USERESTRICTION_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
     </FIDMapping>
     <Complex path="net:networkRef">
-      <Join table="tnro.tna.userestriction_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.userestriction_networkref" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Complex path="net:NetworkReference">
@@ -6849,7 +6849,7 @@
     </Complex>
   </FeatureTypeMapping>
   <!-- == TransportLinkSequenceTypes == -->
-  <FeatureTypeMapping name="tn-a:AirLinkSequence" table="tnro.tna.airlinksequence">
+  <FeatureTypeMapping name="tn-a:AirLinkSequence" table="tna.airlinksequence">
     <FIDMapping prefix="TN-A_AIRLINKSEQUENCE_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -6871,14 +6871,14 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.airlinksequence_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.airlinksequence_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
       <Primitive path="@xsi:nil" mapping="nil"/>
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
     <Complex path="net:link">
-      <Join table="tnro.tna.airlinksequence_link" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.airlinksequence_link" fromColumns="id" toColumns="parentfk"/>
       <Complex path="net:DirectedLink">
         <Primitive path="net:direction" mapping="direction"/>
         <Complex path="net:link">
@@ -6915,7 +6915,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.airlinksequence_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.airlinksequence_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -6944,7 +6944,7 @@
     </Complex>
   </FeatureTypeMapping>
   <!-- == TransportLinkSetTypes == -->
-  <FeatureTypeMapping name="tn-a:AirRoute" table="tnro.tna.airroute">
+  <FeatureTypeMapping name="tn-a:AirRoute" table="tna.airroute">
     <FIDMapping prefix="TN-A_AIRROUTE_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -6966,14 +6966,14 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.airroute_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.airroute_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>     
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
     <Complex path="net:link">
-      <Join table="tnro.tna.airroute_link" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.airroute_link" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>  
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
@@ -7005,7 +7005,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.airroute_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.airroute_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -7033,7 +7033,7 @@
       <Primitive path="@xsi:nil" mapping="validto_nil"/>
     </Complex>
     <Complex path="tn:post">
-      <Join table="tnro.tna.airroute_post" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.airroute_post" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
       <Primitive path="@xsi:nil" mapping="nil"/>
@@ -7052,7 +7052,7 @@
     </Complex>
   </FeatureTypeMapping>
   <!-- == TransportLinkTypes == -->
-  <FeatureTypeMapping name="tn-a:AirRouteLink" table="tnro.tna.airroutelink">
+  <FeatureTypeMapping name="tn-a:AirRouteLink" table="tna.airroutelink">
     <FIDMapping prefix="TN-A_AIRROUTELINK_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -7074,7 +7074,7 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.airroutelink_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.airroutelink_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
@@ -7123,7 +7123,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.airroutelink_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.airroutelink_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -7157,7 +7157,7 @@
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:ProcedureLink" table="tnro.tna.procedurelink">
+  <FeatureTypeMapping name="tn-a:ProcedureLink" table="tna.procedurelink">
     <FIDMapping prefix="TN-A_PROCEDURELINK_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -7179,7 +7179,7 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.procedurelink_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.procedurelink_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
@@ -7228,7 +7228,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.procedurelink_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.procedurelink_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -7256,7 +7256,7 @@
       <Primitive path="@xsi:nil" mapping="validto_nil"/>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:InstrumentApproachProcedure" table="tnro.tna.instrumentapproachprocedure">
+  <FeatureTypeMapping name="tn-a:InstrumentApproachProcedure" table="tna.instrumentapproachprocedure">
     <FIDMapping prefix="TN-A_INSTRUMENTAPPROACHPROCEDURE_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -7278,7 +7278,7 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.instrumentapproachprocedure_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.instrumentapproachprocedure_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
@@ -7327,7 +7327,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.instrumentapproachprocedure_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.instrumentapproachprocedure_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -7355,7 +7355,7 @@
       <Primitive path="@xsi:nil" mapping="validto_nil"/>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:StandardInstrumentArrival" table="tnro.tna.standardinstrumentarrival">
+  <FeatureTypeMapping name="tn-a:StandardInstrumentArrival" table="tna.standardinstrumentarrival">
     <FIDMapping prefix="TN-A_STANDARDINSTRUMENTARRIVAL_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -7377,7 +7377,7 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.standardinstrumentarrival_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.standardinstrumentarrival_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
@@ -7426,7 +7426,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.standardinstrumentarrival_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.standardinstrumentarrival_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -7459,7 +7459,7 @@
       <Primitive path="@xsi:nil" mapping="designator_nil"/>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:StandardInstrumentDeparture" table="tnro.tna.standardinstrumentdeparture">
+  <FeatureTypeMapping name="tn-a:StandardInstrumentDeparture" table="tna.standardinstrumentdeparture">
     <FIDMapping prefix="TN-A_STANDARDINSTRUMENTDEPARTURE_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -7481,7 +7481,7 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.standardinstrumentdeparture_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.standardinstrumentdeparture_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
@@ -7530,7 +7530,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.standardinstrumentdeparture_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.standardinstrumentdeparture_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -7564,7 +7564,7 @@
     </Complex>
   </FeatureTypeMapping>
   <!-- == TransportAreaTypes == -->
-  <FeatureTypeMapping name="tn-a:AirspaceArea" table="tnro.tna.airspacearea">
+  <FeatureTypeMapping name="tn-a:AirspaceArea" table="tna.airspacearea">
     <FIDMapping prefix="TN-A_AIRSPACEAREA_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -7586,7 +7586,7 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.airspacearea_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.airspacearea_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
@@ -7624,7 +7624,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.airspacearea_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.airspacearea_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -7657,7 +7657,7 @@
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:ApronArea" table="tnro.tna.apronarea">
+  <FeatureTypeMapping name="tn-a:ApronArea" table="tna.apronarea">
     <FIDMapping prefix="TN-A_APRONAREA_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -7679,7 +7679,7 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.apronarea_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.apronarea_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
@@ -7717,7 +7717,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.apronarea_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.apronarea_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -7745,7 +7745,7 @@
       <Primitive path="@xsi:nil" mapping="validto_nil"/>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:RunwayArea" table="tnro.tna.runwayarea">
+  <FeatureTypeMapping name="tn-a:RunwayArea" table="tna.runwayarea">
     <FIDMapping prefix="TN-A_RUNWAYAREA_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -7767,7 +7767,7 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.runwayarea_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.runwayarea_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
@@ -7805,7 +7805,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.runwayarea_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.runwayarea_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -7844,7 +7844,7 @@
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:TaxiwayArea" table="tnro.tna.taxiwayarea">
+  <FeatureTypeMapping name="tn-a:TaxiwayArea" table="tna.taxiwayarea">
     <FIDMapping prefix="TN-A_TAXIWAYAREA_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -7866,7 +7866,7 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.taxiwayarea_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.taxiwayarea_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>
@@ -7904,7 +7904,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.taxiwayarea_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.taxiwayarea_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -7938,7 +7938,7 @@
     </Complex>
   </FeatureTypeMapping>
   <!-- == TransportNodeTypes == -->
-  <FeatureTypeMapping name="tn-a:DesignatedPoint" table="tnro.tna.designatedpoint">
+  <FeatureTypeMapping name="tn-a:DesignatedPoint" table="tna.designatedpoint">
     <FIDMapping prefix="TN-A_DESIGNATEDPOINT_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -7960,7 +7960,7 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.designatedpoint_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.designatedpoint_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
@@ -7972,14 +7972,14 @@
       <Geometry path="." mapping="geometry"/>
     </Complex>
     <Complex path="net:spokeEnd">
-      <Join table="tnro.tna.designatedpoint_spokeend" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.designatedpoint_spokeend" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
     <Complex path="net:spokeStart">
-      <Join table="tnro.tna.designatedpoint_spokestart" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.designatedpoint_spokestart" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
@@ -8012,7 +8012,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.designatedpoint_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.designatedpoint_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -8046,7 +8046,7 @@
       <Primitive path="@xsi:nil" mapping="designator_nil"/>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:Navaid" table="tnro.tna.navaid">
+  <FeatureTypeMapping name="tn-a:Navaid" table="tna.navaid">
     <FIDMapping prefix="TN-A_NAVAID_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -8068,7 +8068,7 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.navaid_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.navaid_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
@@ -8080,14 +8080,14 @@
       <Geometry path="." mapping="geometry"/>
     </Complex>
     <Complex path="net:spokeEnd">
-      <Join table="tnro.tna.navaid_spokeend" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.navaid_spokeend" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
     <Complex path="net:spokeStart">
-      <Join table="tnro.tna.navaid_spokestart" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.navaid_spokestart" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
@@ -8120,7 +8120,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.navaid_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.navaid_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -8160,7 +8160,7 @@
       <Primitive path="@xsi:nil" mapping="designator_nil"/>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:RunwayCentrelinePoint" table="tnro.tna.runwaycentrelinepoint">
+  <FeatureTypeMapping name="tn-a:RunwayCentrelinePoint" table="tna.runwaycentrelinepoint">
     <FIDMapping prefix="TN-A_RUNWAYCENTRELINEPOINT_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -8182,7 +8182,7 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.runwaycentrelinepoint_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.runwaycentrelinepoint_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
@@ -8194,14 +8194,14 @@
       <Geometry path="." mapping="geometry"/>
     </Complex>
     <Complex path="net:spokeEnd">
-      <Join table="tnro.tna.runwaycentrelinepoint_spokeend" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.runwaycentrelinepoint_spokeend" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
     <Complex path="net:spokeStart">
-      <Join table="tnro.tna.runwaycentrelinepoint_spokestart" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.runwaycentrelinepoint_spokestart" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>      
@@ -8234,7 +8234,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.runwaycentrelinepoint_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.runwaycentrelinepoint_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -8268,7 +8268,7 @@
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-a:TouchDownLiftOff" table="tnro.tna.touchdownliftoff">
+  <FeatureTypeMapping name="tn-a:TouchDownLiftOff" table="tna.touchdownliftoff">
     <FIDMapping prefix="TN-A_TOUCHDOWNLIFTOFF_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -8290,7 +8290,7 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.touchdownliftoff_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.touchdownliftoff_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>
@@ -8302,14 +8302,14 @@
       <Geometry path="." mapping="geometry"/>
     </Complex>
     <Complex path="net:spokeEnd">
-      <Join table="tnro.tna.touchdownliftoff_spokeend" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.touchdownliftoff_spokeend" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
     <Complex path="net:spokeStart">
-      <Join table="tnro.tna.touchdownliftoff_spokestart" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.touchdownliftoff_spokestart" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>
@@ -8342,7 +8342,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.touchdownliftoff_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.touchdownliftoff_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -8378,7 +8378,7 @@
   </FeatureTypeMapping>
 
   <!-- == ELF TransportNetwork Air =============================================================== -->
-  <FeatureTypeMapping name="elf-tn-a:AerodromeArea" table="tnro.tna.aerodromearea">
+  <FeatureTypeMapping name="elf-tn-a:AerodromeArea" table="tna.aerodromearea">
     <FIDMapping prefix="ELF-TN-A_AERODROMEAREA_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -8400,7 +8400,7 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.aerodromearea_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.aerodromearea_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>
@@ -8438,7 +8438,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.aerodromearea_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.aerodromearea_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -8471,7 +8471,7 @@
     </Complex>
     <Primitive path="elf-tn-a:transEuropeanTransportNetwork" mapping="transeuropeantransportnetwork"/>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="elf-tn-a:AerodromeNode" table="tnro.tna.aerodromenode">
+  <FeatureTypeMapping name="elf-tn-a:AerodromeNode" table="tna.aerodromenode">
     <FIDMapping prefix="ELF-TN-A_AERODROMENODE_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -8493,7 +8493,7 @@
       </Complex>
     </Complex>
     <Complex path="net:inNetwork">
-      <Join table="tnro.tna.aerodromenode_innetwork" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.aerodromenode_innetwork" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>
@@ -8505,14 +8505,14 @@
       <Geometry path="." mapping="geometry"/>
     </Complex>
     <Complex path="net:spokeEnd">
-      <Join table="tnro.tna.aerodromenode_spokeend" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.aerodromenode_spokeend" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
     <Complex path="net:spokeStart">
-      <Join table="tnro.tna.aerodromenode_spokestart" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.aerodromenode_spokestart" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>
@@ -8545,7 +8545,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.aerodromenode_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.aerodromenode_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -8584,7 +8584,7 @@
       <Primitive path="@xsi:nil" mapping="locationindicatoricao_nil"/>
     </Complex>
     <Complex path="tn-a:controlTowers">
-      <Join table="tnro.tna.aerodromenode_controltowers" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.aerodromenode_controltowers" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Primitive path="@xlink:href" mapping="href"/>
@@ -8592,13 +8592,13 @@
     </Complex>
     <Primitive path="elf-tn-a:transEuropeanTransportNetwork" mapping="transeuropeantransportnetwork"/>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="elf-tn-a:FunctionalUseCategory" table="tnro.tna.functionalusecategory">
+  <FeatureTypeMapping name="elf-tn-a:FunctionalUseCategory" table="tna.functionalusecategory">
     <FIDMapping prefix="ELF-TN-A_FUNCTIONALUSECATEGORY_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
     </FIDMapping>
     <Complex path="net:networkRef">
-      <Join table="tnro.tna.functionalusecategory_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.functionalusecategory_networkref" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Complex path="net:NetworkReference">
         <Complex path="net:element">
@@ -8640,7 +8640,7 @@
       <!-- TODO: ReferencedType? <Feature>...</Feature> -->
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="elf-tn-a:RunwayLine" table="tnro.tna.runwayline">
+  <FeatureTypeMapping name="elf-tn-a:RunwayLine" table="tna.runwayline">
     <FIDMapping prefix="ELF-TN-A_RUNWAYLINE_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
@@ -8672,7 +8672,7 @@
           <Primitive path="@xsi:nil" mapping="gn_sourceofname_nil"/>
         </Complex>
         <Complex path="gn:spelling">
-          <Join table="tnro.tna.runwayline_gn_spelling" fromColumns="id" toColumns="parentfk"/>
+          <Join table="tna.runwayline_gn_spelling" fromColumns="id" toColumns="parentfk"/>
           <Complex path="gn:SpellingOfName">
             <Primitive path="gn:text" mapping="text"/>
             <Complex path="gn:script">
@@ -8715,13 +8715,13 @@
       <Primitive path="@uom" mapping="length_uom"/>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="elf-tn-a:TransportationUseCategory" table="tnro.tna.transportationusecategory">
+  <FeatureTypeMapping name="elf-tn-a:TransportationUseCategory" table="tna.transportationusecategory">
     <FIDMapping prefix="ELF-TN-A_TRANSPORTATIONUSECATEGORY_">
       <Column name="id" type="string"/>
       <UUIDGenerator/>
     </FIDMapping>
     <Complex path="net:networkRef">
-      <Join table="tnro.tna.transportationusecategory_networkref" fromColumns="id" toColumns="parentfk"/>
+      <Join table="tna.transportationusecategory_networkref" fromColumns="id" toColumns="parentfk"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <Complex path="net:NetworkReference">
         <Complex path="net:element">
