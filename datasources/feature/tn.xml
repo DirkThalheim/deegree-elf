@@ -4729,7 +4729,7 @@
   </FeatureTypeMapping>
 -->
 
-<!--  <FeatureTypeMapping name="tn-ra:DesignSpeed" table="tnra.designspeed">
+  <FeatureTypeMapping name="tn-ra:DesignSpeed" table="tnra.designspeed">
     <FIDMapping prefix="TN-RA_DESIGNSPEED_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -4877,8 +4877,7 @@
       <Primitive path="@uom" mapping="speed_uom"/>
     </Complex>
   </FeatureTypeMapping>
--->
-<!--  <FeatureTypeMapping name="tn-ra:RailwayElectrification" table="tnra.railwayelectrification">
+  <FeatureTypeMapping name="tn-ra:RailwayElectrification" table="tnra.railwayelectrification">
     <FIDMapping prefix="TN-RA_RAILWAYELECTRIFICATION_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -5023,8 +5022,7 @@
     </Complex>
     <Primitive path="tn-ra:electrified" mapping="electrified"/>
   </FeatureTypeMapping>
--->
-<!--  <FeatureTypeMapping name="tn-ra:RailwayLink" table="tnra.railwaylink">
+ <FeatureTypeMapping name="tn-ra:RailwayLink" table="tnra.railwaylink">
     <FIDMapping prefix="TN-RA_RAILWAYLINK_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -5189,7 +5187,7 @@
       <Primitive path="@xsi:nil" mapping="validto_nil"/>
     </Complex>
   </FeatureTypeMapping>
--->  <FeatureTypeMapping name="tn-ra:RailwayLinkSequence" table="tnra.railwaylinksequence">
+  <FeatureTypeMapping name="tn-ra:RailwayLinkSequence" table="tnra.railwaylinksequence">
     <FIDMapping prefix="TN-RA_RAILWAYLINKSEQUENCE_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -5344,7 +5342,7 @@
       <Primitive path="@xsi:nil" mapping="validto_nil"/>
     </Complex>
   </FeatureTypeMapping>
-<!--  <FeatureTypeMapping name="tn-ra:RailwayStationNode" table="tnra.railwaystationnode">
+  <FeatureTypeMapping name="tn-ra:RailwayStationNode" table="tnra.railwaystationnode">
     <FIDMapping prefix="TN-RA_RAILWAYSTATIONNODE_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -5527,7 +5525,6 @@
       <Primitive path="@xsi:nil" mapping="numberofplatforms_nil"/>
     </Complex>
   </FeatureTypeMapping>
--->
 
   <!-- == ELF Transport Network Railway =================================== -->
   <FeatureTypeMapping name="elf-tn-ra:DesignSpeed" table="tnra.designspeed">
@@ -6352,16 +6349,6 @@
       </Feature>
     </Complex>
   </FeatureTypeMapping>    
-    
-  <!-- 
-    TODO:    
-    * tn-ra:RailwayLinkSequence
-    * tn:AccessRestriction
-    * tn:ConditionOfFacility
-    * tn:RestrictionForVehicles
-    * tn:TransportNetwork
-    * tn:VerticalPosition
-  -->
 
 
   <!-- 
