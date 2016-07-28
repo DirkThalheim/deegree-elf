@@ -15,7 +15,7 @@
                  xmlns:gml="http://www.opengis.net/gml/3.2" 
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
                  xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.1.0/sql.xsd">
-  <JDBCConnId>elf</JDBCConnId>
+  <JDBCConnId>${jdbc_connection}</JDBCConnId>
   <StorageCRS srid="4258" dim="2D">EPSG:4258</StorageCRS>
   <GMLSchema>../../appschemas/elf/AdministrativeUnits.xsd</GMLSchema>
   

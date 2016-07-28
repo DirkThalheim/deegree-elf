@@ -11,7 +11,7 @@
                  xmlns:gml="http://www.opengis.net/gml/3.2"
                  xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.1.0/sql.xsd">
                  
-  <JDBCConnId>elf_master</JDBCConnId>
+  <JDBCConnId>${jdbc_connection}</JDBCConnId>
   <StorageCRS srid="4258" dim="2D">EPSG:4258</StorageCRS>
   <GMLSchema>../../appschemas/elf/BuildingsCore2D.xsd</GMLSchema>
   

@@ -11,25 +11,61 @@ COMMENT ON SCHEMA tnro
 -- == Tabellen =====
 
 -- == ERoad ================================  
-
 CREATE TABLE tnro.eroad (
-    id text,
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_localid text,
-    gn_nilreason text,
-    gn_nil boolean,
-    gn_language text,
-    gn_language_nilreason text,
-    gn_language_nil boolean,
-    gn_nativeness_nilreason text,
-    gn_nativeness_href text,
-    gn_namestatus_nilreason text,
-    gn_namestatus_href text,
-    gn_sourceofname text,
-    gn_sourceofname_nilreason text,
-    gn_sourceofname_nil boolean,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
+    geographicalname_nilreason text,
+    geographicalname_nil boolean,
+    geographicalname_language text,
+    geographicalname_language_nilreason text,
+    geographicalname_language_nil boolean,
+    geographicalname_nativeness_owns boolean,
+    geographicalname_nativeness_nilreason text,
+    geographicalname_nativeness_remoteschema text,
+    geographicalname_nativeness_nil boolean,
+    geographicalname_nativeness_fk text,
+    geographicalname_nativeness_href text,
+    geographicalname_namestatus_owns boolean,
+    geographicalname_namestatus_nilreason text,
+    geographicalname_namestatus_remoteschema text,
+    geographicalname_namestatus_nil boolean,
+    geographicalname_namestatus_fk text,
+    geographicalname_namestatus_href text,
+    geographicalname_sourceofname text,
+    geographicalname_sourceofname_nilreason text,
+    geographicalname_sourceofname_nil boolean,
+    geographicalname_pronunciation_nilreason text,
+    geographicalname_pronunciation_nil boolean,
+    geographicalname_pronunciation_soundlink text,
+    geographicalname_pronunciation_soundlink_nilreason text,
+    geographicalname_pronunciation_soundlink_nil boolean,
+    geographicalname_pronunciation_ipa text,
+    geographicalname_pronunciation_ipa_nilreason text,
+    geographicalname_pronunciation_ipa_nil boolean,
+    geographicalname_grammaticalgender_owns boolean,
+    geographicalname_grammaticalgender_nilreason text,
+    geographicalname_grammaticalgender_remoteschema text,
+    geographicalname_grammaticalgender_nil boolean,
+    geographicalname_grammaticalgender_fk text,
+    geographicalname_grammaticalgender_href text,
+    geographicalname_grammaticalnumber_owns boolean,
+    geographicalname_grammaticalnumber_nilreason text,
+    geographicalname_grammaticalnumber_remoteschema text,
+    geographicalname_grammaticalnumber_nil boolean,
+    geographicalname_grammaticalnumber_fk text,
+    geographicalname_grammaticalnumber_href text,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
@@ -39,86 +75,108 @@ CREATE TABLE tnro.eroad (
     europeanroutenumber text,
     europeanroutenumber_nilreason text,
     europeanroutenumber_nil boolean,
-    CONSTRAINT eroad_pkey PRIMARY KEY (id)
+    CONSTRAINT eroad_pkey PRIMARY KEY (gml_id)
 );
 ALTER TABLE tnro.eroad OWNER TO elf_admin;
+
 CREATE TABLE tnro.eroad_innetwork (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.eroad ON DELETE CASCADE,
+    num integer not null,
+    owns boolean,
     nilreason text,
+    remoteschema text,
     nil boolean,
+    fk text,
     href text
 );
 ALTER TABLE tnro.eroad_innetwork OWNER TO elf_admin;
+
 CREATE TABLE tnro.eroad_link (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.eroad ON DELETE CASCADE,
+    num integer not null,
     nilreason text,
+    remoteschema text,
+    owns boolean,
+    fk text,
     href text
 );
 ALTER TABLE tnro.eroad_link OWNER TO elf_admin;
-CREATE TABLE tnro.eroad_gn_spelling (
+
+CREATE TABLE tnro.eroad_geographicalname_spelling (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.eroad ON DELETE CASCADE,
-    spellingofname text,
-    script text,
-    script_nilreason text,
-    script_nil boolean,
-    transliterationscheme text,
-    transliterationscheme_nilreason text,
-    transliterationscheme_nil boolean
+    num integer not null,
+    geographicalname_spellingofname_text text,
+    geographicalname_spellingofname_script text,
+    geographicalname_spellingofname_script_nilreason text,
+    geographicalname_spellingofname_script_nil boolean,
+    geographicalname_spellingofname_transliterationscheme text,
+    geographicalname_spellingofname_transliterationscheme_nilreason text,
+    geographicalname_spellingofname_transliterationscheme_nil boolean
 );
-ALTER TABLE tnro.eroad_gn_spelling OWNER TO elf_admin;
+ALTER TABLE tnro.eroad_geographicalname_spelling OWNER TO elf_admin;
+
 CREATE TABLE tnro.eroad_post (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.eroad ON DELETE CASCADE,
+    num integer not null,
+    owns boolean,
     nilreason text,
+    remoteschema text,
     nil boolean,
+    fk text,
     href text
 );
 ALTER TABLE tnro.eroad_post OWNER TO elf_admin;
 
-CREATE INDEX eroad_id_idx ON tnro.eroad(id);
-CREATE INDEX eroad_innetwork_id_idx ON tnro.eroad_innetwork(id);
-CREATE INDEX eroad_innetwork_parentfk_idx ON tnro.eroad_innetwork (parentfk);
-CREATE INDEX eeroad_link_id_idx ON tnro.eroad_link(id);
-CREATE INDEX eroad_link_parentfk_idx ON tnro.eroad_link (parentfk);
-CREATE INDEX eroad_gn_spelling_id_idx ON tnro.eroad_gn_spelling(id);
-CREATE INDEX eroad_gn_spelling_parentfk_idx ON tnro.eroad_gn_spelling (parentfk);
-CREATE INDEX eroad_post_id_idx ON tnro.eroad_post(id);
-CREATE INDEX eroad_post_parentfk_idx ON tnro.eroad_post (parentfk);
-
--- == FormOfWay ================================  
-
 CREATE TABLE tnro.formofway (
-    id text,
-    inspireid_localid text,
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
+    formofway_owns boolean,
     formofway_nilreason text,
+    formofway_remoteschema text,
+    formofway_fk text,
     formofway_href text,
-    CONSTRAINT formofway_pkey PRIMARY KEY (id)
+    CONSTRAINT formofway_pkey PRIMARY KEY (gml_id)
 );
 ALTER TABLE tnro.formofway OWNER TO elf_admin;
+
 CREATE TABLE tnro.formofway_networkref (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.formofway ON DELETE CASCADE,
+    num integer not null,
     nilreason text,
     nil boolean,
-    linkreference_nilreason text,
-    linkreference_href text,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_href text,
-    simplelinearreference_nilreason text,
-    simplelinearreference_href text,
+    simplelinearreference_element_owns boolean,
+    simplelinearreference_element_nilreason text,
+    simplelinearreference_element_remoteschema text,
+    simplelinearreference_element_fk text,
+    simplelinearreference_element_href text,
+    simplelinearreference_applicabledirection_owns boolean,
     simplelinearreference_applicabledirection_nilreason text,
+    simplelinearreference_applicabledirection_remoteschema text,
+    simplelinearreference_applicabledirection_nil boolean,
+    simplelinearreference_applicabledirection_fk text,
     simplelinearreference_applicabledirection_href text,
     simplelinearreference_fromposition numeric,
     simplelinearreference_fromposition_uom text,
@@ -128,33 +186,57 @@ CREATE TABLE tnro.formofway_networkref (
     simplelinearreference_offset_nilreason text,
     simplelinearreference_offset_uom text,
     simplelinearreference_offset_nil boolean,
-    networkreference_nilreason text,
-    networkreference_href text,
-    simplepointreference_nilreason text,
-    simplepointreference_href text,
+    simplepointreference_element_owns boolean,
+    simplepointreference_element_nilreason text,
+    simplepointreference_element_remoteschema text,
+    simplepointreference_element_fk text,
+    simplepointreference_element_href text,
+    simplepointreference_applicabledirection_owns boolean,
     simplepointreference_applicabledirection_nilreason text,
+    simplepointreference_applicabledirection_remoteschema text,
+    simplepointreference_applicabledirection_nil boolean,
+    simplepointreference_applicabledirection_fk text,
     simplepointreference_applicabledirection_href text,
     simplepointreference_atposition numeric,
     simplepointreference_atposition_uom text,
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean
+    simplepointreference_offset_nil boolean,
+    linkreference_element_owns boolean,
+    linkreference_element_nilreason text,
+    linkreference_element_remoteschema text,
+    linkreference_element_fk text,
+    linkreference_element_href text,
+    linkreference_applicabledirection_owns boolean,
+    linkreference_applicabledirection_nilreason text,
+    linkreference_applicabledirection_remoteschema text,
+    linkreference_applicabledirection_nil boolean,
+    linkreference_applicabledirection_fk text,
+    linkreference_applicabledirection_href text,
+    networkreference_element_owns boolean,
+    networkreference_element_nilreason text,
+    networkreference_element_remoteschema text,
+    networkreference_element_fk text,
+    networkreference_element_href text
 );
 ALTER TABLE tnro.formofway_networkref OWNER TO elf_admin;
 
-CREATE INDEX formofway_id_idx ON tnro.formofway(id);
-CREATE INDEX formofway_networkref_id_idx ON tnro.formofway_networkref(id);
-CREATE INDEX formofway_networkref_parentfk_idx ON tnro.formofway_networkref (parentfk);
-
--- == FunctionalRoadClass ================================  
-
 CREATE TABLE tnro.functionalroadclass (
-    id text,
-    inspireid_localid text,
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
@@ -162,21 +244,26 @@ CREATE TABLE tnro.functionalroadclass (
     validto_nilreason text,
     validto_nil boolean,
     functionalclass text,
-    CONSTRAINT functionalroadclass_pkey PRIMARY KEY (id)
+    CONSTRAINT functionalroadclass_pkey PRIMARY KEY (gml_id)
 );
 ALTER TABLE tnro.functionalroadclass OWNER TO elf_admin;
+
 CREATE TABLE tnro.functionalroadclass_networkref (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.functionalroadclass ON DELETE CASCADE,
+    num integer not null,
     nilreason text,
     nil boolean,
-    linkreference_nilreason text,
-    linkreference_href text,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_href text,
-    simplelinearreference_nilreason text,
-    simplelinearreference_href text,
+    simplelinearreference_element_owns boolean,
+    simplelinearreference_element_nilreason text,
+    simplelinearreference_element_remoteschema text,
+    simplelinearreference_element_fk text,
+    simplelinearreference_element_href text,
+    simplelinearreference_applicabledirection_owns boolean,
     simplelinearreference_applicabledirection_nilreason text,
+    simplelinearreference_applicabledirection_remoteschema text,
+    simplelinearreference_applicabledirection_nil boolean,
+    simplelinearreference_applicabledirection_fk text,
     simplelinearreference_applicabledirection_href text,
     simplelinearreference_fromposition numeric,
     simplelinearreference_fromposition_uom text,
@@ -186,61 +273,93 @@ CREATE TABLE tnro.functionalroadclass_networkref (
     simplelinearreference_offset_nilreason text,
     simplelinearreference_offset_uom text,
     simplelinearreference_offset_nil boolean,
-    networkreference_nilreason text,
-    networkreference_href text,
-    simplepointreference_nilreason text,
-    simplepointreference_href text,
+    simplepointreference_element_owns boolean,
+    simplepointreference_element_nilreason text,
+    simplepointreference_element_remoteschema text,
+    simplepointreference_element_fk text,
+    simplepointreference_element_href text,
+    simplepointreference_applicabledirection_owns boolean,
     simplepointreference_applicabledirection_nilreason text,
+    simplepointreference_applicabledirection_remoteschema text,
+    simplepointreference_applicabledirection_nil boolean,
+    simplepointreference_applicabledirection_fk text,
     simplepointreference_applicabledirection_href text,
     simplepointreference_atposition numeric,
     simplepointreference_atposition_uom text,
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean
+    simplepointreference_offset_nil boolean,
+    linkreference_element_owns boolean,
+    linkreference_element_nilreason text,
+    linkreference_element_remoteschema text,
+    linkreference_element_fk text,
+    linkreference_element_href text,
+    linkreference_applicabledirection_owns boolean,
+    linkreference_applicabledirection_nilreason text,
+    linkreference_applicabledirection_remoteschema text,
+    linkreference_applicabledirection_nil boolean,
+    linkreference_applicabledirection_fk text,
+    linkreference_applicabledirection_href text,
+    networkreference_element_owns boolean,
+    networkreference_element_nilreason text,
+    networkreference_element_remoteschema text,
+    networkreference_element_fk text,
+    networkreference_element_href text
 );
 ALTER TABLE tnro.functionalroadclass_networkref OWNER TO elf_admin;
 
-CREATE INDEX functionalroadclass_id_idx ON tnro.functionalroadclass(id);
-CREATE INDEX functionalroadclass_networkref_networkref_id_idx ON tnro.functionalroadclass_networkref(id);
-CREATE INDEX functionalroadclass_networkref_networkref_parentfk_idx ON tnro.functionalroadclass_networkref (parentfk);
-
--- == NumberOfLanes ================================  
-
 CREATE TABLE tnro.numberoflanes (
-    id text,
-    inspireid_localid text,
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
+    direction_owns boolean,
     direction_nilreason text,
+    direction_remoteschema text,
     direction_nil boolean,
+    direction_fk text,
     direction_href text,
     minmaxnumberoflanes text,
     minmaxnumberoflanes_nilreason text,
     minmaxnumberoflanes_nil boolean,
     numberoflanes integer,
-    CONSTRAINT numberoflanes_pkey PRIMARY KEY (id)
+    CONSTRAINT numberoflanes_pkey PRIMARY KEY (gml_id)
 );
 ALTER TABLE tnro.numberoflanes OWNER TO elf_admin;
+
 CREATE TABLE tnro.numberoflanes_networkref (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.numberoflanes ON DELETE CASCADE,
+    num integer not null,
     nilreason text,
     nil boolean,
-    linkreference_nilreason text,
-    linkreference_href text,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_href text,
-    simplelinearreference_nilreason text,
-    simplelinearreference_href text,
+    simplelinearreference_element_owns boolean,
+    simplelinearreference_element_nilreason text,
+    simplelinearreference_element_remoteschema text,
+    simplelinearreference_element_fk text,
+    simplelinearreference_element_href text,
+    simplelinearreference_applicabledirection_owns boolean,
     simplelinearreference_applicabledirection_nilreason text,
+    simplelinearreference_applicabledirection_remoteschema text,
+    simplelinearreference_applicabledirection_nil boolean,
+    simplelinearreference_applicabledirection_fk text,
     simplelinearreference_applicabledirection_href text,
     simplelinearreference_fromposition numeric,
     simplelinearreference_fromposition_uom text,
@@ -250,45 +369,97 @@ CREATE TABLE tnro.numberoflanes_networkref (
     simplelinearreference_offset_nilreason text,
     simplelinearreference_offset_uom text,
     simplelinearreference_offset_nil boolean,
-    networkreference_nilreason text,
-    networkreference_href text,
-    simplepointreference_nilreason text,
-    simplepointreference_href text,
+    simplepointreference_element_owns boolean,
+    simplepointreference_element_nilreason text,
+    simplepointreference_element_remoteschema text,
+    simplepointreference_element_fk text,
+    simplepointreference_element_href text,
+    simplepointreference_applicabledirection_owns boolean,
     simplepointreference_applicabledirection_nilreason text,
+    simplepointreference_applicabledirection_remoteschema text,
+    simplepointreference_applicabledirection_nil boolean,
+    simplepointreference_applicabledirection_fk text,
     simplepointreference_applicabledirection_href text,
     simplepointreference_atposition numeric,
     simplepointreference_atposition_uom text,
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean
+    simplepointreference_offset_nil boolean,
+    linkreference_element_owns boolean,
+    linkreference_element_nilreason text,
+    linkreference_element_remoteschema text,
+    linkreference_element_fk text,
+    linkreference_element_href text,
+    linkreference_applicabledirection_owns boolean,
+    linkreference_applicabledirection_nilreason text,
+    linkreference_applicabledirection_remoteschema text,
+    linkreference_applicabledirection_nil boolean,
+    linkreference_applicabledirection_fk text,
+    linkreference_applicabledirection_href text,
+    networkreference_element_owns boolean,
+    networkreference_element_nilreason text,
+    networkreference_element_remoteschema text,
+    networkreference_element_fk text,
+    networkreference_element_href text
 );
 ALTER TABLE tnro.numberoflanes_networkref OWNER TO elf_admin;
 
-CREATE INDEX numberoflanes_id_idx ON tnro.numberoflanes(id);
-CREATE INDEX numberoflanes_networkref_networkref_id_idx ON tnro.numberoflanes_networkref(id);
-CREATE INDEX numberoflanes_networkref_networkref_parentfk_idx ON tnro.numberoflanes_networkref (parentfk);
-
--- == Road ================================  
-
 CREATE TABLE tnro.road (
-    id text,
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_localid text,
-    gn_nilreason text,
-    gn_nil boolean,
-    gn_language text,
-    gn_language_nilreason text,
-    gn_language_nil boolean,
-    gn_nativeness_nilreason text,
-    gn_nativeness_href text,
-    gn_namestatus_nilreason text,
-    gn_namestatus_href text,
-    gn_sourceofname text,
-    gn_sourceofname_nilreason text,
-    gn_sourceofname_nil boolean,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
+    geographicalname_nilreason text,
+    geographicalname_nil boolean,
+    geographicalname_language text,
+    geographicalname_language_nilreason text,
+    geographicalname_language_nil boolean,
+    geographicalname_nativeness_owns boolean,
+    geographicalname_nativeness_nilreason text,
+    geographicalname_nativeness_remoteschema text,
+    geographicalname_nativeness_nil boolean,
+    geographicalname_nativeness_fk text,
+    geographicalname_nativeness_href text,
+    geographicalname_namestatus_owns boolean,
+    geographicalname_namestatus_nilreason text,
+    geographicalname_namestatus_remoteschema text,
+    geographicalname_namestatus_nil boolean,
+    geographicalname_namestatus_fk text,
+    geographicalname_namestatus_href text,
+    geographicalname_sourceofname text,
+    geographicalname_sourceofname_nilreason text,
+    geographicalname_sourceofname_nil boolean,
+    geographicalname_pronunciation_nilreason text,
+    geographicalname_pronunciation_nil boolean,
+    geographicalname_pronunciation_soundlink text,
+    geographicalname_pronunciation_soundlink_nilreason text,
+    geographicalname_pronunciation_soundlink_nil boolean,
+    geographicalname_pronunciation_ipa text,
+    geographicalname_pronunciation_ipa_nilreason text,
+    geographicalname_pronunciation_ipa_nil boolean,
+    geographicalname_grammaticalgender_owns boolean,
+    geographicalname_grammaticalgender_nilreason text,
+    geographicalname_grammaticalgender_remoteschema text,
+    geographicalname_grammaticalgender_nil boolean,
+    geographicalname_grammaticalgender_fk text,
+    geographicalname_grammaticalgender_href text,
+    geographicalname_grammaticalnumber_owns boolean,
+    geographicalname_grammaticalnumber_nilreason text,
+    geographicalname_grammaticalnumber_remoteschema text,
+    geographicalname_grammaticalnumber_nil boolean,
+    geographicalname_grammaticalnumber_fk text,
+    geographicalname_grammaticalnumber_href text,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
@@ -301,231 +472,344 @@ CREATE TABLE tnro.road (
     nationalroadcode text,
     nationalroadcode_nilreason text,
     nationalroadcode_nil boolean,
-    CONSTRAINT road_pkey PRIMARY KEY (id)
+    CONSTRAINT road_pkey PRIMARY KEY (gml_id)
 );
 ALTER TABLE tnro.road OWNER TO elf_admin;
+
 CREATE TABLE tnro.road_innetwork (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.road ON DELETE CASCADE,
+    num integer not null,
+    owns boolean,
     nilreason text,
+    remoteschema text,
     nil boolean,
+    fk text,
     href text
 );
 ALTER TABLE tnro.road_innetwork OWNER TO elf_admin;
+
 CREATE TABLE tnro.road_link (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.road ON DELETE CASCADE,
+    num integer not null,
     nilreason text,
+    remoteschema text,
+    owns boolean,
+    fk text,
     href text
 );
 ALTER TABLE tnro.road_link OWNER TO elf_admin;
-CREATE TABLE tnro.road_gn_spelling (
+
+CREATE TABLE tnro.road_geographicalname_spelling (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.road ON DELETE CASCADE,
-    spellingofname text,
-    script text,
-    script_nilreason text,
-    script_nil boolean,
-    transliterationscheme text,
-    transliterationscheme_nilreason text,
-    transliterationscheme_nil boolean
+    num integer not null,
+    geographicalname_spellingofname_text text,
+    geographicalname_spellingofname_script text,
+    geographicalname_spellingofname_script_nilreason text,
+    geographicalname_spellingofname_script_nil boolean,
+    geographicalname_spellingofname_transliterationscheme text,
+    geographicalname_spellingofname_transliterationscheme_nilreason text,
+    geographicalname_spellingofname_transliterationscheme_nil boolean
 );
-ALTER TABLE tnro.road_gn_spelling OWNER TO elf_admin;
+ALTER TABLE tnro.road_geographicalname_spelling OWNER TO elf_admin;
+
 CREATE TABLE tnro.road_post (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.road ON DELETE CASCADE,
+    num integer not null,
+    owns boolean,
     nilreason text,
+    remoteschema text,
     nil boolean,
+    fk text,
     href text
 );
 ALTER TABLE tnro.road_post OWNER TO elf_admin;
 
-CREATE INDEX road_id_idx ON tnro.road(id);
-CREATE INDEX road_innetwork_id_idx ON tnro.road_innetwork(id);
-CREATE INDEX road_innetwork_parentfk_idx ON tnro.road_innetwork (parentfk);
-CREATE INDEX road_link_id_idx ON tnro.road_link(id);
-CREATE INDEX road_link_parentfk_idx ON tnro.road_link (parentfk);
-CREATE INDEX road_gn_spelling_id_idx ON tnro.road_gn_spelling(id);
-CREATE INDEX road_gn_spelling_parentfk_idx ON tnro.road_gn_spelling (parentfk);
-CREATE INDEX road_post_id_idx ON tnro.road_post(id);
-CREATE INDEX road_post_parentfk_idx ON tnro.road_post (parentfk);
-
--- == RoadArea ================================  
-
 CREATE TABLE tnro.roadarea (
-    id text,
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_localid text,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
     geometry_nilreason text,
-    gn_nilreason text,
-    gn_nil boolean,
-    gn_language text,
-    gn_language_nilreason text,
-    gn_language_nil boolean,
-    gn_nativeness_href text,
-    gn_nativeness_nilreason text,
-    gn_namestatus_href text,
-    gn_namestatus_nilreason text,
-    gn_sourceofname text,
-    gn_sourceofname_nilreason text,
-    gn_sourceofname_nil boolean,
+    geometry_remoteschema text,
+    geometry_owns boolean,
+    geographicalname_nilreason text,
+    geographicalname_nil boolean,
+    geographicalname_language text,
+    geographicalname_language_nilreason text,
+    geographicalname_language_nil boolean,
+    geographicalname_nativeness_owns boolean,
+    geographicalname_nativeness_nilreason text,
+    geographicalname_nativeness_remoteschema text,
+    geographicalname_nativeness_nil boolean,
+    geographicalname_nativeness_fk text,
+    geographicalname_nativeness_href text,
+    geographicalname_namestatus_owns boolean,
+    geographicalname_namestatus_nilreason text,
+    geographicalname_namestatus_remoteschema text,
+    geographicalname_namestatus_nil boolean,
+    geographicalname_namestatus_fk text,
+    geographicalname_namestatus_href text,
+    geographicalname_sourceofname text,
+    geographicalname_sourceofname_nilreason text,
+    geographicalname_sourceofname_nil boolean,
+    geographicalname_pronunciation_nilreason text,
+    geographicalname_pronunciation_nil boolean,
+    geographicalname_pronunciation_soundlink text,
+    geographicalname_pronunciation_soundlink_nilreason text,
+    geographicalname_pronunciation_soundlink_nil boolean,
+    geographicalname_pronunciation_ipa text,
+    geographicalname_pronunciation_ipa_nilreason text,
+    geographicalname_pronunciation_ipa_nil boolean,
+    geographicalname_grammaticalgender_owns boolean,
+    geographicalname_grammaticalgender_nilreason text,
+    geographicalname_grammaticalgender_remoteschema text,
+    geographicalname_grammaticalgender_nil boolean,
+    geographicalname_grammaticalgender_fk text,
+    geographicalname_grammaticalgender_href text,
+    geographicalname_grammaticalnumber_owns boolean,
+    geographicalname_grammaticalnumber_nilreason text,
+    geographicalname_grammaticalnumber_remoteschema text,
+    geographicalname_grammaticalnumber_nil boolean,
+    geographicalname_grammaticalnumber_fk text,
+    geographicalname_grammaticalnumber_href text,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
-    CONSTRAINT roadarea_pkey PRIMARY KEY (id)
+    CONSTRAINT roadarea_pkey PRIMARY KEY (gml_id)
 );
 ALTER TABLE tnro.roadarea OWNER TO elf_admin;
+
 CREATE TABLE tnro.roadarea_innetwork (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadarea ON DELETE CASCADE,
+    num integer not null,
+    owns boolean,
     nilreason text,
+    remoteschema text,
     nil boolean,
+    fk text,
     href text
 );
 ALTER TABLE tnro.roadarea_innetwork OWNER TO elf_admin;
-SELECT ADDGEOMETRYCOLUMN('tnro', 'roadarea','geometry','4258','GEOMETRY', 2);
-CREATE TABLE tnro.roadarea_gn_spelling (
+
+SELECT ADDGEOMETRYCOLUMN('tnro', 'roadarea','geometry_value','4258','GEOMETRY', 2);
+CREATE INDEX roadarea_geometry_idx ON tnro.roadarea USING GIST (geometry_value);
+
+CREATE TABLE tnro.roadarea_geographicalname_spelling (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadarea ON DELETE CASCADE,
-    spellingofname text,
-    script text,
-    script_nilreason text,
-    script_nil boolean,
-    transliterationscheme text,
-    transliterationscheme_nilreason text,
-    transliterationscheme_nil boolean
+    num integer not null,
+    geographicalname_spellingofname_text text,
+    geographicalname_spellingofname_script text,
+    geographicalname_spellingofname_script_nilreason text,
+    geographicalname_spellingofname_script_nil boolean,
+    geographicalname_spellingofname_transliterationscheme text,
+    geographicalname_spellingofname_transliterationscheme_nilreason text,
+    geographicalname_spellingofname_transliterationscheme_nil boolean
 );
-ALTER TABLE tnro.roadarea_gn_spelling OWNER TO elf_admin;
+ALTER TABLE tnro.roadarea_geographicalname_spelling OWNER TO elf_admin;
 
-CREATE INDEX roadarea_id_idx ON tnro.roadarea(id);
-CREATE INDEX roadarea_geometry_idx ON tnro.roadarea USING GIST (geometry);
-CREATE INDEX roadarea_innetwork_id_idx ON tnro.roadarea_innetwork(id);
-CREATE INDEX roadarea_innetwork_parentfk_idx ON tnro.roadarea_innetwork (parentfk);
-CREATE INDEX roadarea_gn_spelling_id_idx ON tnro.roadarea_gn_spelling(id);
-CREATE INDEX roadarea_gn_spelling_parentfk_idx ON tnro.roadarea_gn_spelling (parentfk);
-
--- == RoadLinkSequence ================================  
-
-CREATE TABLE tnro.roadlinksequence(
-    id text,
+CREATE TABLE tnro.roadlinksequence (
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_localid text,
-    gn_nilreason text,
-    gn_nil boolean,
-    gn_language text,
-    gn_language_nilreason text,
-    gn_language_nil boolean,
-    gn_nativeness_href text,
-    gn_nativeness_nilreason text,
-    gn_namestatus_href text,
-    gn_namestatus_nilreason text,
-    gn_sourceofname text,
-    gn_sourceofname_nilreason text,
-    gn_sourceofname_nil boolean,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
+    geographicalname_nilreason text,
+    geographicalname_nil boolean,
+    geographicalname_language text,
+    geographicalname_language_nilreason text,
+    geographicalname_language_nil boolean,
+    geographicalname_nativeness_owns boolean,
+    geographicalname_nativeness_nilreason text,
+    geographicalname_nativeness_remoteschema text,
+    geographicalname_nativeness_nil boolean,
+    geographicalname_nativeness_fk text,
+    geographicalname_nativeness_href text,
+    geographicalname_namestatus_owns boolean,
+    geographicalname_namestatus_nilreason text,
+    geographicalname_namestatus_remoteschema text,
+    geographicalname_namestatus_nil boolean,
+    geographicalname_namestatus_fk text,
+    geographicalname_namestatus_href text,
+    geographicalname_sourceofname text,
+    geographicalname_sourceofname_nilreason text,
+    geographicalname_sourceofname_nil boolean,
+    geographicalname_pronunciation_nilreason text,
+    geographicalname_pronunciation_nil boolean,
+    geographicalname_pronunciation_soundlink text,
+    geographicalname_pronunciation_soundlink_nilreason text,
+    geographicalname_pronunciation_soundlink_nil boolean,
+    geographicalname_pronunciation_ipa text,
+    geographicalname_pronunciation_ipa_nilreason text,
+    geographicalname_pronunciation_ipa_nil boolean,
+    geographicalname_grammaticalgender_owns boolean,
+    geographicalname_grammaticalgender_nilreason text,
+    geographicalname_grammaticalgender_remoteschema text,
+    geographicalname_grammaticalgender_nil boolean,
+    geographicalname_grammaticalgender_fk text,
+    geographicalname_grammaticalgender_href text,
+    geographicalname_grammaticalnumber_owns boolean,
+    geographicalname_grammaticalnumber_nilreason text,
+    geographicalname_grammaticalnumber_remoteschema text,
+    geographicalname_grammaticalnumber_nil boolean,
+    geographicalname_grammaticalnumber_fk text,
+    geographicalname_grammaticalnumber_href text,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
-    CONSTRAINT roadlinksequence_pkey PRIMARY KEY (id)
+    CONSTRAINT roadlinksequence_pkey PRIMARY KEY (gml_id)
 );
 ALTER TABLE tnro.roadlinksequence OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadlinksequence_innetwork(
+CREATE TABLE tnro.roadlinksequence_innetwork (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadlinksequence ON DELETE CASCADE,
-    href text,
+    num integer not null,
+    owns boolean,
     nilreason text,
-    nil boolean
+    remoteschema text,
+    nil boolean,
+    fk text,
+    href text
 );
 ALTER TABLE tnro.roadlinksequence_innetwork OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadlinksequence_link(
+CREATE TABLE tnro.roadlinksequence_link (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadlinksequence ON DELETE CASCADE,
-    direction text,
-    href text,
-    nilreason text
+    num integer not null,
+    directedlink_direction text,
+    directedlink_link_owns boolean,
+    directedlink_link_nilreason text,
+    directedlink_link_remoteschema text,
+    directedlink_link_fk text,
+    directedlink_link_href text
 );
 ALTER TABLE tnro.roadlinksequence_link OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadlinksequence_gn_spelling(
+CREATE TABLE tnro.roadlinksequence_geographicalname_spelling (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadlinksequence ON DELETE CASCADE,
-    spellingofname text,
-    script text,
-    script_nilreason text,
-    script_nil boolean,
-    transliterationscheme text,
-    transliterationscheme_nilreason text,
-    transliterationscheme_nil boolean
+    num integer not null,
+    geographicalname_spellingofname_text text,
+    geographicalname_spellingofname_script text,
+    geographicalname_spellingofname_script_nilreason text,
+    geographicalname_spellingofname_script_nil boolean,
+    geographicalname_spellingofname_transliterationscheme text,
+    geographicalname_spellingofname_transliterationscheme_nilreason text,
+    geographicalname_spellingofname_transliterationscheme_nil boolean
 );
-ALTER TABLE tnro.roadlinksequence_gn_spelling OWNER TO elf_admin;
+ALTER TABLE tnro.roadlinksequence_geographicalname_spelling OWNER TO elf_admin;
 
-CREATE INDEX roadlinksequence_id_idx ON tnro.roadlinksequence(id);
-CREATE INDEX roadlinksequence_innetwork_id_idx ON tnro.roadlinksequence_innetwork(id);
-CREATE INDEX roadlinksequence_innetwork_parentfk_idx ON tnro.roadlinksequence_innetwork (parentfk);
-CREATE INDEX roadlinksequence_link_id_idx ON tnro.roadlinksequence_link(id);
-CREATE INDEX roadlinksequence_link_parentfk_idx ON tnro.roadlinksequence_link (parentfk);
-CREATE INDEX roadlinksequence_gn_spelling_id_idx ON tnro.roadlinksequence_gn_spelling(id);
-CREATE INDEX roadlinksequence_gn_spelling_parentfk_idx ON tnro.roadlinksequence_gn_spelling (parentfk);
-
--- == RoadName ================================  
-
-CREATE TABLE tnro.roadname(
-    id text,
-    inspireid_localid text,
+CREATE TABLE tnro.roadname (
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
-    name_gn_language text,
-    name_gn_language_nilreason text,
-    name_gn_language_nil boolean,
-    name_gn_nativeness_owns boolean,
-    name_gn_nativeness_nilreason text,
-    name_gn_nativeness_gml_remoteschema text,
-    name_gn_nativeness_nil boolean,
-    name_gn_nativeness_fk text,
-    name_gn_nativeness_href text,
-    name_gn_namestatus_owns boolean,
-    name_gn_namestatus_nilreason text,
-    name_gn_namestatus_gml_remoteschema text,
-    name_gn_namestatus_nil boolean,
-    name_gn_namestatus_fk text,
-    name_gn_namestatus_href text,
-    name_gn_sourceofname text,
-    name_gn_sourceofname_nilreason text,
-    name_gn_sourceofname_nil boolean,
-    CONSTRAINT roadname_pkey PRIMARY KEY (id)
+    name_geographicalname_language text,
+    name_geographicalname_language_nilreason text,
+    name_geographicalname_language_nil boolean,
+    name_geographicalname_nativeness_owns boolean,
+    name_geographicalname_nativeness_nilreason text,
+    name_geographicalname_nativeness_remoteschema text,
+    name_geographicalname_nativeness_nil boolean,
+    name_geographicalname_nativeness_fk text,
+    name_geographicalname_nativeness_href text,
+    name_geographicalname_namestatus_owns boolean,
+    name_geographicalname_namestatus_nilreason text,
+    name_geographicalname_namestatus_remoteschema text,
+    name_geographicalname_namestatus_nil boolean,
+    name_geographicalname_namestatus_fk text,
+    name_geographicalname_namestatus_href text,
+    name_geographicalname_sourceofname text,
+    name_geographicalname_sourceofname_nilreason text,
+    name_geographicalname_sourceofname_nil boolean,
+    name_geographicalname_pronunciation_nilreason text,
+    name_geographicalname_pronunciation_nil boolean,
+    name_geographicalname_pronunciation_soundlink text,
+    name_geographicalname_pronunciation_soundlink_nilreason text,
+    name_geographicalname_pronunciation_soundlink_nil boolean,
+    name_geographicalname_pronunciation_ipa text,
+    name_geographicalname_pronunciation_ipa_nilreason text,
+    name_geographicalname_pronunciation_ipa_nil boolean,
+    name_geographicalname_grammaticalgender_owns boolean,
+    name_geographicalname_grammaticalgender_nilreason text,
+    name_geographicalname_grammaticalgender_remoteschema text,
+    name_geographicalname_grammaticalgender_nil boolean,
+    name_geographicalname_grammaticalgender_fk text,
+    name_geographicalname_grammaticalgender_href text,
+    name_geographicalname_grammaticalnumber_owns boolean,
+    name_geographicalname_grammaticalnumber_nilreason text,
+    name_geographicalname_grammaticalnumber_remoteschema text,
+    name_geographicalname_grammaticalnumber_nil boolean,
+    name_geographicalname_grammaticalnumber_fk text,
+    name_geographicalname_grammaticalnumber_href text,
+    CONSTRAINT roadname_pkey PRIMARY KEY (gml_id)
 );
 ALTER TABLE tnro.roadname OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadname_networkref(
+CREATE TABLE tnro.roadname_networkref (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadname ON DELETE CASCADE,
+    num integer not null,
     nilreason text,
     nil boolean,
-    linkreference_nilreason text,
-    linkreference_href text,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_href text,
-    simplelinearreference_nilreason text,
-    simplelinearreference_href text,
+    simplelinearreference_element_owns boolean,
+    simplelinearreference_element_nilreason text,
+    simplelinearreference_element_remoteschema text,
+    simplelinearreference_element_fk text,
+    simplelinearreference_element_href text,
+    simplelinearreference_applicabledirection_owns boolean,
     simplelinearreference_applicabledirection_nilreason text,
+    simplelinearreference_applicabledirection_remoteschema text,
+    simplelinearreference_applicabledirection_nil boolean,
+    simplelinearreference_applicabledirection_fk text,
     simplelinearreference_applicabledirection_href text,
     simplelinearreference_fromposition numeric,
     simplelinearreference_fromposition_uom text,
@@ -535,220 +819,330 @@ CREATE TABLE tnro.roadname_networkref(
     simplelinearreference_offset_nilreason text,
     simplelinearreference_offset_uom text,
     simplelinearreference_offset_nil boolean,
-    networkreference_nilreason text,
-    networkreference_href text,
-    simplepointreference_nilreason text,
-    simplepointreference_href text,
+    simplepointreference_element_owns boolean,
+    simplepointreference_element_nilreason text,
+    simplepointreference_element_remoteschema text,
+    simplepointreference_element_fk text,
+    simplepointreference_element_href text,
+    simplepointreference_applicabledirection_owns boolean,
     simplepointreference_applicabledirection_nilreason text,
+    simplepointreference_applicabledirection_remoteschema text,
+    simplepointreference_applicabledirection_nil boolean,
+    simplepointreference_applicabledirection_fk text,
     simplepointreference_applicabledirection_href text,
     simplepointreference_atposition numeric,
     simplepointreference_atposition_uom text,
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean
+    simplepointreference_offset_nil boolean,
+    linkreference_element_owns boolean,
+    linkreference_element_nilreason text,
+    linkreference_element_remoteschema text,
+    linkreference_element_fk text,
+    linkreference_element_href text,
+    linkreference_applicabledirection_owns boolean,
+    linkreference_applicabledirection_nilreason text,
+    linkreference_applicabledirection_remoteschema text,
+    linkreference_applicabledirection_nil boolean,
+    linkreference_applicabledirection_fk text,
+    linkreference_applicabledirection_href text,
+    networkreference_element_owns boolean,
+    networkreference_element_nilreason text,
+    networkreference_element_remoteschema text,
+    networkreference_element_fk text,
+    networkreference_element_href text
 );
 ALTER TABLE tnro.roadname_networkref OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadname_name_gn_spelling(
+CREATE TABLE tnro.roadname_name_geographicalname_spelling (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadname ON DELETE CASCADE,
-    name_spellingofname text,
-    name_script text,
-    name_script_nilreason text,
-    name_script_nil boolean,
-    name_transliterationscheme text,
-    name_transliterationscheme_nilreason text,
-    name_transliterationscheme_nil boolean
+    num integer not null,
+    name_geographicalname_spellingofname_text text,
+    name_geographicalname_spellingofname_script text,
+    name_geographicalname_spellingofname_script_nilreason text,
+    name_geographicalname_spellingofname_script_nil boolean,
+    name_geographicalname_spellingofname_transliterationscheme text,
+    name_geographicalname_spellingofname_transliterationscheme_nilreason text,
+    name_geographicalname_spellingofname_transliterationscheme_nil boolean
 );
-ALTER TABLE tnro.roadname_name_gn_spelling OWNER TO elf_admin;
+ALTER TABLE tnro.roadname_name_geographicalname_spelling OWNER TO elf_admin;
 
-CREATE INDEX roadname_id_idx ON tnro.roadname(id);
-CREATE INDEX roadname_networkref_id_idx ON tnro.roadname_networkref(id);
-CREATE INDEX roadname_networkref_parentfk_idx ON tnro.roadname_networkref (parentfk);
-CREATE INDEX roadname_name_gn_spelling_id_idx ON tnro.roadname_name_gn_spelling(id);
-CREATE INDEX roadname_name_gn_spelling_parentfk_idx ON tnro.roadname_name_gn_spelling (parentfk);
-
--- == RoadNode ================================  
-
-CREATE TABLE tnro.roadnode(
-    id text,
+CREATE TABLE tnro.roadnode (
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_localid text,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
     geometry_nilreason text,
-    gn_nilreason text,
-    gn_nil boolean,
-    gn_language text,
-    gn_language_nilreason text,
-    gn_language_nil boolean,
-    gn_nativeness_href text,
-    gn_nativeness_nilreason text,
-    gn_namestatus_href text,
-    gn_namestatus_nilreason text,
-    gn_sourceofname text,
-    gn_sourceofname_nilreason text,
-    gn_sourceofname_nil boolean,
+    geometry_remoteschema text,
+    geometry_owns boolean,
+    geographicalname_nilreason text,
+    geographicalname_nil boolean,
+    geographicalname_language text,
+    geographicalname_language_nilreason text,
+    geographicalname_language_nil boolean,
+    geographicalname_nativeness_owns boolean,
+    geographicalname_nativeness_nilreason text,
+    geographicalname_nativeness_remoteschema text,
+    geographicalname_nativeness_nil boolean,
+    geographicalname_nativeness_fk text,
+    geographicalname_nativeness_href text,
+    geographicalname_namestatus_owns boolean,
+    geographicalname_namestatus_nilreason text,
+    geographicalname_namestatus_remoteschema text,
+    geographicalname_namestatus_nil boolean,
+    geographicalname_namestatus_fk text,
+    geographicalname_namestatus_href text,
+    geographicalname_sourceofname text,
+    geographicalname_sourceofname_nilreason text,
+    geographicalname_sourceofname_nil boolean,
+    geographicalname_pronunciation_nilreason text,
+    geographicalname_pronunciation_nil boolean,
+    geographicalname_pronunciation_soundlink text,
+    geographicalname_pronunciation_soundlink_nilreason text,
+    geographicalname_pronunciation_soundlink_nil boolean,
+    geographicalname_pronunciation_ipa text,
+    geographicalname_pronunciation_ipa_nilreason text,
+    geographicalname_pronunciation_ipa_nil boolean,
+    geographicalname_grammaticalgender_owns boolean,
+    geographicalname_grammaticalgender_nilreason text,
+    geographicalname_grammaticalgender_remoteschema text,
+    geographicalname_grammaticalgender_nil boolean,
+    geographicalname_grammaticalgender_fk text,
+    geographicalname_grammaticalgender_href text,
+    geographicalname_grammaticalnumber_owns boolean,
+    geographicalname_grammaticalnumber_nilreason text,
+    geographicalname_grammaticalnumber_remoteschema text,
+    geographicalname_grammaticalnumber_nil boolean,
+    geographicalname_grammaticalnumber_fk text,
+    geographicalname_grammaticalnumber_href text,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
+    formofroadnode_owns boolean,
     formofroadnode_nilreason text,
+    formofroadnode_remoteschema text,
     formofroadnode_nil boolean,
+    formofroadnode_fk text,
     formofroadnode_href text,
-    CONSTRAINT roadnode_pkey PRIMARY KEY (id)
+    CONSTRAINT roadnode_pkey PRIMARY KEY (gml_id)
 );
-SELECT ADDGEOMETRYCOLUMN('tnro', 'roadnode','geometry','4258','GEOMETRY', 2);
 ALTER TABLE tnro.roadnode OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadnode_innetwork(
+CREATE TABLE tnro.roadnode_innetwork (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadnode ON DELETE CASCADE,
+    num integer not null,
+    owns boolean,
     nilreason text,
+    remoteschema text,
     nil boolean,
+    fk text,
     href text
 );
 ALTER TABLE tnro.roadnode_innetwork OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadnode_spokeend(
+SELECT ADDGEOMETRYCOLUMN('tnro', 'roadnode','geometry_value','4258','GEOMETRY', 2);
+CREATE INDEX roadnode_geometry_idx ON tnro.roadnode USING GIST (geometry_value);
+
+CREATE TABLE tnro.roadnode_spokeend (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadnode ON DELETE CASCADE,
+    num integer not null,
+    owns boolean,
     nilreason text,
+    remoteschema text,
     nil boolean,
+    fk text,
     href text
 );
 ALTER TABLE tnro.roadnode_spokeend OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadnode_spokestart(
+CREATE TABLE tnro.roadnode_spokestart (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadnode ON DELETE CASCADE,
+    num integer not null,
+    owns boolean,
     nilreason text,
+    remoteschema text,
     nil boolean,
+    fk text,
     href text
 );
 ALTER TABLE tnro.roadnode_spokestart OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadnode_gn_spelling(
+CREATE TABLE tnro.roadnode_geographicalname_spelling (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadnode ON DELETE CASCADE,
-    spellingofname text,
-    script text,
-    script_nilreason text,
-    script_nil boolean,
-    transliterationscheme text,
-    transliterationscheme_nilreason text,
-    transliterationscheme_nil boolean
+    num integer not null,
+    geographicalname_spellingofname_text text,
+    geographicalname_spellingofname_script text,
+    geographicalname_spellingofname_script_nilreason text,
+    geographicalname_spellingofname_script_nil boolean,
+    geographicalname_spellingofname_transliterationscheme text,
+    geographicalname_spellingofname_transliterationscheme_nilreason text,
+    geographicalname_spellingofname_transliterationscheme_nil boolean
 );
-ALTER TABLE tnro.roadnode_gn_spelling OWNER TO elf_admin;
+ALTER TABLE tnro.roadnode_geographicalname_spelling OWNER TO elf_admin;
 
-CREATE INDEX roadnode_id_idx ON tnro.roadnode(id);
-CREATE INDEX roadnode_geometry_idx ON tnro.roadnode USING GIST (geometry);
-CREATE INDEX roadnode_innetwork_id_idx ON tnro.roadnode_innetwork(id);
-CREATE INDEX roadnode_innetwork_parentfk_idx ON tnro.roadnode_innetwork (parentfk);
-CREATE INDEX roadnode_spokeend_id_idx ON tnro.roadnode_spokeend(id);
-CREATE INDEX roadnode_spokeend_parentfk_idx ON tnro.roadnode_spokeend (parentfk);
-CREATE INDEX roadnode_spokestart_id_idx ON tnro.roadnode_spokestart(id);
-CREATE INDEX roadnode_spokestart_parentfk_idx ON tnro.roadnode_spokestart (parentfk);
-CREATE INDEX roadnode_gn_spelling_id_idx ON tnro.roadnode_gn_spelling(id);
-CREATE INDEX roadnode_gn_spelling_parentfk_idx ON tnro.roadnode_gn_spelling (parentfk);
-
--- == RoadServiceArea ================================  
-
-CREATE TABLE tnro.roadservicearea(
-    id text,
+CREATE TABLE tnro.roadservicearea (
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_localid text,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
     geometry_nilreason text,
-    gn_nilreason text,
-    gn_nil boolean,
-    gn_language text,
-    gn_language_nilreason text,
-    gn_language_nil boolean,
-    gn_nativeness_href text,
-    gn_nativeness_nilreason text,
-    gn_namestatus_href text,
-    gn_namestatus_nilreason text,
-    gn_sourceofname text,
-    gn_sourceofname_nilreason text,
-    gn_sourceofname_nil boolean,
+    geometry_remoteschema text,
+    geometry_owns boolean,
+    geographicalname_nilreason text,
+    geographicalname_nil boolean,
+    geographicalname_language text,
+    geographicalname_language_nilreason text,
+    geographicalname_language_nil boolean,
+    geographicalname_nativeness_owns boolean,
+    geographicalname_nativeness_nilreason text,
+    geographicalname_nativeness_remoteschema text,
+    geographicalname_nativeness_nil boolean,
+    geographicalname_nativeness_fk text,
+    geographicalname_nativeness_href text,
+    geographicalname_namestatus_owns boolean,
+    geographicalname_namestatus_nilreason text,
+    geographicalname_namestatus_remoteschema text,
+    geographicalname_namestatus_nil boolean,
+    geographicalname_namestatus_fk text,
+    geographicalname_namestatus_href text,
+    geographicalname_sourceofname text,
+    geographicalname_sourceofname_nilreason text,
+    geographicalname_sourceofname_nil boolean,
+    geographicalname_pronunciation_nilreason text,
+    geographicalname_pronunciation_nil boolean,
+    geographicalname_pronunciation_soundlink text,
+    geographicalname_pronunciation_soundlink_nilreason text,
+    geographicalname_pronunciation_soundlink_nil boolean,
+    geographicalname_pronunciation_ipa text,
+    geographicalname_pronunciation_ipa_nilreason text,
+    geographicalname_pronunciation_ipa_nil boolean,
+    geographicalname_grammaticalgender_owns boolean,
+    geographicalname_grammaticalgender_nilreason text,
+    geographicalname_grammaticalgender_remoteschema text,
+    geographicalname_grammaticalgender_nil boolean,
+    geographicalname_grammaticalgender_fk text,
+    geographicalname_grammaticalgender_href text,
+    geographicalname_grammaticalnumber_owns boolean,
+    geographicalname_grammaticalnumber_nilreason text,
+    geographicalname_grammaticalnumber_remoteschema text,
+    geographicalname_grammaticalnumber_nil boolean,
+    geographicalname_grammaticalnumber_fk text,
+    geographicalname_grammaticalnumber_href text,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
-    CONSTRAINT roadservicearea_pkey PRIMARY KEY (id)
+    CONSTRAINT roadservicearea_pkey PRIMARY KEY (gml_id)
 );
-SELECT ADDGEOMETRYCOLUMN('tnro', 'roadservicearea','geometry','4258','GEOMETRY', 2);
 ALTER TABLE tnro.roadservicearea OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadservicearea_innetwork(
+CREATE TABLE tnro.roadservicearea_innetwork (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadservicearea ON DELETE CASCADE,
+    num integer not null,
+    owns boolean,
     nilreason text,
+    remoteschema text,
     nil boolean,
+    fk text,
     href text
 );
 ALTER TABLE tnro.roadservicearea_innetwork OWNER TO elf_admin;
 
+SELECT ADDGEOMETRYCOLUMN('tnro', 'roadservicearea','geometry_value','4258','GEOMETRY', 2);
+CREATE INDEX roadservicearea_geometry_idx ON tnro.roadservicearea USING GIST (geometry_value);
 
-CREATE TABLE tnro.roadservicearea_gn_spelling(
+CREATE TABLE tnro.roadservicearea_geographicalname_spelling (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadservicearea ON DELETE CASCADE,
-    spellingofname text,
-    script text,
-    script_nilreason text,
-    script_nil boolean,
-    transliterationscheme text,
-    transliterationscheme_nilreason text,
-    transliterationscheme_nil boolean
+    num integer not null,
+    geographicalname_spellingofname_text text,
+    geographicalname_spellingofname_script text,
+    geographicalname_spellingofname_script_nilreason text,
+    geographicalname_spellingofname_script_nil boolean,
+    geographicalname_spellingofname_transliterationscheme text,
+    geographicalname_spellingofname_transliterationscheme_nilreason text,
+    geographicalname_spellingofname_transliterationscheme_nil boolean
 );
-ALTER TABLE tnro.roadservicearea_gn_spelling OWNER TO elf_admin;
+ALTER TABLE tnro.roadservicearea_geographicalname_spelling OWNER TO elf_admin;
 
-CREATE INDEX roadservicearea_id_idx ON tnro.roadservicearea(id);
-CREATE INDEX roadservicearea_innetwork_id_idx ON tnro.roadservicearea_innetwork(id);
-CREATE INDEX roadservicearea_innetwork_parentfk_idx ON tnro.roadservicearea_innetwork (parentfk);
-CREATE INDEX roadservicearea_geometry_idx ON tnro.roadservicearea USING GIST (geometry);
-CREATE INDEX roadservicearea_gn_spelling_id_idx ON tnro.roadservicearea_gn_spelling(id);
-CREATE INDEX roadservicearea_gn_spelling_parentfk_idx ON tnro.roadservicearea_gn_spelling (parentfk);
-
--- == RoadServiceType ================================  
-
-CREATE TABLE tnro.roadservicetype(
-    id text,
-    inspireid_localid text,
+CREATE TABLE tnro.roadservicetype (
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
+    type_owns boolean,
     type_nilreason text,
+    type_remoteschema text,
+    type_fk text,
     type_href text,
-    CONSTRAINT roadservicetype_pkey PRIMARY KEY (id)
+    CONSTRAINT roadservicetype_pkey PRIMARY KEY (gml_id)
 );
 ALTER TABLE tnro.roadservicetype OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadservicetype_networkref(
+CREATE TABLE tnro.roadservicetype_networkref (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadservicetype ON DELETE CASCADE,
+    num integer not null,
     nilreason text,
     nil boolean,
-    linkreference_nilreason text,
-    linkreference_href text,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_href text,
-    simplelinearreference_nilreason text,
-    simplelinearreference_href text,
+    simplelinearreference_element_owns boolean,
+    simplelinearreference_element_nilreason text,
+    simplelinearreference_element_remoteschema text,
+    simplelinearreference_element_fk text,
+    simplelinearreference_element_href text,
+    simplelinearreference_applicabledirection_owns boolean,
     simplelinearreference_applicabledirection_nilreason text,
+    simplelinearreference_applicabledirection_remoteschema text,
+    simplelinearreference_applicabledirection_nil boolean,
+    simplelinearreference_applicabledirection_fk text,
     simplelinearreference_applicabledirection_href text,
     simplelinearreference_fromposition numeric,
     simplelinearreference_fromposition_uom text,
@@ -758,67 +1152,100 @@ CREATE TABLE tnro.roadservicetype_networkref(
     simplelinearreference_offset_nilreason text,
     simplelinearreference_offset_uom text,
     simplelinearreference_offset_nil boolean,
-    networkreference_nilreason text,
-    networkreference_href text,
-    simplepointreference_nilreason text,
-    simplepointreference_href text,
+    simplepointreference_element_owns boolean,
+    simplepointreference_element_nilreason text,
+    simplepointreference_element_remoteschema text,
+    simplepointreference_element_fk text,
+    simplepointreference_element_href text,
+    simplepointreference_applicabledirection_owns boolean,
     simplepointreference_applicabledirection_nilreason text,
+    simplepointreference_applicabledirection_remoteschema text,
+    simplepointreference_applicabledirection_nil boolean,
+    simplepointreference_applicabledirection_fk text,
     simplepointreference_applicabledirection_href text,
     simplepointreference_atposition numeric,
     simplepointreference_atposition_uom text,
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean
+    simplepointreference_offset_nil boolean,
+    linkreference_element_owns boolean,
+    linkreference_element_nilreason text,
+    linkreference_element_remoteschema text,
+    linkreference_element_fk text,
+    linkreference_element_href text,
+    linkreference_applicabledirection_owns boolean,
+    linkreference_applicabledirection_nilreason text,
+    linkreference_applicabledirection_remoteschema text,
+    linkreference_applicabledirection_nil boolean,
+    linkreference_applicabledirection_fk text,
+    linkreference_applicabledirection_href text,
+    networkreference_element_owns boolean,
+    networkreference_element_nilreason text,
+    networkreference_element_remoteschema text,
+    networkreference_element_fk text,
+    networkreference_element_href text
 );
 ALTER TABLE tnro.roadservicetype_networkref OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadservicetype_availablefacility(
+CREATE TABLE tnro.roadservicetype_availablefacility (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadservicetype ON DELETE CASCADE,
+    num integer not null,
+    owns boolean,
     nilreason text,
+    remoteschema text,
+    fk text,
     href text
 );
 ALTER TABLE tnro.roadservicetype_availablefacility OWNER TO elf_admin;
 
-CREATE INDEX roadservicetype_id_idx ON tnro.roadservicetype(id);
-CREATE INDEX roadservicetype_networkref_id_idx ON tnro.roadservicetype_networkref(id);
-CREATE INDEX roadservicetype_networkref_parentfk_idx ON tnro.roadservicetype_networkref (parentfk);
-CREATE INDEX roadservicetype_availablefacility_id_idx ON tnro.roadservicetype_availablefacility(id);
-CREATE INDEX roadservicetype_availablefacility_parentfk_idx ON tnro.roadservicetype_availablefacility (parentfk);
-
--- == RoadSurfaceCategory ================================  
-
-CREATE TABLE tnro.roadsurfacecategory(
-    id text,
-    inspireid_localid text,
+CREATE TABLE tnro.roadsurfacecategory (
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
+    surfacecategory_owns boolean,
     surfacecategory_nilreason text,
+    surfacecategory_remoteschema text,
+    surfacecategory_fk text,
     surfacecategory_href text,
-    CONSTRAINT roadsurfacecategory_pkey PRIMARY KEY (id)
+    CONSTRAINT roadsurfacecategory_pkey PRIMARY KEY (gml_id)
 );
 ALTER TABLE tnro.roadsurfacecategory OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadsurfacecategory_networkref(
+CREATE TABLE tnro.roadsurfacecategory_networkref (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadsurfacecategory ON DELETE CASCADE,
+    num integer not null,
     nilreason text,
     nil boolean,
-    linkreference_nilreason text,
-    linkreference_href text,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_href text,
-    simplelinearreference_nilreason text,
-    simplelinearreference_href text,
+    simplelinearreference_element_owns boolean,
+    simplelinearreference_element_nilreason text,
+    simplelinearreference_element_remoteschema text,
+    simplelinearreference_element_fk text,
+    simplelinearreference_element_href text,
+    simplelinearreference_applicabledirection_owns boolean,
     simplelinearreference_applicabledirection_nilreason text,
+    simplelinearreference_applicabledirection_remoteschema text,
+    simplelinearreference_applicabledirection_nil boolean,
+    simplelinearreference_applicabledirection_fk text,
     simplelinearreference_applicabledirection_href text,
     simplelinearreference_fromposition numeric,
     simplelinearreference_fromposition_uom text,
@@ -828,60 +1255,91 @@ CREATE TABLE tnro.roadsurfacecategory_networkref(
     simplelinearreference_offset_nilreason text,
     simplelinearreference_offset_uom text,
     simplelinearreference_offset_nil boolean,
-    networkreference_nilreason text,
-    networkreference_href text,
-    simplepointreference_nilreason text,
-    simplepointreference_href text,
+    simplepointreference_element_owns boolean,
+    simplepointreference_element_nilreason text,
+    simplepointreference_element_remoteschema text,
+    simplepointreference_element_fk text,
+    simplepointreference_element_href text,
+    simplepointreference_applicabledirection_owns boolean,
     simplepointreference_applicabledirection_nilreason text,
+    simplepointreference_applicabledirection_remoteschema text,
+    simplepointreference_applicabledirection_nil boolean,
+    simplepointreference_applicabledirection_fk text,
     simplepointreference_applicabledirection_href text,
     simplepointreference_atposition numeric,
     simplepointreference_atposition_uom text,
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean
+    simplepointreference_offset_nil boolean,
+    linkreference_element_owns boolean,
+    linkreference_element_nilreason text,
+    linkreference_element_remoteschema text,
+    linkreference_element_fk text,
+    linkreference_element_href text,
+    linkreference_applicabledirection_owns boolean,
+    linkreference_applicabledirection_nilreason text,
+    linkreference_applicabledirection_remoteschema text,
+    linkreference_applicabledirection_nil boolean,
+    linkreference_applicabledirection_fk text,
+    linkreference_applicabledirection_href text,
+    networkreference_element_owns boolean,
+    networkreference_element_nilreason text,
+    networkreference_element_remoteschema text,
+    networkreference_element_fk text,
+    networkreference_element_href text
 );
 ALTER TABLE tnro.roadsurfacecategory_networkref OWNER TO elf_admin;
 
-CREATE INDEX roadsurfacecategory_id_idx ON tnro.roadsurfacecategory(id);
-CREATE INDEX roadsurfacecategory_networkref_id_idx ON tnro.roadsurfacecategory_networkref(id);
-CREATE INDEX roadsurfacecategory_networkref_parentfk_idx ON tnro.roadsurfacecategory_networkref (parentfk);
-
--- == RoadWidth ================================  
-
-CREATE TABLE tnro.roadwidth(
-    id text,
-    inspireid_localid text,
+CREATE TABLE tnro.roadwidth (
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
+    measuredroadpart_owns boolean,
     measuredroadpart_nilreason text,
+    measuredroadpart_remoteschema text,
     measuredroadpart_nil boolean,
+    measuredroadpart_fk text,
     measuredroadpart_href text,
     width numeric,
     width_uom text,
-    CONSTRAINT roadwidth_pkey PRIMARY KEY (id)
+    CONSTRAINT roadwidth_pkey PRIMARY KEY (gml_id)
 );
 ALTER TABLE tnro.roadwidth OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadwidth_networkref(
+CREATE TABLE tnro.roadwidth_networkref (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadwidth ON DELETE CASCADE,
+    num integer not null,
     nilreason text,
     nil boolean,
-    linkreference_nilreason text,
-    linkreference_href text,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_href text,
-    simplelinearreference_nilreason text,
-    simplelinearreference_href text,
+    simplelinearreference_element_owns boolean,
+    simplelinearreference_element_nilreason text,
+    simplelinearreference_element_remoteschema text,
+    simplelinearreference_element_fk text,
+    simplelinearreference_element_href text,
+    simplelinearreference_applicabledirection_owns boolean,
     simplelinearreference_applicabledirection_nilreason text,
+    simplelinearreference_applicabledirection_remoteschema text,
+    simplelinearreference_applicabledirection_nil boolean,
+    simplelinearreference_applicabledirection_fk text,
     simplelinearreference_applicabledirection_href text,
     simplelinearreference_fromposition numeric,
     simplelinearreference_fromposition_uom text,
@@ -891,79 +1349,122 @@ CREATE TABLE tnro.roadwidth_networkref(
     simplelinearreference_offset_nilreason text,
     simplelinearreference_offset_uom text,
     simplelinearreference_offset_nil boolean,
-    networkreference_nilreason text,
-    networkreference_href text,
-    simplepointreference_nilreason text,
-    simplepointreference_href text,
+    simplepointreference_element_owns boolean,
+    simplepointreference_element_nilreason text,
+    simplepointreference_element_remoteschema text,
+    simplepointreference_element_fk text,
+    simplepointreference_element_href text,
+    simplepointreference_applicabledirection_owns boolean,
     simplepointreference_applicabledirection_nilreason text,
+    simplepointreference_applicabledirection_remoteschema text,
+    simplepointreference_applicabledirection_nil boolean,
+    simplepointreference_applicabledirection_fk text,
     simplepointreference_applicabledirection_href text,
     simplepointreference_atposition numeric,
     simplepointreference_atposition_uom text,
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean
+    simplepointreference_offset_nil boolean,
+    linkreference_element_owns boolean,
+    linkreference_element_nilreason text,
+    linkreference_element_remoteschema text,
+    linkreference_element_fk text,
+    linkreference_element_href text,
+    linkreference_applicabledirection_owns boolean,
+    linkreference_applicabledirection_nilreason text,
+    linkreference_applicabledirection_remoteschema text,
+    linkreference_applicabledirection_nil boolean,
+    linkreference_applicabledirection_fk text,
+    linkreference_applicabledirection_href text,
+    networkreference_element_owns boolean,
+    networkreference_element_nilreason text,
+    networkreference_element_remoteschema text,
+    networkreference_element_fk text,
+    networkreference_element_href text
 );
 ALTER TABLE tnro.roadwidth_networkref OWNER TO elf_admin;
 
-CREATE INDEX roadwidth_id_idx ON tnro.roadwidth(id);
-CREATE INDEX roadwidth_networkref_id_idx ON tnro.roadwidth_networkref(id);
-CREATE INDEX roadwidth_networkref_parentfk_idx ON tnro.roadwidth_networkref (parentfk);
-
--- == SpeedLimit ================================  
-
-CREATE TABLE tnro.speedlimit(
-    id text,
-    inspireid_localid text,
+CREATE TABLE tnro.speedlimit (
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
+    areacondition_owns boolean,
     areacondition_nilreason text,
+    areacondition_remoteschema text,
     areacondition_nil boolean,
+    areacondition_fk text,
     areacondition_href text,
+    direction_owns boolean,
     direction_nilreason text,
+    direction_remoteschema text,
     direction_nil boolean,
+    direction_fk text,
     direction_href text,
     laneextension integer,
     laneextension_nilreason text,
     laneextension_nil boolean,
     speedlimitminmaxtype text,
+    speedlimitsource_owns boolean,
     speedlimitsource_nilreason text,
+    speedlimitsource_remoteschema text,
     speedlimitsource_nil boolean,
+    speedlimitsource_fk text,
     speedlimitsource_href text,
     speedlimitvalue numeric,
     speedlimitvalue_uom text,
     startlane integer,
     startlane_nilreason text,
     startlane_nil boolean,
+    vehicletype_owns boolean,
     vehicletype_nilreason text,
+    vehicletype_remoteschema text,
     vehicletype_nil boolean,
+    vehicletype_fk text,
     vehicletype_href text,
+    weathercondition_owns boolean,
     weathercondition_nilreason text,
+    weathercondition_remoteschema text,
     weathercondition_nil boolean,
+    weathercondition_fk text,
     weathercondition_href text,
-    CONSTRAINT speedlimit_pkey PRIMARY KEY (id)
+    CONSTRAINT speedlimit_pkey PRIMARY KEY (gml_id)
 );
 ALTER TABLE tnro.speedlimit OWNER TO elf_admin;
 
-CREATE TABLE tnro.speedlimit_networkref(
+CREATE TABLE tnro.speedlimit_networkref (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.speedlimit ON DELETE CASCADE,
+    num integer not null,
     nilreason text,
     nil boolean,
-    linkreference_nilreason text,
-    linkreference_href text,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_href text,
-    simplelinearreference_nilreason text,
-    simplelinearreference_href text,
+    simplelinearreference_element_owns boolean,
+    simplelinearreference_element_nilreason text,
+    simplelinearreference_element_remoteschema text,
+    simplelinearreference_element_fk text,
+    simplelinearreference_element_href text,
+    simplelinearreference_applicabledirection_owns boolean,
     simplelinearreference_applicabledirection_nilreason text,
+    simplelinearreference_applicabledirection_remoteschema text,
+    simplelinearreference_applicabledirection_nil boolean,
+    simplelinearreference_applicabledirection_fk text,
     simplelinearreference_applicabledirection_href text,
     simplelinearreference_fromposition numeric,
     simplelinearreference_fromposition_uom text,
@@ -973,175 +1474,312 @@ CREATE TABLE tnro.speedlimit_networkref(
     simplelinearreference_offset_nilreason text,
     simplelinearreference_offset_uom text,
     simplelinearreference_offset_nil boolean,
-    networkreference_nilreason text,
-    networkreference_href text,
-    simplepointreference_nilreason text,
-    simplepointreference_href text,
+    simplepointreference_element_owns boolean,
+    simplepointreference_element_nilreason text,
+    simplepointreference_element_remoteschema text,
+    simplepointreference_element_fk text,
+    simplepointreference_element_href text,
+    simplepointreference_applicabledirection_owns boolean,
     simplepointreference_applicabledirection_nilreason text,
+    simplepointreference_applicabledirection_remoteschema text,
+    simplepointreference_applicabledirection_nil boolean,
+    simplepointreference_applicabledirection_fk text,
     simplepointreference_applicabledirection_href text,
     simplepointreference_atposition numeric,
     simplepointreference_atposition_uom text,
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean
+    simplepointreference_offset_nil boolean,
+    linkreference_element_owns boolean,
+    linkreference_element_nilreason text,
+    linkreference_element_remoteschema text,
+    linkreference_element_fk text,
+    linkreference_element_href text,
+    linkreference_applicabledirection_owns boolean,
+    linkreference_applicabledirection_nilreason text,
+    linkreference_applicabledirection_remoteschema text,
+    linkreference_applicabledirection_nil boolean,
+    linkreference_applicabledirection_fk text,
+    linkreference_applicabledirection_href text,
+    networkreference_element_owns boolean,
+    networkreference_element_nilreason text,
+    networkreference_element_remoteschema text,
+    networkreference_element_fk text,
+    networkreference_element_href text
 );
 ALTER TABLE tnro.speedlimit_networkref OWNER TO elf_admin;
 
-CREATE INDEX speedlimit_id_idx ON tnro.speedlimit(id);
-CREATE INDEX speedlimit_networkref_id_idx ON tnro.speedlimit_networkref(id);
-CREATE INDEX speedlimit_networkref_parentfk_idx ON tnro.speedlimit_networkref (parentfk);
-
--- == VehicleTrafficArea ================================  
-
-CREATE TABLE tnro.vehicletrafficarea(
-    id text,
+CREATE TABLE tnro.vehicletrafficarea (
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_localid text,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
     geometry_nilreason text,
-    gn_nilreason text,
-    gn_nil boolean,
-    gn_language text,
-    gn_language_nilreason text,
-    gn_language_nil boolean,
-    gn_nativeness_href text,
-    gn_nativeness_nilreason text,
-    gn_namestatus_href text,
-    gn_namestatus_nilreason text,
-    gn_sourceofname text,
-    gn_sourceofname_nilreason text,
-    gn_sourceofname_nil boolean,
+    geometry_remoteschema text,
+    geometry_owns boolean,
+    geographicalname_nilreason text,
+    geographicalname_nil boolean,
+    geographicalname_language text,
+    geographicalname_language_nilreason text,
+    geographicalname_language_nil boolean,
+    geographicalname_nativeness_owns boolean,
+    geographicalname_nativeness_nilreason text,
+    geographicalname_nativeness_remoteschema text,
+    geographicalname_nativeness_nil boolean,
+    geographicalname_nativeness_fk text,
+    geographicalname_nativeness_href text,
+    geographicalname_namestatus_owns boolean,
+    geographicalname_namestatus_nilreason text,
+    geographicalname_namestatus_remoteschema text,
+    geographicalname_namestatus_nil boolean,
+    geographicalname_namestatus_fk text,
+    geographicalname_namestatus_href text,
+    geographicalname_sourceofname text,
+    geographicalname_sourceofname_nilreason text,
+    geographicalname_sourceofname_nil boolean,
+    geographicalname_pronunciation_nilreason text,
+    geographicalname_pronunciation_nil boolean,
+    geographicalname_pronunciation_soundlink text,
+    geographicalname_pronunciation_soundlink_nilreason text,
+    geographicalname_pronunciation_soundlink_nil boolean,
+    geographicalname_pronunciation_ipa text,
+    geographicalname_pronunciation_ipa_nilreason text,
+    geographicalname_pronunciation_ipa_nil boolean,
+    geographicalname_grammaticalgender_owns boolean,
+    geographicalname_grammaticalgender_nilreason text,
+    geographicalname_grammaticalgender_remoteschema text,
+    geographicalname_grammaticalgender_nil boolean,
+    geographicalname_grammaticalgender_fk text,
+    geographicalname_grammaticalgender_href text,
+    geographicalname_grammaticalnumber_owns boolean,
+    geographicalname_grammaticalnumber_nilreason text,
+    geographicalname_grammaticalnumber_remoteschema text,
+    geographicalname_grammaticalnumber_nil boolean,
+    geographicalname_grammaticalnumber_fk text,
+    geographicalname_grammaticalnumber_href text,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
-    CONSTRAINT vehicletrafficarea_pkey PRIMARY KEY (id)
+    CONSTRAINT vehicletrafficarea_pkey PRIMARY KEY (gml_id)
 );
-SELECT ADDGEOMETRYCOLUMN('tnro', 'vehicletrafficarea','geometry','4258','GEOMETRY', 2);
 ALTER TABLE tnro.vehicletrafficarea OWNER TO elf_admin;
 
-CREATE TABLE tnro.vehicletrafficarea_innetwork(
+CREATE TABLE tnro.vehicletrafficarea_innetwork (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.vehicletrafficarea ON DELETE CASCADE,
+    num integer not null,
+    owns boolean,
     nilreason text,
+    remoteschema text,
     nil boolean,
+    fk text,
     href text
 );
 ALTER TABLE tnro.vehicletrafficarea_innetwork OWNER TO elf_admin;
 
-CREATE TABLE tnro.vehicletrafficarea_gn_spelling(
+SELECT ADDGEOMETRYCOLUMN('tnro', 'vehicletrafficarea','geometry_value','4258','GEOMETRY', 2);
+CREATE INDEX vehicletrafficarea_geometry_idx ON tnro.vehicletrafficarea USING GIST (geometry_value);
+
+CREATE TABLE tnro.vehicletrafficarea_geographicalname_spelling (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.vehicletrafficarea ON DELETE CASCADE,
-    spellingofname text,
-    script text,
-    script_nilreason text,
-    script_nil boolean,
-    transliterationscheme text,
-    transliterationscheme_nilreason text,
-    transliterationscheme_nil boolean
+    num integer not null,
+    geographicalname_spellingofname_text text,
+    geographicalname_spellingofname_script text,
+    geographicalname_spellingofname_script_nilreason text,
+    geographicalname_spellingofname_script_nil boolean,
+    geographicalname_spellingofname_transliterationscheme text,
+    geographicalname_spellingofname_transliterationscheme_nilreason text,
+    geographicalname_spellingofname_transliterationscheme_nil boolean
 );
-ALTER TABLE tnro.vehicletrafficarea_gn_spelling OWNER TO elf_admin;
+ALTER TABLE tnro.vehicletrafficarea_geographicalname_spelling OWNER TO elf_admin;
 
-CREATE INDEX vehicletrafficarea_id_idx ON tnro.vehicletrafficarea(id);
-CREATE INDEX vehicletrafficarea_geometry_idx ON tnro.vehicletrafficarea USING GIST (geometry);
-CREATE INDEX vehicletrafficarea_innetwork_id_idx ON tnro.vehicletrafficarea_innetwork(id);
-CREATE INDEX vehicletrafficarea_innetwork_parentfk_idx ON tnro.vehicletrafficarea_innetwork (parentfk);
-CREATE INDEX vehicletrafficarea_gn_spelling_id_idx ON tnro.vehicletrafficarea_gn_spelling(id);
-CREATE INDEX vehicletrafficarea_gn_spelling_parentfk_idx ON tnro.vehicletrafficarea_gn_spelling (parentfk);
-
--- == InterchangePoint ================================  
-
-CREATE TABLE tnro.interchangepoint(
-    id text,
+CREATE TABLE tnro.interchangepoint (
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_localid text,
-    gn_nilreason text,
-    gn_nil boolean,
-    gn_language text,
-    gn_language_nilreason text,
-    gn_language_nil boolean,
-    gn_nativeness_href text,
-    gn_nativeness_nilreason text,
-    gn_namestatus_href text,
-    gn_namestatus_nilreason text,
-    gn_sourceofname text,
-    gn_sourceofname_nilreason text,
-    gn_sourceofname_nil boolean,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
+    geographicalname_nilreason text,
+    geographicalname_nil boolean,
+    geographicalname_language text,
+    geographicalname_language_nilreason text,
+    geographicalname_language_nil boolean,
+    geographicalname_nativeness_owns boolean,
+    geographicalname_nativeness_nilreason text,
+    geographicalname_nativeness_remoteschema text,
+    geographicalname_nativeness_nil boolean,
+    geographicalname_nativeness_fk text,
+    geographicalname_nativeness_href text,
+    geographicalname_namestatus_owns boolean,
+    geographicalname_namestatus_nilreason text,
+    geographicalname_namestatus_remoteschema text,
+    geographicalname_namestatus_nil boolean,
+    geographicalname_namestatus_fk text,
+    geographicalname_namestatus_href text,
+    geographicalname_sourceofname text,
+    geographicalname_sourceofname_nilreason text,
+    geographicalname_sourceofname_nil boolean,
+    geographicalname_pronunciation_nilreason text,
+    geographicalname_pronunciation_nil boolean,
+    geographicalname_pronunciation_soundlink text,
+    geographicalname_pronunciation_soundlink_nilreason text,
+    geographicalname_pronunciation_soundlink_nil boolean,
+    geographicalname_pronunciation_ipa text,
+    geographicalname_pronunciation_ipa_nilreason text,
+    geographicalname_pronunciation_ipa_nil boolean,
+    geographicalname_grammaticalgender_owns boolean,
+    geographicalname_grammaticalgender_nilreason text,
+    geographicalname_grammaticalgender_remoteschema text,
+    geographicalname_grammaticalgender_nil boolean,
+    geographicalname_grammaticalgender_fk text,
+    geographicalname_grammaticalgender_href text,
+    geographicalname_grammaticalnumber_owns boolean,
+    geographicalname_grammaticalnumber_nilreason text,
+    geographicalname_grammaticalnumber_remoteschema text,
+    geographicalname_grammaticalnumber_nil boolean,
+    geographicalname_grammaticalnumber_fk text,
+    geographicalname_grammaticalnumber_href text,
     geometry_nilreason text,
+    geometry_remoteschema text,
+    geometry_owns boolean,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
+    typeofinterchange_owns boolean,
     typeofinterchange_nilreason text,
+    typeofinterchange_remoteschema text,
+    typeofinterchange_fk text,
     typeofinterchange_href text,
-    CONSTRAINT interchangepoint_pkey PRIMARY KEY (id)
+    CONSTRAINT interchangepoint_pkey PRIMARY KEY (gml_id)
 );
-SELECT ADDGEOMETRYCOLUMN('tnro', 'interchangepoint','geometry','4258','GEOMETRY', 2);
 ALTER TABLE tnro.interchangepoint OWNER TO elf_admin;
 
-CREATE TABLE tnro.interchangepoint_innetwork(
+CREATE TABLE tnro.interchangepoint_innetwork (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.interchangepoint ON DELETE CASCADE,
+    num integer not null,
+    owns boolean,
     nilreason text,
+    remoteschema text,
     nil boolean,
+    fk text,
     href text
 );
 ALTER TABLE tnro.interchangepoint_innetwork OWNER TO elf_admin;
 
-CREATE TABLE tnro.interchangepoint_gn_spelling(
+CREATE TABLE tnro.interchangepoint_geographicalname_spelling (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.interchangepoint ON DELETE CASCADE,
-    spellingofname text,
-    script text,
-    script_nilreason text,
-    script_nil boolean,
-    transliterationscheme text,
-    transliterationscheme_nilreason text,
-    transliterationscheme_nil boolean
+    num integer not null,
+    geographicalname_spellingofname_text text,
+    geographicalname_spellingofname_script text,
+    geographicalname_spellingofname_script_nilreason text,
+    geographicalname_spellingofname_script_nil boolean,
+    geographicalname_spellingofname_transliterationscheme text,
+    geographicalname_spellingofname_transliterationscheme_nilreason text,
+    geographicalname_spellingofname_transliterationscheme_nil boolean
 );
-ALTER TABLE tnro.interchangepoint_gn_spelling OWNER TO elf_admin;
+ALTER TABLE tnro.interchangepoint_geographicalname_spelling OWNER TO elf_admin;
 
-CREATE INDEX interchangepoint_id_idx ON tnro.interchangepoint(id);
-CREATE INDEX interchangepoint_geometry_idx ON tnro.interchangepoint USING GIST (geometry);
-CREATE INDEX interchangepoint_innetwork_id_idx ON tnro.interchangepoint_innetwork(id);
-CREATE INDEX interchangepoint_innetwork_parentfk_idx ON tnro.interchangepoint_innetwork (parentfk);
-CREATE INDEX interchangepoint_gn_spelling_id_idx ON tnro.interchangepoint_gn_spelling(id);
-CREATE INDEX interchangepoint_gn_spelling_parentfk_idx ON tnro.interchangepoint_gn_spelling (parentfk);
+SELECT ADDGEOMETRYCOLUMN('tnro', 'interchangepoint','geometry_value','4258','GEOMETRY', 2);
+CREATE INDEX interchangepoint_geometry_idx ON tnro.interchangepoint USING GIST (geometry_value);
 
--- == RoadLink ================================  
-
-CREATE TABLE tnro.roadlink(
-    id text,
+CREATE TABLE tnro.roadlink (
+    gml_id text,
+    identifier text,
+    identifier_codespace text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_localid text,
+    inspireid_identifier_localid text,
+    inspireid_identifier_namespace text,
+    inspireid_identifier_versionid text,
+    inspireid_identifier_versionid_nilreason text,
+    inspireid_identifier_versionid_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
     centrelinegeometry_nilreason text,
+    centrelinegeometry_remoteschema text,
+    centrelinegeometry_owns boolean,
     fictitious boolean,
+    endnode_owns boolean,
     endnode_nilreason text,
+    endnode_remoteschema text,
+    endnode_fk text,
     endnode_href text,
+    startnode_owns boolean,
     startnode_nilreason text,
+    startnode_remoteschema text,
+    startnode_fk text,
     startnode_href text,
-    gn_nilreason text,
-    gn_nil boolean,
-    gn_language text,
-    gn_language_nilreason text,
-    gn_language_nil boolean,
-    gn_nativeness_href text,
-    gn_nativeness_nilreason text,
-    gn_namestatus_href text,
-    gn_namestatus_nilreason text,
-    gn_sourceofname text,
-    gn_sourceofname_nilreason text,
-    gn_sourceofname_nil boolean,
+    geographicalname_nilreason text,
+    geographicalname_nil boolean,
+    geographicalname_language text,
+    geographicalname_language_nilreason text,
+    geographicalname_language_nil boolean,
+    geographicalname_nativeness_owns boolean,
+    geographicalname_nativeness_nilreason text,
+    geographicalname_nativeness_remoteschema text,
+    geographicalname_nativeness_nil boolean,
+    geographicalname_nativeness_fk text,
+    geographicalname_nativeness_href text,
+    geographicalname_namestatus_owns boolean,
+    geographicalname_namestatus_nilreason text,
+    geographicalname_namestatus_remoteschema text,
+    geographicalname_namestatus_nil boolean,
+    geographicalname_namestatus_fk text,
+    geographicalname_namestatus_href text,
+    geographicalname_sourceofname text,
+    geographicalname_sourceofname_nilreason text,
+    geographicalname_sourceofname_nil boolean,
+    geographicalname_pronunciation_nilreason text,
+    geographicalname_pronunciation_nil boolean,
+    geographicalname_pronunciation_soundlink text,
+    geographicalname_pronunciation_soundlink_nilreason text,
+    geographicalname_pronunciation_soundlink_nil boolean,
+    geographicalname_pronunciation_ipa text,
+    geographicalname_pronunciation_ipa_nilreason text,
+    geographicalname_pronunciation_ipa_nil boolean,
+    geographicalname_grammaticalgender_owns boolean,
+    geographicalname_grammaticalgender_nilreason text,
+    geographicalname_grammaticalgender_remoteschema text,
+    geographicalname_grammaticalgender_nil boolean,
+    geographicalname_grammaticalgender_fk text,
+    geographicalname_grammaticalgender_href text,
+    geographicalname_grammaticalnumber_owns boolean,
+    geographicalname_grammaticalnumber_nilreason text,
+    geographicalname_grammaticalnumber_remoteschema text,
+    geographicalname_grammaticalnumber_nil boolean,
+    geographicalname_grammaticalnumber_fk text,
+    geographicalname_grammaticalnumber_href text,
     validfrom timestamp,
     validfrom_nilreason text,
     validfrom_nil boolean,
@@ -1149,36 +1787,36 @@ CREATE TABLE tnro.roadlink(
     validto_nilreason text,
     validto_nil boolean,
     transeuropeantransportnetwork boolean,
-    CONSTRAINT roadlink_pkey PRIMARY KEY (id)
+    CONSTRAINT roadlink_pkey PRIMARY KEY (gml_id)
 );
-SELECT ADDGEOMETRYCOLUMN('tnro', 'roadlink','centrelinegeometry','4258','GEOMETRY', 2);
 ALTER TABLE tnro.roadlink OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadlink_innetwork(
+CREATE TABLE tnro.roadlink_innetwork (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadlink ON DELETE CASCADE,
+    num integer not null,
+    owns boolean,
     nilreason text,
+    remoteschema text,
     nil boolean,
+    fk text,
     href text
 );
 ALTER TABLE tnro.roadlink_innetwork OWNER TO elf_admin;
 
-CREATE TABLE tnro.roadlink_gn_spelling(
+SELECT ADDGEOMETRYCOLUMN('tnro', 'roadlink','centrelinegeometry_value','4258','GEOMETRY', 2);
+CREATE INDEX roadlink_geometry_idx ON tnro.roadlink USING GIST (centrelinegeometry_value);
+
+CREATE TABLE tnro.roadlink_geographicalname_spelling (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES tnro.roadlink ON DELETE CASCADE,
-    spellingofname text,
-    script text,
-    script_nilreason text,
-    script_nil boolean,
-    transliterationscheme text,
-    transliterationscheme_nilreason text,
-    transliterationscheme_nil boolean
+    num integer not null,
+    geographicalname_spellingofname_text text,
+    geographicalname_spellingofname_script text,
+    geographicalname_spellingofname_script_nilreason text,
+    geographicalname_spellingofname_script_nil boolean,
+    geographicalname_spellingofname_transliterationscheme text,
+    geographicalname_spellingofname_transliterationscheme_nilreason text,
+    geographicalname_spellingofname_transliterationscheme_nil boolean
 );
-ALTER TABLE tnro.roadlink_gn_spelling OWNER TO elf_admin;
-
-CREATE INDEX roadlink_id_idx ON tnro.roadlink(id);
-CREATE INDEX roadlink_centrelinegeometry_idx ON tnro.roadlink USING GIST (centrelinegeometry);
-CREATE INDEX roadlink_innetwork_id_idx ON tnro.roadlink_innetwork(id);
-CREATE INDEX roadlink_innetwork_parentfk_idx ON tnro.roadlink_innetwork (parentfk);
-CREATE INDEX roadlink_gn_spelling_id_idx ON tnro.roadlink_gn_spelling(id);
-CREATE INDEX roadlink_gn_spelling_parentfk_idx ON tnro.roadlink_gn_spelling (parentfk);
+ALTER TABLE tnro.roadlink_geographicalname_spelling OWNER TO elf_admin;
