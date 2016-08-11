@@ -34,13 +34,14 @@
               </simpleContent>
             </complexType>
           </element>
-          <element maxOccurs="unbounded" minOccurs="0" name="adminUnitArea">
+          <!--element maxOccurs="unbounded" minOccurs="0" name="adminUnitArea"-->
+          <element maxOccurs="unbounded" minOccurs="0" name="adminUnitArea" type="elf-au:AdministrativeUnitAreaPropertyType">
             <annotation>
               <appinfo>
                 <reversePropertyName xmlns="http://www.opengis.net/gml/3.2">elf-au:adminUnit</reversePropertyName>
               </appinfo>
             </annotation>
-            <complexType>
+            <!--complexType>
               <complexContent>
                 <extension base="gml:AbstractFeatureMemberType">
                   <sequence minOccurs="0">
@@ -49,7 +50,7 @@
                   <attributeGroup ref="gml:AssociationAttributeGroup"/>
                 </extension>
               </complexContent>
-            </complexType>
+            </complexType-->
           </element>
           <element maxOccurs="unbounded" minOccurs="0" name="namedPlacePoint" type="elf-gn:NamedPlacePropertyType"/>
         </sequence>

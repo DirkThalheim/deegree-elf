@@ -19,7 +19,7 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
                  xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.1.0/sql.xsd">
                  
-  <JDBCConnId>${jdbc_connection}</JDBCConnId>
+  <JDBCConnId>@jdbc_connection@</JDBCConnId>
   <StorageCRS srid="4258" dim="2D">EPSG:4258</StorageCRS>
   
   <GMLSchema>../../appschemas/elf/AirTransportNetwork.xsd</GMLSchema>
@@ -122,14 +122,14 @@
           <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_nil"/>
           <Complex path="gn:PronunciationOfName">
             <Complex path="gn:pronunciationSoundLink">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_soundlink"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_soundlink"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_soundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_soundlink_nil"/>
             </Complex>
             <Complex path="gn:pronunciationIPA">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_ipa"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_ipa"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_ipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_ipa_nil"/>
             </Complex>
           </Complex>
         </Complex>
@@ -746,14 +746,14 @@
           <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_nil"/>
           <Complex path="gn:PronunciationOfName">
             <Complex path="gn:pronunciationSoundLink">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_soundlink"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_soundlink"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_soundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_soundlink_nil"/>
             </Complex>
             <Complex path="gn:pronunciationIPA">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_ipa"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_ipa"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_ipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_ipa_nil"/>
             </Complex>
           </Complex>
         </Complex>
@@ -913,14 +913,14 @@
           <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_nil"/>
           <Complex path="gn:PronunciationOfName">
             <Complex path="gn:pronunciationSoundLink">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_soundlink"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_soundlink"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_soundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_soundlink_nil"/>
             </Complex>
             <Complex path="gn:pronunciationIPA">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_ipa"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_ipa"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_ipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_ipa_nil"/>
             </Complex>
           </Complex>
         </Complex>
@@ -973,7 +973,7 @@
       <Primitive path="@xsi:nil" mapping="validto_nil"/>
     </Complex>
   </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-ro:RoadLink" table="tnro.roadlink">
+  <!--FeatureTypeMapping name="tn-ro:RoadLink" table="tnro.roadlink">
     <FIDMapping prefix="TN-RO_ROADLINK_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -1078,14 +1078,14 @@
           <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_nil"/>
           <Complex path="gn:PronunciationOfName">
             <Complex path="gn:pronunciationSoundLink">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_soundlink"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_soundlink"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_soundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_soundlink_nil"/>
             </Complex>
             <Complex path="gn:pronunciationIPA">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_ipa"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_ipa"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_ipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_ipa_nil"/>
             </Complex>
           </Complex>
         </Complex>
@@ -1137,7 +1137,7 @@
       <Primitive path="@nilReason" mapping="validto_nilreason"/>
       <Primitive path="@xsi:nil" mapping="validto_nil"/>
     </Complex>
-  </FeatureTypeMapping>
+  </FeatureTypeMapping-->
   <FeatureTypeMapping name="tn-ro:RoadLinkSequence" table="tnro.roadlinksequence">
     <FIDMapping prefix="TN-RO_ROADLINKSEQUENCE_">
       <Column name="gml_id" type="string"/>
@@ -1233,14 +1233,14 @@
           <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_nil"/>
           <Complex path="gn:PronunciationOfName">
             <Complex path="gn:pronunciationSoundLink">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_soundlink"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_soundlink"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_soundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_soundlink_nil"/>
             </Complex>
             <Complex path="gn:pronunciationIPA">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_ipa"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_ipa"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_ipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_ipa_nil"/>
             </Complex>
           </Complex>
         </Complex>
@@ -1473,14 +1473,14 @@
           <Primitive path="@xsi:nil" mapping="name_geographicalname_pronunciation_nil"/>
           <Complex path="gn:PronunciationOfName">
             <Complex path="gn:pronunciationSoundLink">
-              <Primitive path="text()" mapping="name_geographicalname_pronunciation_pronunciationofname_soundlink"/>
-              <Primitive path="@nilReason" mapping="name_geographicalname_pronunciation_pronunciationofname_soundlink_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="name_geographicalname_pronunciation_pronunciationofname_soundlink_nil"/>
+              <Primitive path="text()" mapping="name_geographicalname_pronunciation_soundlink"/>
+              <Primitive path="@nilReason" mapping="name_geographicalname_pronunciation_soundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="name_geographicalname_pronunciation_soundlink_nil"/>
             </Complex>
             <Complex path="gn:pronunciationIPA">
-              <Primitive path="text()" mapping="name_geographicalname_pronunciation_pronunciationofname_ipa"/>
-              <Primitive path="@nilReason" mapping="name_geographicalname_pronunciation_pronunciationofname_ipa_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="name_geographicalname_pronunciation_pronunciationofname_ipa_nil"/>
+              <Primitive path="text()" mapping="name_geographicalname_pronunciation_ipa"/>
+              <Primitive path="@nilReason" mapping="name_geographicalname_pronunciation_ipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="name_geographicalname_pronunciation_ipa_nil"/>
             </Complex>
           </Complex>
         </Complex>
@@ -1631,14 +1631,14 @@
           <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_nil"/>
           <Complex path="gn:PronunciationOfName">
             <Complex path="gn:pronunciationSoundLink">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_soundlink"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_soundlink"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_soundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_soundlink_nil"/>
             </Complex>
             <Complex path="gn:pronunciationIPA">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_ipa"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_ipa"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_ipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_ipa_nil"/>
             </Complex>
           </Complex>
         </Complex>
@@ -1787,14 +1787,14 @@
           <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_nil"/>
           <Complex path="gn:PronunciationOfName">
             <Complex path="gn:pronunciationSoundLink">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_soundlink"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_soundlink"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_soundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_soundlink_nil"/>
             </Complex>
             <Complex path="gn:pronunciationIPA">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_ipa"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_ipa"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_ipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_ipa_nil"/>
             </Complex>
           </Complex>
         </Complex>
@@ -2616,14 +2616,14 @@
           <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_nil"/>
           <Complex path="gn:PronunciationOfName">
             <Complex path="gn:pronunciationSoundLink">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_soundlink"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_soundlink"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_soundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_soundlink_nil"/>
             </Complex>
             <Complex path="gn:pronunciationIPA">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_ipa"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_ipa"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_ipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_ipa_nil"/>
             </Complex>
           </Complex>
         </Complex>
@@ -2758,14 +2758,14 @@
           <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_nil"/>
           <Complex path="gn:PronunciationOfName">
             <Complex path="gn:pronunciationSoundLink">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_soundlink"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_soundlink"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_soundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_soundlink_nil"/>
             </Complex>
             <Complex path="gn:pronunciationIPA">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_ipa"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_ipa"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_ipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_ipa_nil"/>
             </Complex>
           </Complex>
         </Complex>
@@ -2938,14 +2938,14 @@
           <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_nil"/>
           <Complex path="gn:PronunciationOfName">
             <Complex path="gn:pronunciationSoundLink">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_soundlink"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_soundlink_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_soundlink"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_soundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_soundlink_nil"/>
             </Complex>
             <Complex path="gn:pronunciationIPA">
-              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_ipa"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_ipa_nil"/>
+              <Primitive path="text()" mapping="geographicalname_pronunciation_ipa"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_ipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_ipa_nil"/>
             </Complex>
           </Complex>
         </Complex>
@@ -4107,6 +4107,161 @@
       </Feature>
     </Complex>
   </FeatureTypeMapping>
+  <FeatureTypeMapping name="tn-ra:RailwayLinkSequence" table="tnra.railwaylinksequence">
+    <FIDMapping prefix="TN-RA_RAILWAYLINKSEQUENCE_">
+      <Column name="gml_id" type="string"/>
+      <UUIDGenerator/>
+    </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="identifier"/>
+      <Primitive path="@codeSpace" mapping="identifier_codespace"/>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid_identifier_localid"/>
+        <Primitive path="base:namespace" mapping="inspireid_identifier_namespace"/>
+        <Complex path="base:versionId">
+          <Primitive path="text()" mapping="inspireid_identifier_versionid"/>
+          <Primitive path="@nilReason" mapping="inspireid_identifier_versionid_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="inspireid_identifier_versionid_nil"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion"/>
+      <Primitive path="@nilReason" mapping="endlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="tnra.railwaylinksequence_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="gml_id"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="net:link">
+      <Join table="tnra.railwaylinksequence_link" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Complex path="net:DirectedLink">
+        <Primitive path="net:direction" mapping="directedlink_direction"/>
+        <Complex path="net:link">
+          <Primitive path="@owns" mapping="directedlink_link_owns"/>
+          <Primitive path="@nilReason" mapping="directedlink_link_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="directedlink_link_remoteschema"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="directedlink_link_fk" toColumns="gml_id"/>
+            <Href mapping="directedlink_link_href"/>
+          </Feature>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:geographicalName">
+      <Primitive path="@nilReason" mapping="geographicalname_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="geographicalname_nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="geographicalname_language"/>
+          <Primitive path="@nilReason" mapping="geographicalname_language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="geographicalname_language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@owns" mapping="geographicalname_nativeness_owns"/>
+          <Primitive path="@nilReason" mapping="geographicalname_nativeness_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_nativeness_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="geographicalname_nativeness_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_nativeness_fk" toColumns="gml_id"/>
+            <Href mapping="geographicalname_nativeness_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@owns" mapping="geographicalname_namestatus_owns"/>
+          <Primitive path="@nilReason" mapping="geographicalname_namestatus_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_namestatus_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="geographicalname_namestatus_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_namestatus_fk" toColumns="gml_id"/>
+            <Href mapping="geographicalname_namestatus_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="geographicalname_sourceofname"/>
+          <Primitive path="@nilReason" mapping="geographicalname_sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="geographicalname_sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:pronunciation">
+          <Primitive path="@nilReason" mapping="geographicalname_pronunciation_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_nil"/>
+          <Complex path="gn:PronunciationOfName">
+            <Complex path="gn:pronunciationSoundLink">
+              <Primitive path="text()" mapping="geographicalname_pronunciationofname_soundlink"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciationofname_soundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciationofname_soundlink_nil"/>
+            </Complex>
+            <Complex path="gn:pronunciationIPA">
+              <Primitive path="text()" mapping="geographicalname_pronunciationofname_ipa"/>
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciationofname_ipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciationofname_ipa_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="tnra.railwaylinksequence_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="geographicalname_spellingofname_text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="geographicalname_spellingofname_script"/>
+              <Primitive path="@nilReason" mapping="geographicalname_spellingofname_script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_spellingofname_script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="geographicalname_spellingofname_transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="geographicalname_spellingofname_transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="geographicalname_spellingofname_transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:grammaticalGender">
+          <Primitive path="@owns" mapping="geographicalname_grammaticalgender_owns"/>
+          <Primitive path="@nilReason" mapping="geographicalname_grammaticalgender_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_grammaticalgender_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="geographicalname_grammaticalgender_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_grammaticalgender_fk" toColumns="gml_id"/>
+            <Href mapping="geographicalname_grammaticalgender_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:grammaticalNumber">
+          <Primitive path="@owns" mapping="geographicalname_grammaticalnumber_owns"/>
+          <Primitive path="@nilReason" mapping="geographicalname_grammaticalnumber_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_grammaticalnumber_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="geographicalname_grammaticalnumber_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_grammaticalnumber_fk" toColumns="gml_id"/>
+            <Href mapping="geographicalname_grammaticalnumber_href"/>
+          </Feature>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="tn:validFrom">
+      <Primitive path="text()" mapping="validfrom"/>
+      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
+    </Complex>
+    <Complex path="tn:validTo">
+      <Primitive path="text()" mapping="validto"/>
+      <Primitive path="@nilReason" mapping="validto_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="validto_nil"/>
+    </Complex>
+  </FeatureTypeMapping>
 
 <!--  <FeatureTypeMapping name="tn-ra:RailwayArea" table="tnra.railwayarea">
     <FIDMapping prefix="TN-RA_RAILWAYAREA_">
@@ -4729,7 +4884,7 @@
   </FeatureTypeMapping>
 -->
 
-  <FeatureTypeMapping name="tn-ra:DesignSpeed" table="tnra.designspeed">
+  <!--FeatureTypeMapping name="tn-ra:DesignSpeed" table="tnra.designspeed">
     <FIDMapping prefix="TN-RA_DESIGNSPEED_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -4876,8 +5031,8 @@
       <Primitive path="text()" mapping="speed"/>
       <Primitive path="@uom" mapping="speed_uom"/>
     </Complex>
-  </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-ra:RailwayElectrification" table="tnra.railwayelectrification">
+  </FeatureTypeMapping-->
+  <!--FeatureTypeMapping name="tn-ra:RailwayElectrification" table="tnra.railwayelectrification">
     <FIDMapping prefix="TN-RA_RAILWAYELECTRIFICATION_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -5021,8 +5176,8 @@
       <Primitive path="@xsi:nil" mapping="validto_nil"/>
     </Complex>
     <Primitive path="tn-ra:electrified" mapping="electrified"/>
-  </FeatureTypeMapping>
- <FeatureTypeMapping name="tn-ra:RailwayLink" table="tnra.railwaylink">
+  </FeatureTypeMapping-->
+  <!--FeatureTypeMapping name="tn-ra:RailwayLink" table="tnra.railwaylink">
     <FIDMapping prefix="TN-RA_RAILWAYLINK_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -5186,163 +5341,8 @@
       <Primitive path="@nilReason" mapping="validto_nilreason"/>
       <Primitive path="@xsi:nil" mapping="validto_nil"/>
     </Complex>
-  </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-ra:RailwayLinkSequence" table="tnra.railwaylinksequence">
-    <FIDMapping prefix="TN-RA_RAILWAYLINKSEQUENCE_">
-      <Column name="gml_id" type="string"/>
-      <UUIDGenerator/>
-    </FIDMapping>
-    <Complex path="gml:identifier">
-      <Primitive path="text()" mapping="identifier"/>
-      <Primitive path="@codeSpace" mapping="identifier_codespace"/>
-    </Complex>
-    <Complex path="net:beginLifespanVersion">
-      <Primitive path="text()" mapping="beginlifespanversion"/>
-      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
-      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
-    </Complex>
-    <Complex path="net:inspireId">
-      <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_identifier_localid"/>
-        <Primitive path="base:namespace" mapping="inspireid_identifier_namespace"/>
-        <Complex path="base:versionId">
-          <Primitive path="text()" mapping="inspireid_identifier_versionid"/>
-          <Primitive path="@nilReason" mapping="inspireid_identifier_versionid_nilreason"/>
-          <Primitive path="@xsi:nil" mapping="inspireid_identifier_versionid_nil"/>
-        </Complex>
-      </Complex>
-    </Complex>
-    <Complex path="net:endLifespanVersion">
-      <Primitive path="text()" mapping="endlifespanversion"/>
-      <Primitive path="@nilReason" mapping="endlifespanversion_nilreason"/>
-      <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
-    </Complex>
-    <Complex path="net:inNetwork">
-      <Join table="tnra.railwaylinksequence_innetwork" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
-      <Primitive path="@owns" mapping="owns"/>
-      <Primitive path="@nilReason" mapping="nilreason"/>
-      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
-      <Primitive path="@xsi:nil" mapping="nil"/>
-      <Feature path=".">
-        <Join table="?" fromColumns="fk" toColumns="gml_id"/>
-        <Href mapping="href"/>
-      </Feature>
-    </Complex>
-    <Complex path="net:link">
-      <Join table="tnra.railwaylinksequence_link" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
-      <Complex path="net:DirectedLink">
-        <Primitive path="net:direction" mapping="directedlink_direction"/>
-        <Complex path="net:link">
-          <Primitive path="@owns" mapping="directedlink_link_owns"/>
-          <Primitive path="@nilReason" mapping="directedlink_link_nilreason"/>
-          <Primitive path="@gml:remoteSchema" mapping="directedlink_link_remoteschema"/>
-          <Feature path=".">
-            <Join table="?" fromColumns="directedlink_link_fk" toColumns="gml_id"/>
-            <Href mapping="directedlink_link_href"/>
-          </Feature>
-        </Complex>
-      </Complex>
-    </Complex>
-    <Complex path="tn:geographicalName">
-      <Primitive path="@nilReason" mapping="geographicalname_nilreason"/>
-      <Primitive path="@xsi:nil" mapping="geographicalname_nil"/>
-      <Complex path="gn:GeographicalName">
-        <Complex path="gn:language">
-          <Primitive path="text()" mapping="geographicalname_language"/>
-          <Primitive path="@nilReason" mapping="geographicalname_language_nilreason"/>
-          <Primitive path="@xsi:nil" mapping="geographicalname_language_nil"/>
-        </Complex>
-        <Complex path="gn:nativeness">
-          <Primitive path="@owns" mapping="geographicalname_nativeness_owns"/>
-          <Primitive path="@nilReason" mapping="geographicalname_nativeness_nilreason"/>
-          <Primitive path="@gml:remoteSchema" mapping="geographicalname_nativeness_remoteschema"/>
-          <Primitive path="@xsi:nil" mapping="geographicalname_nativeness_nil"/>
-          <Feature path=".">
-            <Join table="?" fromColumns="geographicalname_nativeness_fk" toColumns="gml_id"/>
-            <Href mapping="geographicalname_nativeness_href"/>
-          </Feature>
-        </Complex>
-        <Complex path="gn:nameStatus">
-          <Primitive path="@owns" mapping="geographicalname_namestatus_owns"/>
-          <Primitive path="@nilReason" mapping="geographicalname_namestatus_nilreason"/>
-          <Primitive path="@gml:remoteSchema" mapping="geographicalname_namestatus_remoteschema"/>
-          <Primitive path="@xsi:nil" mapping="geographicalname_namestatus_nil"/>
-          <Feature path=".">
-            <Join table="?" fromColumns="geographicalname_namestatus_fk" toColumns="gml_id"/>
-            <Href mapping="geographicalname_namestatus_href"/>
-          </Feature>
-        </Complex>
-        <Complex path="gn:sourceOfName">
-          <Primitive path="text()" mapping="geographicalname_sourceofname"/>
-          <Primitive path="@nilReason" mapping="geographicalname_sourceofname_nilreason"/>
-          <Primitive path="@xsi:nil" mapping="geographicalname_sourceofname_nil"/>
-        </Complex>
-        <Complex path="gn:pronunciation">
-          <Primitive path="@nilReason" mapping="geographicalname_pronunciation_nilreason"/>
-          <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_nil"/>
-          <Complex path="gn:PronunciationOfName">
-            <Complex path="gn:pronunciationSoundLink">
-              <Primitive path="text()" mapping="geographicalname_pronunciationofname_soundlink"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciationofname_soundlink_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciationofname_soundlink_nil"/>
-            </Complex>
-            <Complex path="gn:pronunciationIPA">
-              <Primitive path="text()" mapping="geographicalname_pronunciationofname_ipa"/>
-              <Primitive path="@nilReason" mapping="geographicalname_pronunciationofname_ipa_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciationofname_ipa_nil"/>
-            </Complex>
-          </Complex>
-        </Complex>
-        <Complex path="gn:spelling">
-          <Join table="tnra.railwaylinksequence_geographicalname_spelling" fromColumns="gml_id" toColumns="parentfk" orderColumns="num" numbered="true"/>
-          <Complex path="gn:SpellingOfName">
-            <Primitive path="gn:text" mapping="geographicalname_spellingofname_text"/>
-            <Complex path="gn:script">
-              <Primitive path="text()" mapping="geographicalname_spellingofname_script"/>
-              <Primitive path="@nilReason" mapping="geographicalname_spellingofname_script_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_spellingofname_script_nil"/>
-            </Complex>
-            <Complex path="gn:transliterationScheme">
-              <Primitive path="text()" mapping="geographicalname_spellingofname_transliterationscheme"/>
-              <Primitive path="@nilReason" mapping="geographicalname_spellingofname_transliterationscheme_nilreason"/>
-              <Primitive path="@xsi:nil" mapping="geographicalname_spellingofname_transliterationscheme_nil"/>
-            </Complex>
-          </Complex>
-        </Complex>
-        <Complex path="gn:grammaticalGender">
-          <Primitive path="@owns" mapping="geographicalname_grammaticalgender_owns"/>
-          <Primitive path="@nilReason" mapping="geographicalname_grammaticalgender_nilreason"/>
-          <Primitive path="@gml:remoteSchema" mapping="geographicalname_grammaticalgender_remoteschema"/>
-          <Primitive path="@xsi:nil" mapping="geographicalname_grammaticalgender_nil"/>
-          <Feature path=".">
-            <Join table="?" fromColumns="geographicalname_grammaticalgender_fk" toColumns="gml_id"/>
-            <Href mapping="geographicalname_grammaticalgender_href"/>
-          </Feature>
-        </Complex>
-        <Complex path="gn:grammaticalNumber">
-          <Primitive path="@owns" mapping="geographicalname_grammaticalnumber_owns"/>
-          <Primitive path="@nilReason" mapping="geographicalname_grammaticalnumber_nilreason"/>
-          <Primitive path="@gml:remoteSchema" mapping="geographicalname_grammaticalnumber_remoteschema"/>
-          <Primitive path="@xsi:nil" mapping="geographicalname_grammaticalnumber_nil"/>
-          <Feature path=".">
-            <Join table="?" fromColumns="geographicalname_grammaticalnumber_fk" toColumns="gml_id"/>
-            <Href mapping="geographicalname_grammaticalnumber_href"/>
-          </Feature>
-        </Complex>
-      </Complex>
-    </Complex>
-    <Complex path="tn:validFrom">
-      <Primitive path="text()" mapping="validfrom"/>
-      <Primitive path="@nilReason" mapping="validfrom_nilreason"/>
-      <Primitive path="@xsi:nil" mapping="validfrom_nil"/>
-    </Complex>
-    <Complex path="tn:validTo">
-      <Primitive path="text()" mapping="validto"/>
-      <Primitive path="@nilReason" mapping="validto_nilreason"/>
-      <Primitive path="@xsi:nil" mapping="validto_nil"/>
-    </Complex>
-  </FeatureTypeMapping>
-  <FeatureTypeMapping name="tn-ra:RailwayStationNode" table="tnra.railwaystationnode">
+  </FeatureTypeMapping-->
+  <!--FeatureTypeMapping name="tn-ra:RailwayStationNode" table="tnra.railwaystationnode">
     <FIDMapping prefix="TN-RA_RAILWAYSTATIONNODE_">
       <Column name="gml_id" type="string"/>
       <UUIDGenerator/>
@@ -5524,7 +5524,7 @@
       <Primitive path="@nilReason" mapping="numberofplatforms_nilreason"/>
       <Primitive path="@xsi:nil" mapping="numberofplatforms_nil"/>
     </Complex>
-  </FeatureTypeMapping>
+  </FeatureTypeMapping-->
 
   <!-- == ELF Transport Network Railway =================================== -->
   <FeatureTypeMapping name="elf-tn-ra:DesignSpeed" table="tnra.designspeed">
