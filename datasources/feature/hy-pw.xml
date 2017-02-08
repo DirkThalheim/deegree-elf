@@ -63,9 +63,12 @@
   <!-- == INSPIRE Hydro Physical Water ====================================== -->
   <FeatureTypeMapping name="hy-p:Crossing" table="hydro.crossing">
     <FIDMapping prefix="HY-P_CROSSING_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:geographicalName">
       <Join table="hydro.crossing_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -153,8 +156,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -185,9 +188,12 @@
   
   <FeatureTypeMapping name="hy-p:DamOrWeir" table="hydro.damorweir">
     <FIDMapping prefix="HY-P_DAMORWEIR_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:geographicalName">
       <Join table="hydro.damorweir_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -274,8 +280,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -299,9 +305,12 @@
 
   <FeatureTypeMapping name="hy-p:DrainageBasin" table="hydro.drainagebasin">
     <FIDMapping prefix="HY-P_DRAINAGEBASIN_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:geographicalName">
       <Join table="hydro.drainagebasin_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -396,8 +405,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -411,12 +420,12 @@
       <Primitive path="@xsi:nil" mapping="origin_nil"/>
     </Complex>
     <Complex path="hy-p:containsBasin">
-      <Join table="hydro.drainagebasin_containsbasin" fromColumns="id" toColumns="parentfk"/>
+      <Join table="hydro.drainagebasin_containsbasin" fromColumns="localid" toColumns="parentfk"/>
       <Primitive path="@xlink:href" mapping="href"/>
       <!-- TODO: additional ReferencedType attributes -->
     </Complex>
     <Complex path="hy-p:outlet">
-      <Join table="hydro.drainagebasin_outlet" fromColumns="id" toColumns="parentfk"/>
+      <Join table="hydro.drainagebasin_outlet" fromColumns="localid" toColumns="parentfk"/>
       <Primitive path="@xlink:href" mapping="href"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -426,9 +435,12 @@
 
   <FeatureTypeMapping name="hy-p:Falls" table="hydro.falls">
     <FIDMapping prefix="HY-P_FALLS_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:geographicalName">
       <Join table="hydro.falls_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -509,8 +521,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -540,9 +552,12 @@
 
   <FeatureTypeMapping name="hy-p:Ford" table="hydro.ford">
     <FIDMapping prefix="HY-P_FORD_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:geographicalName">
       <Join table="hydro.ford_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -629,8 +644,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -654,9 +669,12 @@
 
   <FeatureTypeMapping name="hy-p:Lock" table="hydro.lock">
     <FIDMapping prefix="HY-P_LOCK_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:geographicalName">
       <Join table="hydro.lock_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -743,8 +761,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -768,9 +786,12 @@
 
   <FeatureTypeMapping name="hy-p:Rapids" table="hydro.rapids">
     <FIDMapping prefix="HY-P_RAPIDS_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:geographicalName">
       <Join table="hydro.rapids_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -851,8 +872,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -876,9 +897,12 @@
 
   <FeatureTypeMapping name="hy-p:RiverBasin" table="hydro.riverbasin">
     <FIDMapping prefix="HY-P_RIVERBASIN_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:geographicalName">
       <Join table="hydro.riverbasin_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -973,8 +997,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -988,14 +1012,14 @@
       <Primitive path="@xsi:nil" mapping="origin_nil"/>
     </Complex>
     <Complex path="hy-p:containsBasin">
-      <Join table="hydro.riverbasin_containsbasin" fromColumns="id" toColumns="parentfk"/>
+      <Join table="hydro.riverbasin_containsbasin" fromColumns="localid" toColumns="parentfk"/>
       <Primitive path="@xlink:href" mapping="href"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <!-- TODO: additional ReferencedType attributes -->
     </Complex>
     <Complex path="hy-p:outlet">
-      <Join table="hydro.riverbasin_outlet" fromColumns="id" toColumns="parentfk"/>
+      <Join table="hydro.riverbasin_outlet" fromColumns="localid" toColumns="parentfk"/>
       <Primitive path="@xlink:href" mapping="href"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -1005,9 +1029,12 @@
 
   <FeatureTypeMapping name="hy-p:Shore" table="hydro.shore">
     <FIDMapping prefix="HY-P_SHORE_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:geographicalName">
       <Join table="hydro.shore_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -1077,8 +1104,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -1112,9 +1139,12 @@
 
   <FeatureTypeMapping name="hy-p:Sluice" table="hydro.sluice">
     <FIDMapping prefix="HY-P_SLUICE_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:geographicalName">
       <Join table="hydro.sluice_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -1201,8 +1231,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -1226,9 +1256,12 @@
 
   <FeatureTypeMapping name="hy-p:StandingWater" table="hydro.standingwater">
     <FIDMapping prefix="HY-P_STANDINGWATER_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:geographicalName">
       <Join table="hydro.standingwater_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -1308,8 +1341,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -1357,19 +1390,19 @@
       <Primitive path="@xsi:nil" mapping="tidal_nil"/>
     </Complex>
     <Complex path="hy-p:bank">
-      <Join table="hydro.standingwater_bank" fromColumns="id" toColumns="parentfk"/>
+      <Join table="hydro.standingwater_bank" fromColumns="localid" toColumns="parentfk"/>
       <Primitive path="@xlink:href" mapping="href"/>
       <!-- TODO: additional ReferencedType attributes -->
     </Complex>
     <Complex path="hy-p:drainsBasin">
-      <Join table="hydro.standingwater_drainsbasin" fromColumns="id" toColumns="parentfk"/>
+      <Join table="hydro.standingwater_drainsbasin" fromColumns="localid" toColumns="parentfk"/>
       <Primitive path="@xlink:href" mapping="href"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <!-- TODO: additional ReferencedType attributes -->
     </Complex>
     <Complex path="hy-p:neighbour">
-      <Join table="hydro.standingwater_neighbour" fromColumns="id" toColumns="parentfk"/>
+      <Join table="hydro.standingwater_neighbour" fromColumns="localid" toColumns="parentfk"/>
       <Primitive path="@xlink:href" mapping="href"/>
       <!-- TODO: additional ReferencedType attributes -->
     </Complex>
@@ -1395,9 +1428,12 @@
 
   <FeatureTypeMapping name="hy-p:Watercourse" table="hydro.watercourse">
     <FIDMapping prefix="HY-P_WATERCOURSE_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:geographicalName">
       <Join table="hydro.watercourse_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -1477,8 +1513,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -1526,19 +1562,19 @@
       <Primitive path="@xsi:nil" mapping="tidal_nil"/>
     </Complex>
     <Complex path="hy-p:bank">
-      <Join table="hydro.watercourse_bank" fromColumns="id" toColumns="parentfk"/>
+      <Join table="hydro.watercourse_bank" fromColumns="localid" toColumns="parentfk"/>
       <Primitive path="@xlink:href" mapping="href"/>
       <!-- TODO: additional ReferencedType attributes -->
     </Complex>
     <Complex path="hy-p:drainsBasin">
-      <Join table="hydro.watercourse_drainsbasin" fromColumns="id" toColumns="parentfk"/>
+      <Join table="hydro.watercourse_drainsbasin" fromColumns="localid" toColumns="parentfk"/>
       <Primitive path="@xlink:href" mapping="href"/>
       <Primitive path="@xsi:nil" mapping="nil"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
       <!-- TODO: additional ReferencedType attributes -->
     </Complex>
     <Complex path="hy-p:neighbour">
-      <Join table="hydro.watercourse_neighbour" fromColumns="id" toColumns="parentfk"/>
+      <Join table="hydro.watercourse_neighbour" fromColumns="localid" toColumns="parentfk"/>
       <Primitive path="@xlink:href" mapping="href"/>
       <!-- TODO: additional ReferencedType attributes -->
     </Complex>
@@ -1589,9 +1625,12 @@
 
   <FeatureTypeMapping name="hy-p:Wetland" table="hydro.wetland">
     <FIDMapping prefix="HY-P_WETLAND_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:geographicalName">
       <Join table="hydro.wetland_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -1661,8 +1700,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -1701,9 +1740,12 @@
   <!-- == ELF Physical Water ============================================================= -->
   <FeatureTypeMapping name="elf-pw:Embankment" table="hydro.embankment">
     <FIDMapping prefix="ELF-PW_EMBANKMENT_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:geographicalName">
       <Join table="hydro.embankment_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -1790,8 +1832,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -1829,9 +1871,12 @@
 
   <FeatureTypeMapping name="elf-pw:Island" table="hydro.island">
     <FIDMapping prefix="ELF-PW_ISLAND_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="elf-pw:geographicalName">
       <Join table="hydro.island_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -1899,10 +1944,10 @@
         <Primitive path="hy:namespace" mapping="hydroidentifier_namespace"/>
       </Complex>
     </Complex>
-    <Complex path="elf-pw:inspireId">
+    <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -1924,9 +1969,12 @@
 
   <FeatureTypeMapping name="elf-pw:LandWaterBoundary" table="hydro.landwaterboundary">
     <FIDMapping prefix="ELF-PW_LANDWATERBOUNDARY_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:beginLifespanVersion">
       <Primitive path="text()" mapping="beginlifespanversion"/>
       <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
@@ -1939,8 +1987,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
@@ -1960,7 +2008,7 @@
       <!-- TODO: additional ReferencedType attributes -->
     </Complex>
     <Complex path="elf-pw:delimit">
-      <Join table="hydro.landwaterboundary_delimit" fromColumns="id" toColumns="parentfk"/>
+      <Join table="hydro.landwaterboundary_delimit" fromColumns="localid" toColumns="parentfk"/>
       <Primitive path="@xlink:href" mapping="waterleveleffect_href"/>
       <!-- TODO: additional ReferencedType attributes -->
       <!-- TODO: weitere SurfaceWaterProperty Attribute? -->
@@ -1969,9 +2017,12 @@
 
   <FeatureTypeMapping name="elf-pw:ShorelineConstruction" table="hydro.shorelineconstruction">
     <FIDMapping prefix="ELF-PW_SHORELINECONSTRUCTION_">
-      <Column name="id" type="string"/>
-      <UUIDGenerator/>
+      <Column name="localid" type="string"/>
     </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
     <Complex path="hy-p:geographicalName">
       <Join table="hydro.shorelineconstruction_geographicalname" fromColumns="namedplace_fk" toColumns="id"/>
       <Primitive path="@nilReason" mapping="nilreason"/>
@@ -2058,8 +2109,8 @@
     </Complex>
     <Complex path="hy-p:inspireId">
       <Complex path="base:Identifier">
-        <Primitive path="base:localId" mapping="inspireid_localid"/>
-        <Primitive path="base:namespace" mapping="'TODO'"/>
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
         <Complex path="base:versionId">
           <!-- Primitive path="text" mapping="inspireid_versionid"/-->
           <Primitive path="@nilReason" mapping="'other:unpopulated'"/>

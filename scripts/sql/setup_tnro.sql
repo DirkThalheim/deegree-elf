@@ -1,6 +1,6 @@
 -- Schema: tnro
 
--- DROP SCHEMA tnro;
+-- DROP SCHEMA tnro CASCADE;
 
 CREATE SCHEMA tnro
   AUTHORIZATION elf_admin;
@@ -10,19 +10,263 @@ COMMENT ON SCHEMA tnro
   
 -- == Tabellen =====
 
--- == ERoad ================================  
-CREATE TABLE tnro.eroad (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+-- == INSPIRE Transport Network ==
+CREATE TABLE tnro.accessrestriction (
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
+    validfrom timestamp,
+    validfrom_nilreason text,
+    validfrom_nil boolean,
+    validto timestamp,
+    validto_nilreason text,
+    validto_nil boolean,
+    restriction_owns boolean,
+    restriction_nilreason text,
+    restriction_remoteschema text,
+    restriction_fk text,
+    restriction_href text,
+    CONSTRAINT accessrestriction_pkey PRIMARY KEY (localid)
+);
+ALTER TABLE tnro.accessrestriction OWNER TO elf_admin;
+
+CREATE TABLE tnro.accessrestriction_networkref (
+    id serial PRIMARY KEY,
+    parentfk text NOT NULL REFERENCES tnro.accessrestriction ON DELETE CASCADE,
+    num integer not null,
+    nilreason text,
+    nil boolean,
+    simplelinearreference_element_owns boolean,
+    simplelinearreference_element_nilreason text,
+    simplelinearreference_element_remoteschema text,
+    simplelinearreference_element_fk text,
+    simplelinearreference_element_href text,
+    simplelinearreference_applicabledirection_owns boolean,
+    simplelinearreference_applicabledirection_nilreason text,
+    simplelinearreference_applicabledirection_remoteschema text,
+    simplelinearreference_applicabledirection_nil boolean,
+    simplelinearreference_applicabledirection_fk text,
+    simplelinearreference_applicabledirection_href text,
+    simplelinearreference_fromposition numeric,
+    simplelinearreference_fromposition_uom text,
+    simplelinearreference_toposition numeric,
+    simplelinearreference_toposition_uom text,
+    simplelinearreference_offset numeric,
+    simplelinearreference_offset_nilreason text,
+    simplelinearreference_offset_uom text,
+    simplelinearreference_offset_nil boolean,
+    simplepointreference_element_owns boolean,
+    simplepointreference_element_nilreason text,
+    simplepointreference_element_remoteschema text,
+    simplepointreference_element_fk text,
+    simplepointreference_element_href text,
+    simplepointreference_applicabledirection_owns boolean,
+    simplepointreference_applicabledirection_nilreason text,
+    simplepointreference_applicabledirection_remoteschema text,
+    simplepointreference_applicabledirection_nil boolean,
+    simplepointreference_applicabledirection_fk text,
+    simplepointreference_applicabledirection_href text,
+    simplepointreference_atposition numeric,
+    simplepointreference_atposition_uom text,
+    simplepointreference_offset numeric,
+    simplepointreference_offset_nilreason text,
+    simplepointreference_offset_uom text,
+    simplepointreference_offset_nil boolean,
+    linkreference_element_owns boolean,
+    linkreference_element_nilreason text,
+    linkreference_element_remoteschema text,
+    linkreference_element_fk text,
+    linkreference_element_href text,
+    linkreference_applicabledirection_owns boolean,
+    linkreference_applicabledirection_nilreason text,
+    linkreference_applicabledirection_remoteschema text,
+    linkreference_applicabledirection_nil boolean,
+    linkreference_applicabledirection_fk text,
+    linkreference_applicabledirection_href text,
+    networkreference_element_owns boolean,
+    networkreference_element_nilreason text,
+    networkreference_element_remoteschema text,
+    networkreference_element_fk text,
+    networkreference_element_href text
+);
+ALTER TABLE tnro.accessrestriction_networkref OWNER TO elf_admin;
+
+CREATE TABLE tnro.conditionoffacility (
+    localid text,
+    beginlifespanversion timestamp,
+    beginlifespanversion_nilreason text,
+    beginlifespanversion_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
+    validfrom timestamp,
+    validfrom_nilreason text,
+    validfrom_nil boolean,
+    validto timestamp,
+    validto_nilreason text,
+    validto_nil boolean,
+    currentstatus_owns boolean,
+    currentstatus_nilreason text,
+    currentstatus_remoteschema text,
+    currentstatus_fk text,
+    currentstatus_href text,
+    CONSTRAINT conditionoffacility_pkey PRIMARY KEY (localid)
+);
+ALTER TABLE tnro.conditionoffacility OWNER TO elf_admin;
+
+CREATE TABLE tnro.conditionoffacility_networkref (
+    id serial PRIMARY KEY,
+    parentfk text NOT NULL REFERENCES tnro.conditionoffacility ON DELETE CASCADE,
+    num integer not null,
+    nilreason text,
+    nil boolean,
+    simplelinearreference_element_owns boolean,
+    simplelinearreference_element_nilreason text,
+    simplelinearreference_element_remoteschema text,
+    simplelinearreference_element_fk text,
+    simplelinearreference_element_href text,
+    simplelinearreference_applicabledirection_owns boolean,
+    simplelinearreference_applicabledirection_nilreason text,
+    simplelinearreference_applicabledirection_remoteschema text,
+    simplelinearreference_applicabledirection_nil boolean,
+    simplelinearreference_applicabledirection_fk text,
+    simplelinearreference_applicabledirection_href text,
+    simplelinearreference_fromposition numeric,
+    simplelinearreference_fromposition_uom text,
+    simplelinearreference_toposition numeric,
+    simplelinearreference_toposition_uom text,
+    simplelinearreference_offset numeric,
+    simplelinearreference_offset_nilreason text,
+    simplelinearreference_offset_uom text,
+    simplelinearreference_offset_nil boolean,
+    simplepointreference_element_owns boolean,
+    simplepointreference_element_nilreason text,
+    simplepointreference_element_remoteschema text,
+    simplepointreference_element_fk text,
+    simplepointreference_element_href text,
+    simplepointreference_applicabledirection_owns boolean,
+    simplepointreference_applicabledirection_nilreason text,
+    simplepointreference_applicabledirection_remoteschema text,
+    simplepointreference_applicabledirection_nil boolean,
+    simplepointreference_applicabledirection_fk text,
+    simplepointreference_applicabledirection_href text,
+    simplepointreference_atposition numeric,
+    simplepointreference_atposition_uom text,
+    simplepointreference_offset numeric,
+    simplepointreference_offset_nilreason text,
+    simplepointreference_offset_uom text,
+    simplepointreference_offset_nil boolean,
+    linkreference_element_owns boolean,
+    linkreference_element_nilreason text,
+    linkreference_element_remoteschema text,
+    linkreference_element_fk text,
+    linkreference_element_href text,
+    linkreference_applicabledirection_owns boolean,
+    linkreference_applicabledirection_nilreason text,
+    linkreference_applicabledirection_remoteschema text,
+    linkreference_applicabledirection_nil boolean,
+    linkreference_applicabledirection_fk text,
+    linkreference_applicabledirection_href text,
+    networkreference_element_owns boolean,
+    networkreference_element_nilreason text,
+    networkreference_element_remoteschema text,
+    networkreference_element_fk text,
+    networkreference_element_href text
+);
+ALTER TABLE tnro.conditionoffacility_networkref OWNER TO elf_admin;
+
+CREATE TABLE tnro.verticalposition (
+    localid text,
+    beginlifespanversion timestamp,
+    beginlifespanversion_nilreason text,
+    beginlifespanversion_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
+    validfrom timestamp,
+    validfrom_nilreason text,
+    validfrom_nil boolean,
+    validto timestamp,
+    validto_nilreason text,
+    validto_nil boolean,
+    verticalposition text,
+    CONSTRAINT verticalposition_pkey PRIMARY KEY (localid)
+);
+ALTER TABLE tnro.verticalposition OWNER TO elf_admin;
+
+CREATE TABLE tnro.verticalposition_networkref (
+    id serial PRIMARY KEY,
+    parentfk text NOT NULL REFERENCES tnro.verticalposition ON DELETE CASCADE,
+    num integer not null,
+    nilreason text,
+    nil boolean,
+    simplelinearreference_element_owns boolean,
+    simplelinearreference_element_nilreason text,
+    simplelinearreference_element_remoteschema text,
+    simplelinearreference_element_fk text,
+    simplelinearreference_element_href text,
+    simplelinearreference_applicabledirection_owns boolean,
+    simplelinearreference_applicabledirection_nilreason text,
+    simplelinearreference_applicabledirection_remoteschema text,
+    simplelinearreference_applicabledirection_nil boolean,
+    simplelinearreference_applicabledirection_fk text,
+    simplelinearreference_applicabledirection_href text,
+    simplelinearreference_fromposition numeric,
+    simplelinearreference_fromposition_uom text,
+    simplelinearreference_toposition numeric,
+    simplelinearreference_toposition_uom text,
+    simplelinearreference_offset numeric,
+    simplelinearreference_offset_nilreason text,
+    simplelinearreference_offset_uom text,
+    simplelinearreference_offset_nil boolean,
+    simplepointreference_element_owns boolean,
+    simplepointreference_element_nilreason text,
+    simplepointreference_element_remoteschema text,
+    simplepointreference_element_fk text,
+    simplepointreference_element_href text,
+    simplepointreference_applicabledirection_owns boolean,
+    simplepointreference_applicabledirection_nilreason text,
+    simplepointreference_applicabledirection_remoteschema text,
+    simplepointreference_applicabledirection_nil boolean,
+    simplepointreference_applicabledirection_fk text,
+    simplepointreference_applicabledirection_href text,
+    simplepointreference_atposition numeric,
+    simplepointreference_atposition_uom text,
+    simplepointreference_offset numeric,
+    simplepointreference_offset_nilreason text,
+    simplepointreference_offset_uom text,
+    simplepointreference_offset_nil boolean,
+    linkreference_element_owns boolean,
+    linkreference_element_nilreason text,
+    linkreference_element_remoteschema text,
+    linkreference_element_fk text,
+    linkreference_element_href text,
+    linkreference_applicabledirection_owns boolean,
+    linkreference_applicabledirection_nilreason text,
+    linkreference_applicabledirection_remoteschema text,
+    linkreference_applicabledirection_nil boolean,
+    linkreference_applicabledirection_fk text,
+    linkreference_applicabledirection_href text,
+    networkreference_element_owns boolean,
+    networkreference_element_nilreason text,
+    networkreference_element_remoteschema text,
+    networkreference_element_fk text,
+    networkreference_element_href text
+);
+ALTER TABLE tnro.verticalposition_networkref OWNER TO elf_admin;
+
+-- == INSPIRE Transport Network Road ==
+
+-- == ERoad ================================  
+CREATE TABLE tnro.eroad (
+    localid text,
+    beginlifespanversion timestamp,
+    beginlifespanversion_nilreason text,
+    beginlifespanversion_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -75,7 +319,7 @@ CREATE TABLE tnro.eroad (
     europeanroutenumber text,
     europeanroutenumber_nilreason text,
     europeanroutenumber_nil boolean,
-    CONSTRAINT eroad_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT eroad_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.eroad OWNER TO elf_admin;
 
@@ -132,14 +376,7 @@ CREATE TABLE tnro.eroad_post (
 ALTER TABLE tnro.eroad_post OWNER TO elf_admin;
 
 CREATE TABLE tnro.formofway (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -157,7 +394,7 @@ CREATE TABLE tnro.formofway (
     formofway_remoteschema text,
     formofway_fk text,
     formofway_href text,
-    CONSTRAINT formofway_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT formofway_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.formofway OWNER TO elf_admin;
 
@@ -223,14 +460,7 @@ CREATE TABLE tnro.formofway_networkref (
 ALTER TABLE tnro.formofway_networkref OWNER TO elf_admin;
 
 CREATE TABLE tnro.functionalroadclass (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -244,7 +474,7 @@ CREATE TABLE tnro.functionalroadclass (
     validto_nilreason text,
     validto_nil boolean,
     functionalclass text,
-    CONSTRAINT functionalroadclass_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT functionalroadclass_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.functionalroadclass OWNER TO elf_admin;
 
@@ -310,14 +540,7 @@ CREATE TABLE tnro.functionalroadclass_networkref (
 ALTER TABLE tnro.functionalroadclass_networkref OWNER TO elf_admin;
 
 CREATE TABLE tnro.numberoflanes (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -340,7 +563,7 @@ CREATE TABLE tnro.numberoflanes (
     minmaxnumberoflanes_nilreason text,
     minmaxnumberoflanes_nil boolean,
     numberoflanes integer,
-    CONSTRAINT numberoflanes_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT numberoflanes_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.numberoflanes OWNER TO elf_admin;
 
@@ -406,17 +629,10 @@ CREATE TABLE tnro.numberoflanes_networkref (
 ALTER TABLE tnro.numberoflanes_networkref OWNER TO elf_admin;
 
 CREATE TABLE tnro.road (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -472,7 +688,7 @@ CREATE TABLE tnro.road (
     nationalroadcode text,
     nationalroadcode_nilreason text,
     nationalroadcode_nil boolean,
-    CONSTRAINT road_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT road_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.road OWNER TO elf_admin;
 
@@ -529,17 +745,10 @@ CREATE TABLE tnro.road_post (
 ALTER TABLE tnro.road_post OWNER TO elf_admin;
 
 CREATE TABLE tnro.roadarea (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -592,7 +801,7 @@ CREATE TABLE tnro.roadarea (
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
-    CONSTRAINT roadarea_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT roadarea_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.roadarea OWNER TO elf_admin;
 
@@ -627,17 +836,10 @@ CREATE TABLE tnro.roadarea_geographicalname_spelling (
 ALTER TABLE tnro.roadarea_geographicalname_spelling OWNER TO elf_admin;
 
 CREATE TABLE tnro.roadlinksequence (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -687,7 +889,7 @@ CREATE TABLE tnro.roadlinksequence (
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
-    CONSTRAINT roadlinksequence_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT roadlinksequence_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.roadlinksequence OWNER TO elf_admin;
 
@@ -732,14 +934,7 @@ CREATE TABLE tnro.roadlinksequence_geographicalname_spelling (
 ALTER TABLE tnro.roadlinksequence_geographicalname_spelling OWNER TO elf_admin;
 
 CREATE TABLE tnro.roadname (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -790,7 +985,7 @@ CREATE TABLE tnro.roadname (
     name_geographicalname_grammaticalnumber_nil boolean,
     name_geographicalname_grammaticalnumber_fk text,
     name_geographicalname_grammaticalnumber_href text,
-    CONSTRAINT roadname_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT roadname_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.roadname OWNER TO elf_admin;
 
@@ -870,17 +1065,10 @@ CREATE TABLE tnro.roadname_name_geographicalname_spelling (
 ALTER TABLE tnro.roadname_name_geographicalname_spelling OWNER TO elf_admin;
 
 CREATE TABLE tnro.roadnode (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -939,7 +1127,7 @@ CREATE TABLE tnro.roadnode (
     formofroadnode_nil boolean,
     formofroadnode_fk text,
     formofroadnode_href text,
-    CONSTRAINT roadnode_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT roadnode_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.roadnode OWNER TO elf_admin;
 
@@ -1000,17 +1188,10 @@ CREATE TABLE tnro.roadnode_geographicalname_spelling (
 ALTER TABLE tnro.roadnode_geographicalname_spelling OWNER TO elf_admin;
 
 CREATE TABLE tnro.roadservicearea (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -1063,7 +1244,7 @@ CREATE TABLE tnro.roadservicearea (
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
-    CONSTRAINT roadservicearea_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT roadservicearea_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.roadservicearea OWNER TO elf_admin;
 
@@ -1098,14 +1279,7 @@ CREATE TABLE tnro.roadservicearea_geographicalname_spelling (
 ALTER TABLE tnro.roadservicearea_geographicalname_spelling OWNER TO elf_admin;
 
 CREATE TABLE tnro.roadservicetype (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -1123,7 +1297,7 @@ CREATE TABLE tnro.roadservicetype (
     type_remoteschema text,
     type_fk text,
     type_href text,
-    CONSTRAINT roadservicetype_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT roadservicetype_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.roadservicetype OWNER TO elf_admin;
 
@@ -1201,14 +1375,7 @@ CREATE TABLE tnro.roadservicetype_availablefacility (
 ALTER TABLE tnro.roadservicetype_availablefacility OWNER TO elf_admin;
 
 CREATE TABLE tnro.roadsurfacecategory (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -1226,7 +1393,7 @@ CREATE TABLE tnro.roadsurfacecategory (
     surfacecategory_remoteschema text,
     surfacecategory_fk text,
     surfacecategory_href text,
-    CONSTRAINT roadsurfacecategory_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT roadsurfacecategory_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.roadsurfacecategory OWNER TO elf_admin;
 
@@ -1292,14 +1459,7 @@ CREATE TABLE tnro.roadsurfacecategory_networkref (
 ALTER TABLE tnro.roadsurfacecategory_networkref OWNER TO elf_admin;
 
 CREATE TABLE tnro.roadwidth (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -1320,7 +1480,7 @@ CREATE TABLE tnro.roadwidth (
     measuredroadpart_href text,
     width numeric,
     width_uom text,
-    CONSTRAINT roadwidth_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT roadwidth_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.roadwidth OWNER TO elf_admin;
 
@@ -1386,14 +1546,7 @@ CREATE TABLE tnro.roadwidth_networkref (
 ALTER TABLE tnro.roadwidth_networkref OWNER TO elf_admin;
 
 CREATE TABLE tnro.speedlimit (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -1445,7 +1598,7 @@ CREATE TABLE tnro.speedlimit (
     weathercondition_nil boolean,
     weathercondition_fk text,
     weathercondition_href text,
-    CONSTRAINT speedlimit_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT speedlimit_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.speedlimit OWNER TO elf_admin;
 
@@ -1511,17 +1664,10 @@ CREATE TABLE tnro.speedlimit_networkref (
 ALTER TABLE tnro.speedlimit_networkref OWNER TO elf_admin;
 
 CREATE TABLE tnro.vehicletrafficarea (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -1574,7 +1720,7 @@ CREATE TABLE tnro.vehicletrafficarea (
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
-    CONSTRAINT vehicletrafficarea_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT vehicletrafficarea_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.vehicletrafficarea OWNER TO elf_admin;
 
@@ -1609,17 +1755,10 @@ CREATE TABLE tnro.vehicletrafficarea_geographicalname_spelling (
 ALTER TABLE tnro.vehicletrafficarea_geographicalname_spelling OWNER TO elf_admin;
 
 CREATE TABLE tnro.interchangepoint (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -1677,7 +1816,7 @@ CREATE TABLE tnro.interchangepoint (
     typeofinterchange_remoteschema text,
     typeofinterchange_fk text,
     typeofinterchange_href text,
-    CONSTRAINT interchangepoint_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT interchangepoint_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.interchangepoint OWNER TO elf_admin;
 
@@ -1712,17 +1851,10 @@ SELECT ADDGEOMETRYCOLUMN('tnro', 'interchangepoint','geometry_value','4258','GEO
 CREATE INDEX interchangepoint_geometry_idx ON tnro.interchangepoint USING GIST (geometry_value);
 
 CREATE TABLE tnro.roadlink (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -1787,7 +1919,7 @@ CREATE TABLE tnro.roadlink (
     validto_nilreason text,
     validto_nil boolean,
     transeuropeantransportnetwork boolean,
-    CONSTRAINT roadlink_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT roadlink_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnro.roadlink OWNER TO elf_admin;
 

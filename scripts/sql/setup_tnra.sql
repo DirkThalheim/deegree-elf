@@ -8,15 +8,259 @@ COMMENT ON SCHEMA misc IS 'Schemata für Thema TransportNetwork-Rail';
   
 -- == Tabellen =====
 
+-- == INSPIRE Transport Network ==
+CREATE TABLE tnra.accessrestriction (
+    localid text,
+    beginlifespanversion timestamp,
+    beginlifespanversion_nilreason text,
+    beginlifespanversion_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
+    validfrom timestamp,
+    validfrom_nilreason text,
+    validfrom_nil boolean,
+    validto timestamp,
+    validto_nilreason text,
+    validto_nil boolean,
+    restriction_owns boolean,
+    restriction_nilreason text,
+    restriction_remoteschema text,
+    restriction_fk text,
+    restriction_href text,
+    CONSTRAINT accessrestriction_pkey PRIMARY KEY (localid)
+);
+ALTER TABLE tnra.accessrestriction OWNER TO elf_admin;
+
+CREATE TABLE tnra.accessrestriction_networkref (
+    id serial PRIMARY KEY,
+    parentfk text NOT NULL REFERENCES tnra.accessrestriction ON DELETE CASCADE,
+    num integer not null,
+    nilreason text,
+    nil boolean,
+    simplelinearreference_element_owns boolean,
+    simplelinearreference_element_nilreason text,
+    simplelinearreference_element_remoteschema text,
+    simplelinearreference_element_fk text,
+    simplelinearreference_element_href text,
+    simplelinearreference_applicabledirection_owns boolean,
+    simplelinearreference_applicabledirection_nilreason text,
+    simplelinearreference_applicabledirection_remoteschema text,
+    simplelinearreference_applicabledirection_nil boolean,
+    simplelinearreference_applicabledirection_fk text,
+    simplelinearreference_applicabledirection_href text,
+    simplelinearreference_fromposition numeric,
+    simplelinearreference_fromposition_uom text,
+    simplelinearreference_toposition numeric,
+    simplelinearreference_toposition_uom text,
+    simplelinearreference_offset numeric,
+    simplelinearreference_offset_nilreason text,
+    simplelinearreference_offset_uom text,
+    simplelinearreference_offset_nil boolean,
+    simplepointreference_element_owns boolean,
+    simplepointreference_element_nilreason text,
+    simplepointreference_element_remoteschema text,
+    simplepointreference_element_fk text,
+    simplepointreference_element_href text,
+    simplepointreference_applicabledirection_owns boolean,
+    simplepointreference_applicabledirection_nilreason text,
+    simplepointreference_applicabledirection_remoteschema text,
+    simplepointreference_applicabledirection_nil boolean,
+    simplepointreference_applicabledirection_fk text,
+    simplepointreference_applicabledirection_href text,
+    simplepointreference_atposition numeric,
+    simplepointreference_atposition_uom text,
+    simplepointreference_offset numeric,
+    simplepointreference_offset_nilreason text,
+    simplepointreference_offset_uom text,
+    simplepointreference_offset_nil boolean,
+    linkreference_element_owns boolean,
+    linkreference_element_nilreason text,
+    linkreference_element_remoteschema text,
+    linkreference_element_fk text,
+    linkreference_element_href text,
+    linkreference_applicabledirection_owns boolean,
+    linkreference_applicabledirection_nilreason text,
+    linkreference_applicabledirection_remoteschema text,
+    linkreference_applicabledirection_nil boolean,
+    linkreference_applicabledirection_fk text,
+    linkreference_applicabledirection_href text,
+    networkreference_element_owns boolean,
+    networkreference_element_nilreason text,
+    networkreference_element_remoteschema text,
+    networkreference_element_fk text,
+    networkreference_element_href text
+);
+ALTER TABLE tnra.accessrestriction_networkref OWNER TO elf_admin;
+
+CREATE TABLE tnra.conditionoffacility (
+    localid text,
+    beginlifespanversion timestamp,
+    beginlifespanversion_nilreason text,
+    beginlifespanversion_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
+    validfrom timestamp,
+    validfrom_nilreason text,
+    validfrom_nil boolean,
+    validto timestamp,
+    validto_nilreason text,
+    validto_nil boolean,
+    currentstatus_owns boolean,
+    currentstatus_nilreason text,
+    currentstatus_remoteschema text,
+    currentstatus_fk text,
+    currentstatus_href text,
+    CONSTRAINT conditionoffacility_pkey PRIMARY KEY (localid)
+);
+ALTER TABLE tnra.conditionoffacility OWNER TO elf_admin;
+
+CREATE TABLE tnra.conditionoffacility_networkref (
+    id serial PRIMARY KEY,
+    parentfk text NOT NULL REFERENCES tnra.conditionoffacility ON DELETE CASCADE,
+    num integer not null,
+    nilreason text,
+    nil boolean,
+    simplelinearreference_element_owns boolean,
+    simplelinearreference_element_nilreason text,
+    simplelinearreference_element_remoteschema text,
+    simplelinearreference_element_fk text,
+    simplelinearreference_element_href text,
+    simplelinearreference_applicabledirection_owns boolean,
+    simplelinearreference_applicabledirection_nilreason text,
+    simplelinearreference_applicabledirection_remoteschema text,
+    simplelinearreference_applicabledirection_nil boolean,
+    simplelinearreference_applicabledirection_fk text,
+    simplelinearreference_applicabledirection_href text,
+    simplelinearreference_fromposition numeric,
+    simplelinearreference_fromposition_uom text,
+    simplelinearreference_toposition numeric,
+    simplelinearreference_toposition_uom text,
+    simplelinearreference_offset numeric,
+    simplelinearreference_offset_nilreason text,
+    simplelinearreference_offset_uom text,
+    simplelinearreference_offset_nil boolean,
+    simplepointreference_element_owns boolean,
+    simplepointreference_element_nilreason text,
+    simplepointreference_element_remoteschema text,
+    simplepointreference_element_fk text,
+    simplepointreference_element_href text,
+    simplepointreference_applicabledirection_owns boolean,
+    simplepointreference_applicabledirection_nilreason text,
+    simplepointreference_applicabledirection_remoteschema text,
+    simplepointreference_applicabledirection_nil boolean,
+    simplepointreference_applicabledirection_fk text,
+    simplepointreference_applicabledirection_href text,
+    simplepointreference_atposition numeric,
+    simplepointreference_atposition_uom text,
+    simplepointreference_offset numeric,
+    simplepointreference_offset_nilreason text,
+    simplepointreference_offset_uom text,
+    simplepointreference_offset_nil boolean,
+    linkreference_element_owns boolean,
+    linkreference_element_nilreason text,
+    linkreference_element_remoteschema text,
+    linkreference_element_fk text,
+    linkreference_element_href text,
+    linkreference_applicabledirection_owns boolean,
+    linkreference_applicabledirection_nilreason text,
+    linkreference_applicabledirection_remoteschema text,
+    linkreference_applicabledirection_nil boolean,
+    linkreference_applicabledirection_fk text,
+    linkreference_applicabledirection_href text,
+    networkreference_element_owns boolean,
+    networkreference_element_nilreason text,
+    networkreference_element_remoteschema text,
+    networkreference_element_fk text,
+    networkreference_element_href text
+);
+ALTER TABLE tnra.conditionoffacility_networkref OWNER TO elf_admin;
+
+CREATE TABLE tnra.verticalposition (
+    localid text,
+    beginlifespanversion timestamp,
+    beginlifespanversion_nilreason text,
+    beginlifespanversion_nil boolean,
+    endlifespanversion timestamp,
+    endlifespanversion_nilreason text,
+    endlifespanversion_nil boolean,
+    validfrom timestamp,
+    validfrom_nilreason text,
+    validfrom_nil boolean,
+    validto timestamp,
+    validto_nilreason text,
+    validto_nil boolean,
+    verticalposition text,
+    CONSTRAINT verticalposition_pkey PRIMARY KEY (localid)
+);
+ALTER TABLE tnra.verticalposition OWNER TO elf_admin;
+
+CREATE TABLE tnra.verticalposition_networkref (
+    id serial PRIMARY KEY,
+    parentfk text NOT NULL REFERENCES tnra.verticalposition ON DELETE CASCADE,
+    num integer not null,
+    nilreason text,
+    nil boolean,
+    simplelinearreference_element_owns boolean,
+    simplelinearreference_element_nilreason text,
+    simplelinearreference_element_remoteschema text,
+    simplelinearreference_element_fk text,
+    simplelinearreference_element_href text,
+    simplelinearreference_applicabledirection_owns boolean,
+    simplelinearreference_applicabledirection_nilreason text,
+    simplelinearreference_applicabledirection_remoteschema text,
+    simplelinearreference_applicabledirection_nil boolean,
+    simplelinearreference_applicabledirection_fk text,
+    simplelinearreference_applicabledirection_href text,
+    simplelinearreference_fromposition numeric,
+    simplelinearreference_fromposition_uom text,
+    simplelinearreference_toposition numeric,
+    simplelinearreference_toposition_uom text,
+    simplelinearreference_offset numeric,
+    simplelinearreference_offset_nilreason text,
+    simplelinearreference_offset_uom text,
+    simplelinearreference_offset_nil boolean,
+    simplepointreference_element_owns boolean,
+    simplepointreference_element_nilreason text,
+    simplepointreference_element_remoteschema text,
+    simplepointreference_element_fk text,
+    simplepointreference_element_href text,
+    simplepointreference_applicabledirection_owns boolean,
+    simplepointreference_applicabledirection_nilreason text,
+    simplepointreference_applicabledirection_remoteschema text,
+    simplepointreference_applicabledirection_nil boolean,
+    simplepointreference_applicabledirection_fk text,
+    simplepointreference_applicabledirection_href text,
+    simplepointreference_atposition numeric,
+    simplepointreference_atposition_uom text,
+    simplepointreference_offset numeric,
+    simplepointreference_offset_nilreason text,
+    simplepointreference_offset_uom text,
+    simplepointreference_offset_nil boolean,
+    linkreference_element_owns boolean,
+    linkreference_element_nilreason text,
+    linkreference_element_remoteschema text,
+    linkreference_element_fk text,
+    linkreference_element_href text,
+    linkreference_applicabledirection_owns boolean,
+    linkreference_applicabledirection_nilreason text,
+    linkreference_applicabledirection_remoteschema text,
+    linkreference_applicabledirection_nil boolean,
+    linkreference_applicabledirection_fk text,
+    linkreference_applicabledirection_href text,
+    networkreference_element_owns boolean,
+    networkreference_element_nilreason text,
+    networkreference_element_remoteschema text,
+    networkreference_element_fk text,
+    networkreference_element_href text
+);
+ALTER TABLE tnra.verticalposition_networkref OWNER TO elf_admin;
+
+-- == INSPIRE Transport Network Rail ==
+
 CREATE TABLE tnra.nominaltrackgauge (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -36,7 +280,7 @@ CREATE TABLE tnra.nominaltrackgauge (
     nominalgaugecategory text,
     nominalgaugecategory_nilreason text,
     nominalgaugecategory_nil boolean,
-    CONSTRAINT nominaltrackgauge_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT nominaltrackgauge_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.nominaltrackgauge OWNER TO elf_admin;
 
@@ -81,35 +325,12 @@ CREATE TABLE tnra.nominaltrackgauge_networkref (
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean,
-    linkreference_element_owns boolean,
-    linkreference_element_nilreason text,
-    linkreference_element_remoteschema text,
-    linkreference_element_fk text,
-    linkreference_element_href text,
-    linkreference_applicabledirection_owns boolean,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_remoteschema text,
-    linkreference_applicabledirection_nil boolean,
-    linkreference_applicabledirection_fk text,
-    linkreference_applicabledirection_href text,
-    networkreference_element_owns boolean,
-    networkreference_element_nilreason text,
-    networkreference_element_remoteschema text,
-    networkreference_element_fk text,
-    networkreference_element_href text
+    simplepointreference_offset_nil boolean
 );
 ALTER TABLE tnra.nominaltrackgauge_networkref OWNER TO elf_admin;
 
 CREATE TABLE tnra.numberoftracks (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -126,7 +347,7 @@ CREATE TABLE tnra.numberoftracks (
     minmaxnumberoftracks_nilreason text,
     minmaxnumberoftracks_nil boolean,
     numberoftracks integer,
-    CONSTRAINT numberoftracks_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT numberoftracks_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.numberoftracks OWNER TO elf_admin;
 
@@ -171,38 +392,15 @@ CREATE TABLE tnra.numberoftracks_networkref (
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean,
-    linkreference_element_owns boolean,
-    linkreference_element_nilreason text,
-    linkreference_element_remoteschema text,
-    linkreference_element_fk text,
-    linkreference_element_href text,
-    linkreference_applicabledirection_owns boolean,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_remoteschema text,
-    linkreference_applicabledirection_nil boolean,
-    linkreference_applicabledirection_fk text,
-    linkreference_applicabledirection_href text,
-    networkreference_element_owns boolean,
-    networkreference_element_nilreason text,
-    networkreference_element_remoteschema text,
-    networkreference_element_fk text,
-    networkreference_element_href text
+    simplepointreference_offset_nil boolean
 );
 ALTER TABLE tnra.numberoftracks_networkref OWNER TO elf_admin;
 
 CREATE TABLE tnra.railwayarea (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -255,7 +453,7 @@ CREATE TABLE tnra.railwayarea (
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
-    CONSTRAINT railwayarea_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT railwayarea_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.railwayarea OWNER TO elf_admin;
 
@@ -290,17 +488,10 @@ CREATE TABLE tnra.railwayarea_geographicalname_spelling (
 ALTER TABLE tnra.railwayarea_geographicalname_spelling OWNER TO elf_admin;
 
 CREATE TABLE tnra.railwayline (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -353,7 +544,7 @@ CREATE TABLE tnra.railwayline (
     railwaylinecode text,
     railwaylinecode_nilreason text,
     railwaylinecode_nil boolean,
-    CONSTRAINT railwayline_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT railwayline_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.railwayline OWNER TO elf_admin;
 
@@ -410,17 +601,10 @@ CREATE TABLE tnra.railwayline_post (
 ALTER TABLE tnra.railwayline_post OWNER TO elf_admin;
 
 CREATE TABLE tnra.railwaylinksequence (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -470,7 +654,7 @@ CREATE TABLE tnra.railwaylinksequence (
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
-    CONSTRAINT railwaylinksequence_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT railwaylinksequence_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.railwaylinksequence OWNER TO elf_admin;
 
@@ -515,17 +699,10 @@ CREATE TABLE tnra.railwaylinksequence_geographicalname_spelling (
 ALTER TABLE tnra.railwaylinksequence_geographicalname_spelling OWNER TO elf_admin;
 
 CREATE TABLE tnra.railwaynode (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -584,7 +761,7 @@ CREATE TABLE tnra.railwaynode (
     formofnode_nil boolean,
     formofnode_fk text,
     formofnode_href text,
-    CONSTRAINT railwaynode_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT railwaynode_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.railwaynode OWNER TO elf_admin;
 
@@ -645,17 +822,10 @@ CREATE TABLE tnra.railwaynode_geographicalname_spelling (
 ALTER TABLE tnra.railwaynode_geographicalname_spelling OWNER TO elf_admin;
 
 CREATE TABLE tnra.railwaystationarea (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -708,7 +878,7 @@ CREATE TABLE tnra.railwaystationarea (
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
-    CONSTRAINT railwaystationarea_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT railwaystationarea_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.railwaystationarea OWNER TO elf_admin;
 
@@ -743,14 +913,7 @@ CREATE TABLE tnra.railwaystationarea_geographicalname_spelling (
 ALTER TABLE tnra.railwaystationarea_geographicalname_spelling OWNER TO elf_admin;
 
 CREATE TABLE tnra.railwaystationcode (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -764,7 +927,7 @@ CREATE TABLE tnra.railwaystationcode (
     validto_nilreason text,
     validto_nil boolean,
     stationcode text,
-    CONSTRAINT railwaystationcode_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT railwaystationcode_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.railwaystationcode OWNER TO elf_admin;
 
@@ -809,35 +972,12 @@ CREATE TABLE tnra.railwaystationcode_networkref (
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean,
-    linkreference_element_owns boolean,
-    linkreference_element_nilreason text,
-    linkreference_element_remoteschema text,
-    linkreference_element_fk text,
-    linkreference_element_href text,
-    linkreference_applicabledirection_owns boolean,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_remoteschema text,
-    linkreference_applicabledirection_nil boolean,
-    linkreference_applicabledirection_fk text,
-    linkreference_applicabledirection_href text,
-    networkreference_element_owns boolean,
-    networkreference_element_nilreason text,
-    networkreference_element_remoteschema text,
-    networkreference_element_fk text,
-    networkreference_element_href text
+    simplepointreference_offset_nil boolean
 );
 ALTER TABLE tnra.railwaystationcode_networkref OWNER TO elf_admin;
 
 CREATE TABLE tnra.railwaytype (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -855,7 +995,7 @@ CREATE TABLE tnra.railwaytype (
     type_remoteschema text,
     type_fk text,
     type_href text,
-    CONSTRAINT railwaytype_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT railwaytype_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.railwaytype OWNER TO elf_admin;
 
@@ -900,35 +1040,12 @@ CREATE TABLE tnra.railwaytype_networkref (
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean,
-    linkreference_element_owns boolean,
-    linkreference_element_nilreason text,
-    linkreference_element_remoteschema text,
-    linkreference_element_fk text,
-    linkreference_element_href text,
-    linkreference_applicabledirection_owns boolean,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_remoteschema text,
-    linkreference_applicabledirection_nil boolean,
-    linkreference_applicabledirection_fk text,
-    linkreference_applicabledirection_href text,
-    networkreference_element_owns boolean,
-    networkreference_element_nilreason text,
-    networkreference_element_remoteschema text,
-    networkreference_element_fk text,
-    networkreference_element_href text
+    simplepointreference_offset_nil boolean
 );
 ALTER TABLE tnra.railwaytype_networkref OWNER TO elf_admin;
 
 CREATE TABLE tnra.railwayuse (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -946,7 +1063,7 @@ CREATE TABLE tnra.railwayuse (
     use_remoteschema text,
     use_fk text,
     use_href text,
-    CONSTRAINT railwayuse_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT railwayuse_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.railwayuse OWNER TO elf_admin;
 
@@ -991,38 +1108,15 @@ CREATE TABLE tnra.railwayuse_networkref (
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean,
-    linkreference_element_owns boolean,
-    linkreference_element_nilreason text,
-    linkreference_element_remoteschema text,
-    linkreference_element_fk text,
-    linkreference_element_href text,
-    linkreference_applicabledirection_owns boolean,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_remoteschema text,
-    linkreference_applicabledirection_nil boolean,
-    linkreference_applicabledirection_fk text,
-    linkreference_applicabledirection_href text,
-    networkreference_element_owns boolean,
-    networkreference_element_nilreason text,
-    networkreference_element_remoteschema text,
-    networkreference_element_fk text,
-    networkreference_element_href text
+    simplepointreference_offset_nil boolean
 );
 ALTER TABLE tnra.railwayuse_networkref OWNER TO elf_admin;
 
 CREATE TABLE tnra.railwayyardarea (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -1075,7 +1169,7 @@ CREATE TABLE tnra.railwayyardarea (
     validto timestamp,
     validto_nilreason text,
     validto_nil boolean,
-    CONSTRAINT railwayyardarea_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT railwayyardarea_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.railwayyardarea OWNER TO elf_admin;
 
@@ -1110,17 +1204,10 @@ CREATE TABLE tnra.railwayyardarea_geographicalname_spelling (
 ALTER TABLE tnra.railwayyardarea_geographicalname_spelling OWNER TO elf_admin;
 
 CREATE TABLE tnra.railwayyardnode (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -1179,7 +1266,7 @@ CREATE TABLE tnra.railwayyardnode (
     formofnode_nil boolean,
     formofnode_fk text,
     formofnode_href text,
-    CONSTRAINT railwayyardnode_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT railwayyardnode_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.railwayyardnode OWNER TO elf_admin;
 
@@ -1239,15 +1326,10 @@ CREATE TABLE tnra.railwayyardnode_geographicalname_spelling (
 );
 ALTER TABLE tnra.railwayyardnode_geographicalname_spelling OWNER TO elf_admin;
 
+-- == ELF Transport Network Rail ==
+
 CREATE TABLE tnra.designspeed (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -1267,7 +1349,7 @@ CREATE TABLE tnra.designspeed (
     speedclass_remoteschema text,
     speedclass_fk text,
     speedclass_href text,
-    CONSTRAINT designspeed_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT designspeed_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.designspeed OWNER TO elf_admin;
 
@@ -1312,35 +1394,12 @@ CREATE TABLE tnra.designspeed_networkref (
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean,
-    linkreference_element_owns boolean,
-    linkreference_element_nilreason text,
-    linkreference_element_remoteschema text,
-    linkreference_element_fk text,
-    linkreference_element_href text,
-    linkreference_applicabledirection_owns boolean,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_remoteschema text,
-    linkreference_applicabledirection_nil boolean,
-    linkreference_applicabledirection_fk text,
-    linkreference_applicabledirection_href text,
-    networkreference_element_owns boolean,
-    networkreference_element_nilreason text,
-    networkreference_element_remoteschema text,
-    networkreference_element_fk text,
-    networkreference_element_href text
+    simplepointreference_offset_nil boolean
 );
 ALTER TABLE tnra.designspeed_networkref OWNER TO elf_admin;
 
 CREATE TABLE tnra.railwayclass (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -1358,7 +1417,7 @@ CREATE TABLE tnra.railwayclass (
     railwayclass_remoteschema text,
     railwayclass_fk text,
     railwayclass_href text,
-    CONSTRAINT railwayclass_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT railwayclass_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.railwayclass OWNER TO elf_admin;
 
@@ -1403,35 +1462,12 @@ CREATE TABLE tnra.railwayclass_networkref (
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean,
-    linkreference_element_owns boolean,
-    linkreference_element_nilreason text,
-    linkreference_element_remoteschema text,
-    linkreference_element_fk text,
-    linkreference_element_href text,
-    linkreference_applicabledirection_owns boolean,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_remoteschema text,
-    linkreference_applicabledirection_nil boolean,
-    linkreference_applicabledirection_fk text,
-    linkreference_applicabledirection_href text,
-    networkreference_element_owns boolean,
-    networkreference_element_nilreason text,
-    networkreference_element_remoteschema text,
-    networkreference_element_fk text,
-    networkreference_element_href text
+    simplepointreference_offset_nil boolean
 );
 ALTER TABLE tnra.railwayclass_networkref OWNER TO elf_admin;
 
 CREATE TABLE tnra.railwayelectrification (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
@@ -1450,7 +1486,7 @@ CREATE TABLE tnra.railwayelectrification (
     railwaypowermethod_remoteschema text,
     railwaypowermethod_fk text,
     railwaypowermethod_href text,
-    CONSTRAINT railwayelectrification_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT railwayelectrification_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.railwayelectrification OWNER TO elf_admin;
 
@@ -1495,38 +1531,15 @@ CREATE TABLE tnra.railwayelectrification_networkref (
     simplepointreference_offset numeric,
     simplepointreference_offset_nilreason text,
     simplepointreference_offset_uom text,
-    simplepointreference_offset_nil boolean,
-    linkreference_element_owns boolean,
-    linkreference_element_nilreason text,
-    linkreference_element_remoteschema text,
-    linkreference_element_fk text,
-    linkreference_element_href text,
-    linkreference_applicabledirection_owns boolean,
-    linkreference_applicabledirection_nilreason text,
-    linkreference_applicabledirection_remoteschema text,
-    linkreference_applicabledirection_nil boolean,
-    linkreference_applicabledirection_fk text,
-    linkreference_applicabledirection_href text,
-    networkreference_element_owns boolean,
-    networkreference_element_nilreason text,
-    networkreference_element_remoteschema text,
-    networkreference_element_fk text,
-    networkreference_element_href text
+    simplepointreference_offset_nil boolean
 );
 ALTER TABLE tnra.railwayelectrification_networkref OWNER TO elf_admin;
 
 CREATE TABLE tnra.railwaylink (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -1591,7 +1604,7 @@ CREATE TABLE tnra.railwaylink (
     validto_nilreason text,
     validto_nil boolean,
     transeuropeantransportnetwork boolean,
-    CONSTRAINT railwaylink_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT railwaylink_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.railwaylink OWNER TO elf_admin;
 
@@ -1626,17 +1639,10 @@ CREATE TABLE tnra.railwaylink_geographicalname_spelling (
 ALTER TABLE tnra.railwaylink_geographicalname_spelling OWNER TO elf_admin;
 
 CREATE TABLE tnra.railwaystationnode (
-    gml_id text,
-    identifier text,
-    identifier_codespace text,
+    localid text,
     beginlifespanversion timestamp,
     beginlifespanversion_nilreason text,
     beginlifespanversion_nil boolean,
-    inspireid_identifier_localid text,
-    inspireid_identifier_namespace text,
-    inspireid_identifier_versionid text,
-    inspireid_identifier_versionid_nilreason text,
-    inspireid_identifier_versionid_nil boolean,
     endlifespanversion timestamp,
     endlifespanversion_nilreason text,
     endlifespanversion_nil boolean,
@@ -1703,7 +1709,7 @@ CREATE TABLE tnra.railwaystationnode (
     facilitytype_remoteschema text,
     facilitytype_fk text,
     facilitytype_href text,
-    CONSTRAINT railwaystationnode_pkey PRIMARY KEY (gml_id)
+    CONSTRAINT railwaystationnode_pkey PRIMARY KEY (localid)
 );
 ALTER TABLE tnra.railwaystationnode OWNER TO elf_admin;
 

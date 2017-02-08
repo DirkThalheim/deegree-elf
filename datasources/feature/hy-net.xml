@@ -1,0 +1,968 @@
+<SQLFeatureStore configVersion="3.1.0" 
+                 xmlns="http://www.deegree.org/datasource/feature/sql" 
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                 xmlns:ad="http://inspire.ec.europa.eu/schemas/ad/4.0" 
+                 xmlns:au="http://inspire.ec.europa.eu/schemas/au/4.0" 
+                 xmlns:base="http://inspire.ec.europa.eu/schemas/base/3.3" 
+                 xmlns:base2="http://inspire.ec.europa.eu/schemas/base2/2.0" 
+                 xmlns:bu-base="http://inspire.ec.europa.eu/schemas/bu-base/4.0" 
+                 xmlns:cp="http://inspire.ec.europa.eu/schemas/cp/4.0" 
+                 xmlns:ef="http://inspire.ec.europa.eu/schemas/ef/4.0" 
+                 xmlns:ge="http://inspire.ec.europa.eu/schemas/ge-core/4.0" 
+                 xmlns:ge_gp="http://inspire.ec.europa.eu/schemas/ge_gp/4.0" 
+                 xmlns:ge_hg="http://inspire.ec.europa.eu/schemas/ge_hg/4.0" 
+                 xmlns:gn="http://inspire.ec.europa.eu/schemas/gn/4.0" 
+                 xmlns:hy-n="http://inspire.ec.europa.eu/schemas/hy-n/4.0" 
+                 xmlns:hy-p="http://inspire.ec.europa.eu/schemas/hy-p/4.0" 
+                 xmlns:hy="http://inspire.ec.europa.eu/schemas/hy/4.0" 
+                 xmlns:net="http://inspire.ec.europa.eu/schemas/net/4.0" 
+                 xmlns:omop="http://inspire.ec.europa.eu/schemas/omop/3.0" 
+                 xmlns:omor="http://inspire.ec.europa.eu/schemas/omor/3.0" 
+                 xmlns:omso="http://inspire.ec.europa.eu/schemas/omso/3.0" 
+                 xmlns:sr="http://inspire.ec.europa.eu/schemas/sr/4.0" 
+                 xmlns:tn="http://inspire.ec.europa.eu/schemas/tn/4.0" 
+                 xmlns:sc="http://www.interactive-instruments.de/ShapeChange/AppInfo" 
+                 xmlns:elf-hn="http://www.locationframework.eu/schemas/HydroNetwork/1.0" 
+                 xmlns:gmlcov="http://www.opengis.net/gmlcov/1.0" 
+                 xmlns:om="http://www.opengis.net/om/2.0" 
+                 xmlns:sam="http://www.opengis.net/sampling/2.0"
+                 xmlns:sams="http://www.opengis.net/samplingSpatial/2.0" 
+                 xmlns:swe="http://www.opengis.net/swe/2.0" 
+                 xmlns:wml2="http://www.opengis.net/waterml/2.0"
+                 xmlns:xlink="http://www.w3.org/1999/xlink" 
+                 xmlns:gml="http://www.opengis.net/gml/3.2"
+                 xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.1.0/sql.xsd">
+
+  <JDBCConnId>@jdbc_connection@</JDBCConnId>
+  <StorageCRS srid="4258" dim="2D">EPSG:4258</StorageCRS>
+  
+  <GMLSchema>../../appschemas/elf/HydroNetwork.xsd</GMLSchema>
+
+  <!-- == INSPIRE Hydrography Network ======================================== -->
+  
+  <FeatureTypeMapping name="hy-n:HydroNode" table="hydronode">
+    <FIDMapping prefix="HY-N_HYDRONODE_">
+      <Column name="localid" type="string"/>
+    </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion"/>
+      <Primitive path="@nilReason" mapping="endlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="hydronode_innetwork" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="localid"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="net:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>
+      <Primitive path="@owns" mapping="geometry_owns"/>
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Complex path="net:spokeEnd">
+      <Join table="hydronode_spokeend" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="localid"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="net:spokeStart">
+      <Join table="hydronode_spokestart" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="localid"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="hy-n:geographicalName">
+      <Join table="hydronode_geographicalname" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="language"/>
+          <Primitive path="@nilReason" mapping="language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@owns" mapping="nativeness_owns"/>
+          <Primitive path="@nilReason" mapping="nativeness_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="nativeness_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="nativeness_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="nativeness_fk" toColumns="localid"/>
+            <Href mapping="nativeness_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@owns" mapping="namestatus_owns"/>
+          <Primitive path="@nilReason" mapping="namestatus_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="namestatus_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="namestatus_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="namestatus_fk" toColumns="localid"/>
+            <Href mapping="namestatus_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="sourceofname"/>
+          <Primitive path="@nilReason" mapping="sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:pronunciation">
+          <Primitive path="@nilReason" mapping="pronunciation_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="pronunciation_nil"/>
+          <Complex path="gn:PronunciationOfName">
+            <Complex path="gn:pronunciationSoundLink">
+              <Primitive path="text()" mapping="pronunciation_pronunciationofname_pronunciationsoundlink"/>
+              <Primitive path="@nilReason" mapping="pronunciation_pronunciationofname_pronunciationsoundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciation_pronunciationofname_pronunciationsoundlink_nil"/>
+            </Complex>
+            <Complex path="gn:pronunciationIPA">
+              <Primitive path="text()" mapping="pronunciation_pronunciationofname_pronunciationipa"/>
+              <Primitive path="@nilReason" mapping="pronunciation_pronunciationofname_pronunciationipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciation_pronunciationofname_pronunciationipa_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="hydronode_geographicalname_spelling" fromColumns="id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="spellingofname_text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="spellingofname_script"/>
+              <Primitive path="@nilReason" mapping="spellingofname_script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="spellingofname_script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="spellingofname_transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="spellingofname_transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="spellingofname_transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:grammaticalGender">
+          <Primitive path="@owns" mapping="grammaticalgender_owns"/>
+          <Primitive path="@nilReason" mapping="grammaticalgender_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalgender_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="grammaticalgender_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="grammaticalgender_fk" toColumns="localid"/>
+            <Href mapping="grammaticalgender_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:grammaticalNumber">
+          <Primitive path="@owns" mapping="grammaticalnumber_owns"/>
+          <Primitive path="@nilReason" mapping="grammaticalnumber_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalnumber_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="grammaticalnumber_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="grammaticalnumber_fk" toColumns="localid"/>
+            <Href mapping="grammaticalnumber_href"/>
+          </Feature>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="hy-n:hydroId">
+      <Join table="hydronode_hydroid" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="hy:HydroIdentifier">
+        <Primitive path="hy:classificationScheme" mapping="hydroidentifier_classificationscheme"/>
+        <Primitive path="hy:localId" mapping="hydroidentifier_localid"/>
+        <Primitive path="hy:namespace" mapping="hydroidentifier_namespace"/>
+      </Complex>
+    </Complex>
+    <Complex path="hy-n:relatedHydroObject">
+      <Join table="hydronode_relatedhydroobject" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="localid"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="hy-n:hydroNodeCategory">
+      <Primitive path="@owns" mapping="hydronodecategory_owns"/>
+      <Primitive path="@nilReason" mapping="hydronodecategory_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="hydronodecategory_remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="hydronodecategory_nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="hydronodecategory_fk" toColumns="localid"/>
+        <Href mapping="hydronodecategory_href"/>
+      </Feature>
+    </Complex>
+  </FeatureTypeMapping>
+  
+  <FeatureTypeMapping name="hy-n:WatercourseLink" table="watercourselink">
+    <FIDMapping prefix="HY-N_WATERCOURSELINK_">
+      <Column name="localid" type="string"/>
+    </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion"/>
+      <Primitive path="@nilReason" mapping="endlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="watercourselink_innetwork" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="localid"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="net:centrelineGeometry">
+      <Primitive path="@nilReason" mapping="centrelinegeometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="centrelinegeometry_remoteschema"/>
+      <Primitive path="@owns" mapping="centrelinegeometry_owns"/>
+      <Geometry path="." mapping="centrelinegeometry"/>
+    </Complex>
+    <Primitive path="net:fictitious" mapping="fictitious"/>
+    <Complex path="net:endNode">
+      <Primitive path="@owns" mapping="endnode_owns"/>
+      <Primitive path="@nilReason" mapping="endnode_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="endnode_remoteschema"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="endnode_fk" toColumns="localid"/>
+        <Href mapping="endnode_href"/>
+      </Feature>
+    </Complex>
+    <Complex path="net:startNode">
+      <Primitive path="@owns" mapping="startnode_owns"/>
+      <Primitive path="@nilReason" mapping="startnode_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="startnode_remoteschema"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="startnode_fk" toColumns="localid"/>
+        <Href mapping="startnode_href"/>
+      </Feature>
+    </Complex>
+    <Complex path="hy-n:geographicalName">
+      <Join table="watercourselink_geographicalname" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="language"/>
+          <Primitive path="@nilReason" mapping="language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@owns" mapping="nativeness_owns"/>
+          <Primitive path="@nilReason" mapping="nativeness_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="nativeness_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="nativeness_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="nativeness_fk" toColumns="localid"/>
+            <Href mapping="nativeness_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@owns" mapping="namestatus_owns"/>
+          <Primitive path="@nilReason" mapping="namestatus_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="namestatus_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="namestatus_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="namestatus_fk" toColumns="localid"/>
+            <Href mapping="namestatus_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="sourceofname"/>
+          <Primitive path="@nilReason" mapping="sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:pronunciation">
+          <Primitive path="@nilReason" mapping="pronunciation_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="pronunciation_nil"/>
+          <Complex path="gn:PronunciationOfName">
+            <Complex path="gn:pronunciationSoundLink">
+              <Primitive path="text()" mapping="pronunciation_pronunciationofname_pronunciationsoundlink"/>
+              <Primitive path="@nilReason" mapping="pronunciation_pronunciationofname_pronunciationsoundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciation_pronunciationofname_pronunciationsoundlink_nil"/>
+            </Complex>
+            <Complex path="gn:pronunciationIPA">
+              <Primitive path="text()" mapping="pronunciation_pronunciationofname_pronunciationipa"/>
+              <Primitive path="@nilReason" mapping="pronunciation_pronunciationofname_pronunciationipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciation_pronunciationofname_pronunciationipa_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="watercourselink_geographicalname_spelling" fromColumns="id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="spellingofname_text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="spellingofname_script"/>
+              <Primitive path="@nilReason" mapping="spellingofname_script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="spellingofname_script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="spellingofname_transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="spellingofname_transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="spellingofname_transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:grammaticalGender">
+          <Primitive path="@owns" mapping="grammaticalgender_owns"/>
+          <Primitive path="@nilReason" mapping="grammaticalgender_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalgender_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="grammaticalgender_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="grammaticalgender_fk" toColumns="localid"/>
+            <Href mapping="grammaticalgender_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:grammaticalNumber">
+          <Primitive path="@owns" mapping="grammaticalnumber_owns"/>
+          <Primitive path="@nilReason" mapping="grammaticalnumber_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalnumber_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="grammaticalnumber_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="grammaticalnumber_fk" toColumns="localid"/>
+            <Href mapping="grammaticalnumber_href"/>
+          </Feature>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="hy-n:hydroId">
+      <Join table="watercourselink_hydroid" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="hy:HydroIdentifier">
+        <Primitive path="hy:classificationScheme" mapping="hydroidentifier_classificationscheme"/>
+        <Primitive path="hy:localId" mapping="hydroidentifier_localid"/>
+        <Primitive path="hy:namespace" mapping="hydroidentifier_namespace"/>
+      </Complex>
+    </Complex>
+    <Complex path="hy-n:relatedHydroObject">
+      <Join table="watercourselink_relatedhydroobject" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="localid"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="hy-n:flowDirection">
+      <Primitive path="@owns" mapping="flowdirection_owns"/>
+      <Primitive path="@nilReason" mapping="flowdirection_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="flowdirection_remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="flowdirection_nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="flowdirection_fk" toColumns="localid"/>
+        <Href mapping="flowdirection_href"/>
+      </Feature>
+    </Complex>
+    <Complex path="hy-n:length">
+      <Primitive path="text()" mapping="length"/>
+      <Primitive path="@nilReason" mapping="length_nilreason"/>
+      <Primitive path="@uom" mapping="length_uom"/>
+      <Primitive path="@xsi:nil" mapping="length_nil"/>
+    </Complex>
+  </FeatureTypeMapping>
+  
+  <FeatureTypeMapping name="hy-n:WatercourseLinkSequence" table="watercourselinksequence">
+    <FIDMapping prefix="HY-N_WATERCOURSELINKSEQUENCE_">
+      <Column name="localid" type="string"/>
+    </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion"/>
+      <Primitive path="@nilReason" mapping="endlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="watercourselinksequence_innetwork" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="localid"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="net:link">
+      <Join table="watercourselinksequence_link" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Complex path="net:DirectedLink">
+        <Primitive path="net:direction" mapping="directedlink_direction"/>
+        <Complex path="net:link">
+          <Primitive path="@owns" mapping="directedlink_link_owns"/>
+          <Primitive path="@nilReason" mapping="directedlink_link_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="directedlink_link_remoteschema"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="directedlink_link_fk" toColumns="localid"/>
+            <Href mapping="directedlink_link_href"/>
+          </Feature>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="hy-n:geographicalName">
+      <Join table="watercourselinksequence_geographicalname" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="language"/>
+          <Primitive path="@nilReason" mapping="language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@owns" mapping="nativeness_owns"/>
+          <Primitive path="@nilReason" mapping="nativeness_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="nativeness_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="nativeness_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="nativeness_fk" toColumns="localid"/>
+            <Href mapping="nativeness_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@owns" mapping="namestatus_owns"/>
+          <Primitive path="@nilReason" mapping="namestatus_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="namestatus_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="namestatus_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="namestatus_fk" toColumns="localid"/>
+            <Href mapping="namestatus_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="sourceofname"/>
+          <Primitive path="@nilReason" mapping="sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:pronunciation">
+          <Primitive path="@nilReason" mapping="pronunciation_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="pronunciation_nil"/>
+          <Complex path="gn:PronunciationOfName">
+            <Complex path="gn:pronunciationSoundLink">
+              <Primitive path="text()" mapping="pronunciation_pronunciationofname_pronunciationsoundlink"/>
+              <Primitive path="@nilReason" mapping="pronunciation_pronunciationofname_pronunciationsoundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciation_pronunciationofname_pronunciationsoundlink_nil"/>
+            </Complex>
+            <Complex path="gn:pronunciationIPA">
+              <Primitive path="text()" mapping="pronunciation_pronunciationofname_pronunciationipa"/>
+              <Primitive path="@nilReason" mapping="pronunciation_pronunciationofname_pronunciationipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciation_pronunciationofname_pronunciationipa_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="watercourselinksequence_geographicalname_spelling" fromColumns="id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="spellingofname_text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="spellingofname_script"/>
+              <Primitive path="@nilReason" mapping="spellingofname_script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="spellingofname_script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="spellingofname_transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="spellingofname_transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="spellingofname_transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:grammaticalGender">
+          <Primitive path="@owns" mapping="grammaticalgender_owns"/>
+          <Primitive path="@nilReason" mapping="grammaticalgender_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalgender_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="grammaticalgender_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="grammaticalgender_fk" toColumns="localid"/>
+            <Href mapping="grammaticalgender_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:grammaticalNumber">
+          <Primitive path="@owns" mapping="grammaticalnumber_owns"/>
+          <Primitive path="@nilReason" mapping="grammaticalnumber_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalnumber_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="grammaticalnumber_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="grammaticalnumber_fk" toColumns="localid"/>
+            <Href mapping="grammaticalnumber_href"/>
+          </Feature>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="hy-n:hydroId">
+      <Join table="watercourselinksequence_hydroid" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="hy:HydroIdentifier">
+        <Primitive path="hy:classificationScheme" mapping="hydroidentifier_classificationscheme"/>
+        <Primitive path="hy:localId" mapping="hydroidentifier_localid"/>
+        <Primitive path="hy:namespace" mapping="hydroidentifier_namespace"/>
+      </Complex>
+    </Complex>
+    <Complex path="hy-n:relatedHydroObject">
+      <Join table="watercourselinksequence_relatedhydroobject" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="localid"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+  </FeatureTypeMapping>
+  
+  <FeatureTypeMapping name="hy-n:WatercourseSeparatedCrossing" table="watercourseseparatedcrossing">
+    <FIDMapping prefix="HY-N_WATERCOURSESEPARATEDCROSSING_">
+      <Column name="localid" type="string"/>
+    </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion"/>
+      <Primitive path="@nilReason" mapping="endlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="watercourseseparatedcrossing_innetwork" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="localid"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="net:element">
+      <Join table="watercourseseparatedcrossing_element" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="localid"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="hy-n:geographicalName">
+      <Join table="watercourseseparatedcrossing_geographicalname" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="language"/>
+          <Primitive path="@nilReason" mapping="language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@owns" mapping="nativeness_owns"/>
+          <Primitive path="@nilReason" mapping="nativeness_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="nativeness_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="nativeness_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="nativeness_fk" toColumns="localid"/>
+            <Href mapping="nativeness_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@owns" mapping="namestatus_owns"/>
+          <Primitive path="@nilReason" mapping="namestatus_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="namestatus_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="namestatus_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="namestatus_fk" toColumns="localid"/>
+            <Href mapping="namestatus_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="sourceofname"/>
+          <Primitive path="@nilReason" mapping="sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:pronunciation">
+          <Primitive path="@nilReason" mapping="pronunciation_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="pronunciation_nil"/>
+          <Complex path="gn:PronunciationOfName">
+            <Complex path="gn:pronunciationSoundLink">
+              <Primitive path="text()" mapping="pronunciation_pronunciationofname_pronunciationsoundlink"/>
+              <Primitive path="@nilReason" mapping="pronunciation_pronunciationofname_pronunciationsoundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciation_pronunciationofname_pronunciationsoundlink_nil"/>
+            </Complex>
+            <Complex path="gn:pronunciationIPA">
+              <Primitive path="text()" mapping="pronunciation_pronunciationofname_pronunciationipa"/>
+              <Primitive path="@nilReason" mapping="pronunciation_pronunciationofname_pronunciationipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciation_pronunciationofname_pronunciationipa_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="watercourseseparatedcrossing_geographicalname_spelling" fromColumns="id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="spellingofname_text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="spellingofname_script"/>
+              <Primitive path="@nilReason" mapping="spellingofname_script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="spellingofname_script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="spellingofname_transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="spellingofname_transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="spellingofname_transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:grammaticalGender">
+          <Primitive path="@owns" mapping="grammaticalgender_owns"/>
+          <Primitive path="@nilReason" mapping="grammaticalgender_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalgender_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="grammaticalgender_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="grammaticalgender_fk" toColumns="localid"/>
+            <Href mapping="grammaticalgender_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:grammaticalNumber">
+          <Primitive path="@owns" mapping="grammaticalnumber_owns"/>
+          <Primitive path="@nilReason" mapping="grammaticalnumber_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalnumber_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="grammaticalnumber_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="grammaticalnumber_fk" toColumns="localid"/>
+            <Href mapping="grammaticalnumber_href"/>
+          </Feature>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="hy-n:hydroId">
+      <Join table="watercourseseparatedcrossing_hydroid" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="hy:HydroIdentifier">
+        <Primitive path="hy:classificationScheme" mapping="hydroidentifier_classificationscheme"/>
+        <Primitive path="hy:localId" mapping="hydroidentifier_localid"/>
+        <Primitive path="hy:namespace" mapping="hydroidentifier_namespace"/>
+      </Complex>
+    </Complex>
+    <Complex path="hy-n:relatedHydroObject">
+      <Join table="watercourseseparatedcrossing_relatedhydroobject" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="localid"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+  </FeatureTypeMapping>
+  
+  <!-- == ELF Hydrography Network ======================================== -->
+  
+  <FeatureTypeMapping name="elf-hn:HydroNode" table="hydronode">
+    <FIDMapping prefix="ELF-HN_HYDRONODE_">
+      <Column name="localid" type="string"/>
+    </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="localid"/>
+      <Primitive path="@codeSpace" mapping="'_EG.ERM:'"/>
+    </Complex>
+    <Complex path="net:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion"/>
+      <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="localid"/>
+        <Primitive path="base:namespace" mapping="'_EG.ERM:'"/>
+        <Complex path="base:versionId">
+          <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+          <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+          <Primitive path="@xsi:nil" mapping="'true'"/>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="net:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion"/>
+      <Primitive path="@nilReason" mapping="endlifespanversion_nilreason"/>
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_nil"/>
+    </Complex>
+    <Complex path="net:inNetwork">
+      <Join table="hydronode_innetwork" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="localid"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="net:geometry">
+      <Primitive path="@nilReason" mapping="geometry_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema"/>
+      <Primitive path="@owns" mapping="geometry_owns"/>
+      <Geometry path="." mapping="geometry"/>
+    </Complex>
+    <Complex path="net:spokeEnd">
+      <Join table="hydronode_spokeend" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="localid"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="net:spokeStart">
+      <Join table="hydronode_spokestart" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="localid"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="hy-n:geographicalName">
+      <Join table="hydronode_geographicalname" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="language"/>
+          <Primitive path="@nilReason" mapping="language_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="language_nil"/>
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@owns" mapping="nativeness_owns"/>
+          <Primitive path="@nilReason" mapping="nativeness_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="nativeness_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="nativeness_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="nativeness_fk" toColumns="localid"/>
+            <Href mapping="nativeness_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@owns" mapping="namestatus_owns"/>
+          <Primitive path="@nilReason" mapping="namestatus_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="namestatus_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="namestatus_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="namestatus_fk" toColumns="localid"/>
+            <Href mapping="namestatus_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="sourceofname"/>
+          <Primitive path="@nilReason" mapping="sourceofname_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="sourceofname_nil"/>
+        </Complex>
+        <Complex path="gn:pronunciation">
+          <Primitive path="@nilReason" mapping="pronunciation_nilreason"/>
+          <Primitive path="@xsi:nil" mapping="pronunciation_nil"/>
+          <Complex path="gn:PronunciationOfName">
+            <Complex path="gn:pronunciationSoundLink">
+              <Primitive path="text()" mapping="pronunciation_pronunciationofname_pronunciationsoundlink"/>
+              <Primitive path="@nilReason" mapping="pronunciation_pronunciationofname_pronunciationsoundlink_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciation_pronunciationofname_pronunciationsoundlink_nil"/>
+            </Complex>
+            <Complex path="gn:pronunciationIPA">
+              <Primitive path="text()" mapping="pronunciation_pronunciationofname_pronunciationipa"/>
+              <Primitive path="@nilReason" mapping="pronunciation_pronunciationofname_pronunciationipa_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="pronunciation_pronunciationofname_pronunciationipa_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="hydronode_geographicalname_spelling" fromColumns="id" toColumns="parentfk" orderColumns="num" numbered="true"/>
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="spellingofname_text"/>
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="spellingofname_script"/>
+              <Primitive path="@nilReason" mapping="spellingofname_script_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="spellingofname_script_nil"/>
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="spellingofname_transliterationscheme"/>
+              <Primitive path="@nilReason" mapping="spellingofname_transliterationscheme_nilreason"/>
+              <Primitive path="@xsi:nil" mapping="spellingofname_transliterationscheme_nil"/>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:grammaticalGender">
+          <Primitive path="@owns" mapping="grammaticalgender_owns"/>
+          <Primitive path="@nilReason" mapping="grammaticalgender_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalgender_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="grammaticalgender_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="grammaticalgender_fk" toColumns="localid"/>
+            <Href mapping="grammaticalgender_href"/>
+          </Feature>
+        </Complex>
+        <Complex path="gn:grammaticalNumber">
+          <Primitive path="@owns" mapping="grammaticalnumber_owns"/>
+          <Primitive path="@nilReason" mapping="grammaticalnumber_nilreason"/>
+          <Primitive path="@gml:remoteSchema" mapping="grammaticalnumber_remoteschema"/>
+          <Primitive path="@xsi:nil" mapping="grammaticalnumber_nil"/>
+          <Feature path=".">
+            <Join table="?" fromColumns="grammaticalnumber_fk" toColumns="localid"/>
+            <Href mapping="grammaticalnumber_href"/>
+          </Feature>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="hy-n:hydroId">
+      <Join table="hydronode_hydroid" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@xsi:nil" mapping="nil"/>
+      <Complex path="hy:HydroIdentifier">
+        <Primitive path="hy:classificationScheme" mapping="hydroidentifier_classificationscheme"/>
+        <Primitive path="hy:localId" mapping="hydroidentifier_localid"/>
+        <Primitive path="hy:namespace" mapping="hydroidentifier_namespace"/>
+      </Complex>
+    </Complex>
+    <Complex path="hy-n:relatedHydroObject">
+      <Join table="hydronode_relatedhydroobject" fromColumns="localid" toColumns="parentfk" orderColumns="num" numbered="true"/>
+      <Primitive path="@owns" mapping="owns"/>
+      <Primitive path="@nilReason" mapping="nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="remoteschema"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="localid"/>
+        <Href mapping="href"/>
+      </Feature>
+    </Complex>
+    <Complex path="hy-n:hydroNodeCategory">
+      <Primitive path="@owns" mapping="hydronodecategory_owns"/>
+      <Primitive path="@nilReason" mapping="hydronodecategory_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="hydronodecategory_remoteschema"/>
+      <Primitive path="@xsi:nil" mapping="hydronodecategory_nil"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="hydronodecategory_fk" toColumns="localid"/>
+        <Href mapping="hydronodecategory_href"/>
+      </Feature>
+    </Complex>
+    <Complex path="elf-hn:spring">
+      <Primitive path="@nilReason" mapping="spring_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="spring_remoteschema"/>
+      <Primitive path="@owns" mapping="spring_owns"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="spring_fk" toColumns="localid"/>
+        <Href mapping="spring_href"/>
+      </Feature>
+    </Complex>
+    <Complex path="elf-hn:damOrWeir">
+      <Primitive path="@nilReason" mapping="damorweir_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="damorweir_remoteschema"/>
+      <Primitive path="@owns" mapping="damorweir_owns"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="damorweir_fk" toColumns="localid"/>
+        <Href mapping="damorweir_href"/>
+      </Feature>
+    </Complex>
+    <Complex path="elf-hn:lock">
+      <Primitive path="@nilReason" mapping="lock_nilreason"/>
+      <Primitive path="@gml:remoteSchema" mapping="lock_remoteschema"/>
+      <Primitive path="@owns" mapping="lock_owns"/>
+      <Feature path=".">
+        <Join table="?" fromColumns="lock_fk" toColumns="localid"/>
+        <Href mapping="lock_href"/>
+      </Feature>
+    </Complex>
+  </FeatureTypeMapping>
+</SQLFeatureStore>
