@@ -20,47 +20,49 @@
 
     <FeatureTypeMapping name="lcv:LandCoverDataset" table="lcv.landcoverdataset">
         <FIDMapping prefix="LANDCOVERDATASET_">
-            <Column name="id" type="string" />
+            <Column name="localid" type="string" />
             <UUIDGenerator />
         </FIDMapping>
         <Complex path="gml:identifier">
-            <Primitive path="text()" mapping="identifier" />
-            <Primitive path="@codeSpace" mapping="identifier_codespace" />
+            <Primitive path="text()" mapping="localid" />
+            <Primitive path="@codeSpace" mapping="'http://bkg.bund.de/eg.erm'" />
         </Complex>
         <Complex path="lcv:inspireId">
-            <Complex path="base:Identifier">
-                <Primitive path="base:localId" mapping="identifier_localid" />
-                <Primitive path="base:namespace" mapping="identifier_namespace" />
-                <Complex path="base:versionId">
-                    <Primitive path="text()" mapping="identifier_versionid" />
-                    <Primitive path="@nilReason" mapping="identifier_versionid_nilreason" />
-                    <Primitive path="@xsi:nil" mapping="identifier_versionid_xsi_nil" />
-                </Complex>
+          <Complex path="base:Identifier">
+            <Primitive path="base:localId" mapping="localid"/>
+            <Primitive path="base:namespace" mapping="'http://bkg.bund.de/eg.erm'"/>
+            <Complex path="base:versionId">
+              <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+              <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+              <Primitive path="@xsi:nil" mapping="'true'"/>
             </Complex>
+          </Complex>
         </Complex>
         <Complex path="lcv:beginLifespanVersion">
             <Primitive path="text()" mapping="beginlifespanversion" />
             <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason" />
-            <Primitive path="@xsi:nil" mapping="beginlifespanversion_xsi_nil" />
+            <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil" />
         </Complex>
         <Primitive path="lcv:name" mapping="name" />
         <Complex path="lcv:validFrom">
             <Primitive path="text()" mapping="validfrom" />
             <Primitive path="@nilReason" mapping="validfrom_nilreason" />
-            <Primitive path="@xsi:nil" mapping="validfrom_xsi_nil" />
+            <Primitive path="@xsi:nil" mapping="validfrom_nil" />
         </Complex>
         <Complex path="lcv:validTo">
             <Primitive path="text()" mapping="validto" />
             <Primitive path="@nilReason" mapping="validto_nilreason" />
-            <Primitive path="@xsi:nil" mapping="validto_xsi_nil" />
+            <Primitive path="@xsi:nil" mapping="validto_nil" />
         </Complex>
         <Complex path="lcv:member">
-            <Join table="lcv.landcoverdataset_member" fromColumns="id" toColumns="parentfk" orderColumns="num" numbered="true" />
+            <!-- member = LandcoverUnitPropertyType -->
+            <Join table="lcv.landcoverdataset_member" fromColumns="localid" toColumns="parentfk"/>
             <Primitive path="@nilReason" mapping="nilreason" />
             <Primitive path="@gml:remoteSchema" mapping="remoteschema" />
             <Primitive path="@owns" mapping="owns" />
             <Feature path=".">
-                <Join table="?" fromColumns="fk" toColumns="id" />
+                <!-- . = LandcoverUnitType -->
+                <Join table="lcv.landcoverunit" fromColumns="fk" toColumns="localid" />
                 <Href mapping="href" />
             </Feature>
         </Complex>
@@ -68,37 +70,36 @@
     
     <FeatureTypeMapping name="lcv:LandCoverUnit" table="lcv.landcoverunit">
         <FIDMapping prefix="LANDCOVERUNIT_">
-            <Column name="id" type="string" />
+            <Column name="localid" type="string" />
             <UUIDGenerator />
         </FIDMapping>
         <Complex path="gml:identifier">
-            <Primitive path="text()" mapping="identifier" />
-            <Primitive path="@codeSpace" mapping="identifier_codespace" />
+            <Primitive path="text()" mapping="localid" />
+            <Primitive path="@codeSpace" mapping="'http://bkg.bund.de/eg.erm'" />
         </Complex>
         <Complex path="lcv:inspireId">
-            <Complex path="base:Identifier">
-                <Primitive path="base:localId" mapping="identifier_localid" />
-                <Primitive path="base:namespace" mapping="identifier_namespace" />
-                <Complex path="base:versionId">
-                    <Primitive path="text()" mapping="identifier_versionid" />
-                    <Primitive path="@nilReason" mapping="identifier_versionid_nilreason" />
-                    <Primitive path="@xsi:nil" mapping="identifier_versionid_xsi_nil" />
-                </Complex>
+          <Complex path="base:Identifier">
+            <Primitive path="base:localId" mapping="localid"/>
+            <Primitive path="base:namespace" mapping="'http://bkg.bund.de/eg.erm'"/>
+            <Complex path="base:versionId">
+              <!-- Primitive path="text" mapping="inspireid_versionid"/-->
+              <Primitive path="@nilReason" mapping="'other:unpopulated'"/>
+              <Primitive path="@xsi:nil" mapping="'true'"/>
             </Complex>
+          </Complex>
         </Complex>
         <Complex path="lcv:beginLifespanVersion">
             <Primitive path="text()" mapping="beginlifespanversion" />
             <Primitive path="@nilReason" mapping="beginlifespanversion_nilreason" />
-            <Primitive path="@xsi:nil" mapping="beginlifespanversion_xsi_nil" />
+            <Primitive path="@xsi:nil" mapping="beginlifespanversion_nil" />
         </Complex>
         <Complex path="lcv:geometry">
             <Primitive path="@nilReason" mapping="geometry_nilreason" />
             <Primitive path="@gml:remoteSchema" mapping="geometry_remoteschema" />
-            <Primitive path="@owns" mapping="geometry_owns" />
             <Geometry path="." mapping="geometry" />
         </Complex>
         <Complex path="lcv:landCoverObservation">
-            <Join table="lcv.landcoverunit_landcoverobservation" fromColumns="id" toColumns="parentfk" orderColumns="num" numbered="true" />
+            <Join table="lcv.landcoverunit_landcoverobservation" fromColumns="localid" toColumns="parentfk"/>
             <Complex path="lcv:LandCoverObservation">
                 <Complex path="lcv:class">
                     <Primitive path="@owns" mapping="class_owns" />
@@ -126,14 +127,14 @@
                         <Complex path="lcv:coveredPercentage">
                             <Primitive path="text()" mapping="landcovervalue_coveredpercentage" />
                             <Primitive path="@nilReason" mapping="landcovervalue_coveredpercentage_nilreason" />
-                            <Primitive path="@xsi:nil" mapping="landcovervalue_coveredpercentage_xsi_nil" />
+                            <Primitive path="@xsi:nil" mapping="landcovervalue_coveredpercentage_nil" />
                         </Complex>
                     </Complex>
                 </Complex>
                 <Complex path="lcv:observationDate">
                     <Primitive path="text()" mapping="observationdate" />
                     <Primitive path="@nilReason" mapping="observationdate_nilreason" />
-                    <Primitive path="@xsi:nil" mapping="observationdate_xsi_nil" />
+                    <Primitive path="@xsi:nil" mapping="observationdate_nil" />
                 </Complex>
             </Complex>
         </Complex>
