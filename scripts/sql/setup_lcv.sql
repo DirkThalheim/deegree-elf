@@ -25,7 +25,6 @@ CREATE TABLE lcv.landcoverdataset (
 CREATE TABLE lcv.landcoverdataset_member (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES lcv.landcoverdataset ON DELETE CASCADE,
-    num integer not null,
     nilreason text,
     remoteschema text,
     owns boolean,
@@ -51,7 +50,6 @@ SELECT ADDGEOMETRYCOLUMN('lcv', 'landcoverunit','geometry','4258','GEOMETRY', 2)
 CREATE TABLE lcv.landcoverunit_landcoverobservation (
     id serial PRIMARY KEY,
     parentfk text NOT NULL REFERENCES lcv.landcoverunit ON DELETE CASCADE,
-    num integer not null,
     class_owns boolean,
     class_nilreason text,
     class_remoteschema text,
@@ -64,7 +62,6 @@ CREATE TABLE lcv.landcoverunit_landcoverobservation (
 CREATE TABLE lcv.landcoverunit_mosaic (
     id serial PRIMARY KEY,
     parentfk integer NOT NULL REFERENCES lcv.landcoverunit_landcoverobservation ON DELETE CASCADE,
-    num integer not null,
     nilreason text,
     xsi_nil boolean,
     landcovervalue_class_owns boolean,
